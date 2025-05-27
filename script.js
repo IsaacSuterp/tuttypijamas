@@ -2,84 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const body = document.body;
     const mainHeader = document.querySelector('.main-header');
-    let allProducts = [];
 
     // ===============================================================
-    //                       1. INICIALIZAÇÃO
-    // ===============================================================
-    function populateProductsArray() {
-        document.querySelectorAll('.product-card').forEach(card => {
-            allProducts.push({
-                id: card.dataset.id,
-                name: card.dataset.name,
-                price: parseFloat(card.dataset.price),
-                image: card.dataset.image,
-            });
-        });
-    }
-
-    // ===============================================================
-    //                       2. LÓGICA DA BUSCA NO HEADER
-    // ===============================================================
-    const searchIconTrigger = document.getElementById('search-icon-trigger');
-    const headerSearchInput = document.getElementById('header-search-input');
-    const closeHeaderSearchBtn = document.getElementById('close-header-search');
-    const searchResultsPanel = document.querySelector('.search-results-panel');
-    const headerSearchResultsContainer = document.getElementById('header-search-results');
-
-    function openHeaderSearch() {
-        mainHeader.classList.add('search-active');
-        setTimeout(() => headerSearchInput.focus(), 400);
-    }
-
-    function closeHeaderSearch() {
-        mainHeader.classList.remove('search-active');
-        headerSearchInput.value = '';
-        searchResultsPanel.style.display = 'none';
-    }
-
-    function displayHeaderResults(results) {
-        headerSearchResultsContainer.innerHTML = '';
-        if (results.length === 0) {
-            headerSearchResultsContainer.innerHTML = '<p class="search-no-results">Nenhum resultado encontrado.</p>';
-        } else {
-            results.forEach(product => {
-                headerSearchResultsContainer.innerHTML += `
-                    <a href="#products" class="search-result-item" data-id="${product.id}">
-                        <img src="${product.image}" alt="${product.name}">
-                        <div class="search-result-info">
-                            <span class="product-name">${product.name}</span>
-                            <span class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
-                        </div>
-                    </a>`;
-            });
-        }
-        searchResultsPanel.style.display = 'block';
-    }
-
-    searchIconTrigger.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (mainHeader.classList.contains('search-active')) {
-            closeHeaderSearch();
-        } else {
-            openHeaderSearch();
-        }
-    });
-
-    closeHeaderSearchBtn.addEventListener('click', closeHeaderSearch);
-
-    headerSearchInput.addEventListener('keyup', () => {
-        const searchTerm = headerSearchInput.value.toLowerCase().trim();
-        if (searchTerm.length < 2) {
-            searchResultsPanel.style.display = 'none';
-            return;
-        }
-        const filteredProducts = allProducts.filter(p => p.name.toLowerCase().includes(searchTerm));
-        displayHeaderResults(filteredProducts);
-    });
-
-    // ===============================================================
-    //                       3. LÓGICA DO CARRINHO
+    //                       1. LÓGICA DO CARRINHO
     // ===============================================================
     let cart = [];
     const cartSidebar = document.querySelector('.cart-sidebar');
@@ -146,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     cartOverlay.addEventListener('click', closeCart);
 
     // ===============================================================
-    //               4. LÓGICA DO MENU DROPDOWN (MEGA MENU)
+    //               2. LÓGICA DO MENU DROPDOWN (MEGA MENU)
     // ===============================================================
     const dropdowns = document.querySelectorAll('.main-nav .has-dropdown');
     function closeAllDropdowns() { dropdowns.forEach(d => d.classList.remove('active')); }
@@ -160,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ===============================================================
-    //               5. OUTRAS FUNCIONALIDADES DO SITE
+    //               3. OUTRAS FUNCIONALIDADES DO SITE
     // ===============================================================
     window.addEventListener('scroll', () => { mainHeader.classList.toggle('scrolled', window.scrollY > 50); });
 
@@ -187,17 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Evento global para fechar popups (menus, busca, etc)
+    // Evento global para fechar popups
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.has-dropdown')) closeAllDropdowns();
-        if (!event.target.closest('.header-right') && !event.target.closest('.search-results-panel')) closeHeaderSearch();
     });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCart(); closeHeaderSearch(); } });
-
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCart(); } });
 
     // ===============================================================
-    //               6. CHAMADAS DE INICIALIZAÇÃO
+    //               4. INICIALIZAÇÃO
     // ===============================================================
-    populateProductsArray();
     renderCart();
 });
