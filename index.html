@@ -1,286 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutty Pijamas - Conforto e Estilo para suas Noites</title>
-    <meta name="description" content="Descubra a coleção de pijamas da Tutty Pijamas. Conforto, estilo e qualidade para homens, mulheres e crianças.">
-
+    <title>Tutty Pijamas - Conforto para suas noites</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+<body id="home-page">
 
-    <header class="main-header">
-        <div class="container">
-            <a href="index.html" class="logo">Tutty Pijamas</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#home">Início</a></li>
-                    <li class="has-dropdown">
-                        <a href="#">Coleções <i class="fas fa-chevron-down"></i></a>
-                        <div class="mega-menu">
-                            <div class="mega-menu-content container">
-                                <div class="mega-menu-column">
-                                    <h4>Feminino</h4>
-                                    <ul>
-                                        <li><a href="#">Pijamas de Verão</a></li>
-                                        <li><a href="#">Pijamas de Inverno</a></li>
-                                        <li><a href="#">Camisolas</a></li>
-                                        <li><a href="#">Roupões</a></li>
-                                        <li><a href="#">Maternidade</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu-column">
-                                    <h4>Masculino</h4>
-                                    <ul>
-                                        <li><a href="#">Pijamas de Verão</a></li>
-                                        <li><a href="#">Pijamas de Inverno</a></li>
-                                        <li><a href="#">Roupões</a></li>
-                                        <li><a href="#">Samba Canção</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu-column">
-                                    <h4>Infantil</h4>
-                                    <ul>
-                                        <li><a href="#">Meninas</a></li>
-                                        <li><a href="#">Meninos</a></li>
-                                        <li><a href="#">Bebês</a></li>
-                                        <li><a href="#">Macacões</a></li>
-                                    </ul>
-                                </div>
-                                <div class="mega-menu-featured">
-                                    <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Nova coleção em destaque">
-                                    <h3>Liquidação de Inverno</h3>
-                                    <p>Até 40% OFF na coleção passada!</p>
-                                    <a href="#" class="btn btn-secondary">Aproveitar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="#">Produtos <i class="fas fa-chevron-down"></i></a>
-                        <ul class="simple-dropdown">
-                            <li><a href="#products">Todos os Produtos</a></li>
-                            <li><a href="#">Mais Vendidos</a></li>
-                            <li><a href="#">Lançamentos</a></li>
-                            <li><a href="#">Ofertas</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="header-icons">
-                <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
-                <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            </div>
-            <button class="hamburger" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
-        </div>
+    <header>
+        <a href="index.html" class="logo">Tutty Pijamas</a>
+        <nav>
+            <ul>
+                <li><a href="produtos.html?category=feminino">Feminino</a></li>
+                <li><a href="produtos.html?category=masculino">Masculino</a></li>
+                <li><a href="produtos.html?category=infantil">Infantil</a></li>
+                <li><a href="produtos.html">Ver Tudo</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="icon">🔍</div> <a href="minha-conta.html" class="icon">👤</a> <a href="carrinho.html" class="icon">
+                🛒
+                <span id="cart-count">0</span>
+            </a> </div>
     </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1 class="animate-on-scroll">Noites de Sonho, Dias de Conforto</h1>
-                <p class="animate-on-scroll">A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
-                <a href="#products" class="btn btn-primary animate-on-scroll">Ver Coleção</a>
+        <section class="banner">
+            <div class="container">
+                <h1>Coleção Sonhos de Inverno</h1>
+                <p>Pijamas quentinhos e confortáveis para aquecer suas noites.</p>
+                <a href="produtos.html" class="btn">Conferir Coleção</a>
             </div>
         </section>
 
-        <section class="features-section">
+        <section class="section">
             <div class="container">
-                <div class="features-grid">
-                    <div class="feature-item animate-on-scroll">
-                        <i class="fas fa-truck-fast"></i>
-                        <h3>Frete Grátis</h3>
-                        <p>Para compras acima de R$ 250 em todo o Brasil.</p>
+                <h2 class="section-title">Produtos em Destaque</h2>
+                <div id="featured-products-grid" class="product-grid">
                     </div>
-                    <div class="feature-item animate-on-scroll">
-                        <i class="fas fa-award"></i>
-                        <h3>Tecido Premium</h3>
-                        <p>Algodão e tecidos sustentáveis para o máximo conforto.</p>
-                    </div>
-                    <div class="feature-item animate-on-scroll">
-                        <i class="fas fa-exchange-alt"></i>
-                        <h3>Troca Fácil</h3>
-                        <p>Até 30 dias para trocar seu produto sem complicações.</p>
-                    </div>
-                    <div class="feature-item animate-on-scroll">
-                        <i class="fas fa-leaf"></i>
-                        <h3>Sustentável</h3>
-                        <p>Produção consciente que respeita o meio ambiente.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="collections" class="collections-section">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Nossas Coleções</h2>
-                <div class="collection-grid">
-                    <div class="collection-card animate-on-scroll">
-                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Feminina">
-                        <div class="collection-card-overlay">
-                            <h3>Feminino</h3>
-                            <a href="#products" class="btn btn-secondary">Explorar</a>
-                        </div>
-                    </div>
-                    <div class="collection-card animate-on-scroll">
-                        <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Masculina">
-                        <div class="collection-card-overlay">
-                            <h3>Masculino</h3>
-                            <a href="#products" class="btn btn-secondary">Explorar</a>
-                        </div>
-                    </div>
-                    <div class="collection-card animate-on-scroll">
-                        <img src="https://images.pexels.com/photos/1648387/pexels-photo-1648387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Infantil">
-                        <div class="collection-card-overlay">
-                            <h3>Infantil</h3>
-                            <a href="#products" class="btn btn-secondary">Explorar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="products" class="product-section">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Produtos em Destaque</h2>
-                <div class="product-grid">
-                    <div class="product-card animate-on-scroll" data-id="p1" data-name="Pijama de Cetim Sonho Rosa" data-price="189.90" data-image="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image"><img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama de Seda Rosa"><span class="product-badge">Novo</span><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
-                        <div class="product-info"><h3 class="product-name">Pijama de Cetim Sonho Rosa</h3><p class="product-price">R$ 189,90</p></div>
-                    </div>
-                    <div class="product-card animate-on-scroll" data-id="p2" data-name="Pijama de Algodão Noite Serena" data-price="119.92" data-image="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600">
-                         <div class="product-image"><img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino de Algodão"><span class="product-badge sale">-20%</span><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
-                        <div class="product-info"><h3 class="product-name">Pijama de Algodão Noite Serena</h3><p class="product-price"><span class="old-price">R$ 149,90</span> R$ 119,92</p></div>
-                    </div>
-                    <div class="product-card animate-on-scroll" data-id="p3" data-name="Pijama Infantil Urso Amigo" data-price="99.90" data-image="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image"><img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Infantil de Ursinho"><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
-                        <div class="product-info"><h3 class="product-name">Pijama Infantil Urso Amigo</h3><p class="product-price">R$ 99,90</p></div>
-                    </div>
-                    <div class="product-card animate-on-scroll" data-id="p4" data-name="Pijama Xadrez Clássico" data-price="169.90" data-image="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image"><img src="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino Xadrez"><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
-                        <div class="product-info"><h3 class="product-name">Pijama Xadrez Clássico</h3><p class="product-price">R$ 169,90</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials-section">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">O que nossos clientes dizem</h2>
-                <div class="testimonial-slider animate-on-scroll">
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p>"O pijama mais confortável que já usei! A qualidade do tecido é incrível. Virou meu uniforme de home office!"</p>
-                        <h4>- Ana Clara M.</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p>"Comprei para a minha família inteira e todos amaram. A entrega foi super rápida e o atendimento é ótimo."</p>
-                        <h4>- Ricardo Borges</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★☆</div>
-                        <p>"Lindo e confortável! Só gostaria que tivesse mais opções de cores no meu modelo preferido. Fora isso, perfeito."</p>
-                        <h4>- Juliana Pires</h4>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">★★★★★</div>
-                        <p>"Qualidade impecável e design muito fofo. Recomendo de olhos fechados. Já estou planejando a próxima compra."</p>
-                        <h4>- Mariana F.</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="instagram-section">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Siga @TuttyPijamas</h2>
-                <div class="instagram-grid">
-                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 1"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/3775087/pexels-photo-3775087.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 3"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/4046313/pexels-photo-4046313.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 4"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/459957/pexels-photo-459957.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 5"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="newsletter-section">
-            <div class="container">
-                <h2 class="animate-on-scroll">Fique por Dentro</h2>
-                <p class="animate-on-scroll">Cadastre-se para receber nossas novidades e promoções exclusivas!</p>
-                <form class="newsletter-form animate-on-scroll" id="newsletterForm">
-                    <input type="email" id="emailInput" placeholder="Digite seu melhor e-mail" required>
-                    <button type="submit" class="btn btn-primary">Inscrever-se</button>
-                </form>
-                 <p id="form-message"></p>
             </div>
         </section>
     </main>
 
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>Tutty Pijamas</h4>
-                    <p>Conforto e estilo que te abraçam. Feito com amor, para suas melhores noites.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="#home">Início</a></li>
-                        <li><a href="#products">Produtos</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Serviço</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Contato</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> Rua dos Sonhos, 123, Brasil</p>
-                    <p><i class="fas fa-envelope"></i> contato@tuttypijamas.com</p>
-                    <p><i class="fas fa-phone"></i> (47) 99999-8888</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Siga-nos</h4>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
+    <footer>
+        <div class="container footer-layout">
+            <div class="footer-column">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Política de Troca</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Tutty Pijamas. Todos os direitos reservados.</p>
+            <div class="footer-column">
+                <h4>Minha Conta</h4>
+                <ul>
+                    <li><a href="minha-conta.html">Meus Pedidos</a></li>
+                    <li><a href="#">Lista de Desejos</a></li>
+                </ul>
             </div>
+            <div class="footer-column">
+                <h4>Redes Sociais</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Tutty Pijamas. Todos os direitos reservados.</p>
         </div>
     </footer>
-    
-    <div class="cart-overlay"></div>
-    <div class="cart-sidebar">
-        <div class="cart-header"><h3>Seu Carrinho</h3><button class="close-cart-btn">&times;</button></div>
-        <div class="cart-items"></div>
-        <div class="cart-footer">
-            <div class="cart-subtotal"><span>Subtotal</span><span class="subtotal-value">R$ 0,00</span></div>
-            <button class="btn btn-primary checkout-btn">Finalizar Compra</button>
-        </div>
-    </div>
 
-    <a href="#home" id="back-to-top" class="back-to-top-btn" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-
-    <script src="script.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
 </body>
-                            </html>
+</html>
