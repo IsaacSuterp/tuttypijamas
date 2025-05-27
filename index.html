@@ -24,14 +24,13 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#collections">Coleções</a></li>
                     <li><a href="#products">Produtos</a></li>
-                    <li><a href="#about">Sobre Nós</a></li>
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
             <div class="header-icons">
                 <a href="#" aria-label="Pesquisar"><i class="fas fa-search"></i></a>
                 <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
-                <a href="#" aria-label="Carrinho de compras" class="cart-icon">
+                <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </a>
@@ -59,21 +58,21 @@
                         <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Feminina">
                         <div class="collection-card-overlay">
                             <h3>Feminino</h3>
-                            <a href="#" class="btn btn-secondary">Explorar</a>
+                            <a href="#products" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
                     <div class="collection-card">
                         <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Masculina">
                         <div class="collection-card-overlay">
                             <h3>Masculino</h3>
-                            <a href="#" class="btn btn-secondary">Explorar</a>
+                            <a href="#products" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
                     <div class="collection-card">
                         <img src="https://images.pexels.com/photos/1648387/pexels-photo-1648387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Infantil">
                         <div class="collection-card-overlay">
                             <h3>Infantil</h3>
-                            <a href="#" class="btn btn-secondary">Explorar</a>
+                            <a href="#products" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
                 </div>
@@ -84,13 +83,12 @@
             <div class="container">
                 <h2 class="section-title">Produtos em Destaque</h2>
                 <div class="product-grid">
-                    <div class="product-card">
+                    <div class="product-card" data-id="p1" data-name="Pijama de Cetim Sonho Rosa" data-price="189.90" data-image="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600">
                         <div class="product-image">
                             <img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama de Seda Rosa">
                             <span class="product-badge">Novo</span>
                             <div class="product-actions">
                                 <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="product-info">
@@ -98,13 +96,12 @@
                             <p class="product-price">R$ 189,90</p>
                         </div>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-id="p2" data-name="Pijama de Algodão Noite Serena" data-price="119.92" data-image="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600">
                          <div class="product-image">
                             <img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino de Algodão">
                             <span class="product-badge sale">-20%</span>
                              <div class="product-actions">
                                 <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="product-info">
@@ -112,12 +109,11 @@
                             <p class="product-price"><span class="old-price">R$ 149,90</span> R$ 119,92</p>
                         </div>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-id="p3" data-name="Pijama Infantil Urso Amigo" data-price="99.90" data-image="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600">
                         <div class="product-image">
                             <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Infantil de Ursinho">
                              <div class="product-actions">
                                 <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="product-info">
@@ -125,12 +121,11 @@
                             <p class="product-price">R$ 99,90</p>
                         </div>
                     </div>
-                    <div class="product-card">
+                    <div class="product-card" data-id="p4" data-name="Pijama Xadrez Clássico" data-price="169.90" data-image="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600">
                         <div class="product-image">
                             <img src="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino Xadrez">
                              <div class="product-actions">
                                 <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
                         <div class="product-info">
@@ -192,12 +187,20 @@
         </div>
     </footer>
     
-    <div id="quickViewModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Detalhes do Produto</h2>
-            <p>Aqui viriam os detalhes do produto selecionado, como mais imagens, seletor de tamanho, cor, etc.</p>
-            <button class="btn btn-primary">Adicionar ao Carrinho</button>
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-cart-btn">&times;</button>
+        </div>
+        <div class="cart-items">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span class="subtotal-value">R$ 0,00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn">Finalizar Compra</button>
         </div>
     </div>
 
