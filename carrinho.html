@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Tutty Pijamas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos específicos da página do carrinho */
+        .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .cart-table th, .cart-table td { padding: 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
+        .cart-table th { background-color: #f9f9f9; }
+        .cart-table input[type="number"] { width: 60px; padding: 5px; }
+        .cart-totals { float: right; width: 300px; border: 1px solid var(--border-color); padding: 20px; }
+    </style>
+</head>
+<body id="cart-page">
+
+    <header>
+        </header>
+
+    <main class="container">
+        <h1 class="section-title">Meu Carrinho</h1>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                </tbody>
+        </table>
+        <div id="cart-totals" class="cart-totals">
+            </div>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
