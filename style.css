@@ -153,6 +153,8 @@ a:hover {
     font-weight: 500;
     position: relative;
     padding-bottom: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .main-nav a::after {
@@ -206,9 +208,140 @@ a:hover {
     border: none;
     color: var(--secondary-color);
     cursor: pointer;
+    z-index: 1200;
 }
 
-/* 3. SEÇÃO HERO */
+
+/* 3. MENU DROPDOWN E MEGA MENU */
+.main-nav .has-dropdown {
+    position: relative;
+}
+
+.main-nav .has-dropdown > a i {
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.main-nav .has-dropdown.active > a i {
+    transform: rotate(180deg);
+}
+
+.simple-dropdown,
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white-color);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    border-top: 3px solid var(--primary-color);
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.main-nav .has-dropdown.active > .simple-dropdown,
+.main-nav .has-dropdown.active > .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.simple-dropdown {
+    min-width: 220px;
+    list-style: none;
+}
+
+.simple-dropdown li {
+    margin: 0;
+}
+
+.simple-dropdown li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.simple-dropdown li a:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+.mega-menu {
+    width: 800px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.main-nav .has-dropdown.active > .mega-menu {
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.mega-menu-column {
+    flex: 1;
+}
+
+.mega-menu-column h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mega-menu-column ul {
+    list-style: none;
+}
+
+.mega-menu-column ul li a {
+    display: block;
+    padding: 8px 0;
+    color: var(--text-color);
+}
+
+.mega-menu-column ul li a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.mega-menu-featured {
+    flex-basis: 250px;
+    background-color: var(--bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.mega-menu-featured img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.mega-menu-featured h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+.mega-menu-featured p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* 4. SEÇÃO HERO */
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
@@ -253,7 +386,7 @@ a:hover {
     }
 }
 
-/* 4. SEÇÃO DE COLEÇÕES */
+/* 5. SEÇÃO DE COLEÇÕES */
 .collections-section {
     padding: 80px 0;
 }
@@ -320,7 +453,7 @@ a:hover {
     opacity: 1;
 }
 
-/* 5. SEÇÃO DE PRODUTOS */
+/* 6. SEÇÃO DE PRODUTOS */
 .product-section {
     padding: 80px 0;
     background-color: var(--white-color);
@@ -433,7 +566,7 @@ a:hover {
     margin-right: 10px;
 }
 
-/* 6. NEWSLETTER */
+/* 7. NEWSLETTER */
 .newsletter-section {
     padding: 80px 0;
     background-color: var(--accent-color);
@@ -479,7 +612,7 @@ a:hover {
     font-weight: bold;
 }
 
-/* 7. RODAPÉ */
+/* 8. RODAPÉ */
 .main-footer {
     background-color: var(--secondary-color);
     color: rgba(255,255,255,0.8);
@@ -534,7 +667,7 @@ a:hover {
     font-size: 0.9rem;
 }
 
-/* 8. ESTILOS DO CARRINHO */
+/* 9. ESTILOS DO CARRINHO */
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -699,7 +832,7 @@ a:hover {
 }
 
 
-/* 9. RESPONSIVIDADE (MOBILE-FIRST) */
+/* 10. RESPONSIVIDADE */
 @media (max-width: 992px) {
     .main-nav {
         display: none;
@@ -713,6 +846,7 @@ a:hover {
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         padding-top: var(--header-height);
         transition: right 0.4s ease-in-out;
+        z-index: 1100;
     }
 
     .main-nav.active {
@@ -731,6 +865,14 @@ a:hover {
 
     .hero h1 {
         font-size: 2.8rem;
+    }
+
+    /* Esconde menus complexos no mobile, pois o menu hambúrguer é o principal */
+    .mega-menu, .simple-dropdown {
+        display: none !important;
+    }
+    .has-dropdown > a i {
+        display: none;
     }
 }
 
@@ -761,4 +903,4 @@ a:hover {
         justify-content: center;
         display: flex;
     }
-}
+        }
