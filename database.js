@@ -60,5 +60,4 @@ const products = [
         rating: 4.9,
         reviews: 52
     }
-    // Adicione mais produtos aqui para testar os filtros e a busca
 ];
