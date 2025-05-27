@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Produtos - Tutty Pijamas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="products-page">
+
+    <header>
+        <a href="index.html" class="logo">Tutty Pijamas</a>
+        <nav>
+            <ul>
+                <li><a href="produtos.html?category=feminino">Feminino</a></li>
+                <li><a href="produtos.html?category=masculino">Masculino</a></li>
+                <li><a href="produtos.html?category=infantil">Infantil</a></li>
+                <li><a href="produtos.html">Ver Tudo</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="icon">🔍</div>
+            <a href="minha-conta.html" class="icon">👤</a>
+            <a href="carrinho.html" class="icon">
+                🛒 <span id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="container products-page-layout">
+        <aside id="filters">
+            <h3>Filtros</h3>
+            <div class="filter-group">
+                <label for="filter-category">Categoria</label>
+                <select id="filter-category">
+                    <option value="">Todas</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="infantil">Infantil</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-color">Cor</label>
+                <select id="filter-color">
+                    <option value="">Todas</option>
+                    <option value="preto">Preto</option>
+                    <option value="azul">Azul</option>
+                    <option value="vermelho">Vermelho</option>
+                    <option value="verde">Verde</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-price">Preço até R$ 300</label>
+                <input type="range" id="filter-price" min="50" max="300" step="10" value="300">
+            </div>
+            
+            <h3>Ordenar por</h3>
+            <div class="filter-group">
+                <select id="sort-order">
+                    <option value="relevance">Mais Relevantes</option>
+                    <option value="price-asc">Menor Preço</option>
+                    <option value="price-desc">Maior Preço</option>
+                </select>
+            </div>
+        </aside>
+
+        <section id="products-content">
+            <div id="product-grid" class="product-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script src="js/database.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
