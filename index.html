@@ -19,6 +19,7 @@
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Tutty Pijamas</a>
+            
             <nav class="main-nav">
                 <ul>
                     <li><a href="#home">Início</a></li>
@@ -75,26 +76,40 @@
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
-            <div class="header-icons">
-                <a href="#" aria-label="Pesquisar" id="search-icon"><i class="fas fa-search"></i></a>
-                <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
-                <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
+            
+            <div class="header-right">
+                <div class="header-icons">
+                    <a href="#" aria-label="Pesquisar" id="search-icon-trigger"><i class="fas fa-search"></i></a>
+                    <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
+                    <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+
+                <div class="header-search-container">
+                    <input type="search" id="header-search-input" placeholder="Buscar produtos...">
+                    <button id="close-header-search" aria-label="Fechar busca"><i class="fas fa-times"></i></button>
+                </div>
             </div>
+
             <button class="hamburger" aria-label="Abrir menu">
                 <i class="fas fa-bars"></i>
             </button>
+        </div>
+        
+        <div class="search-results-panel">
+            <div id="header-search-results" class="search-results-content">
+                </div>
         </div>
     </header>
 
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1 class="animate-on-scroll">Noites de Sonho, Dias de Conforto</h1>
-                <p class="animate-on-scroll">A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
-                <a href="#products" class="btn btn-primary animate-on-scroll">Ver Coleção</a>
+                <h1>Noites de Sonho, Dias de Conforto</h1>
+                <p>A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
+                <a href="#products" class="btn btn-primary">Ver Coleção</a>
             </div>
         </section>
 
@@ -241,8 +256,7 @@
             <h3>Seu Carrinho</h3>
             <button class="close-cart-btn">&times;</button>
         </div>
-        <div class="cart-items">
-            </div>
+        <div class="cart-items"></div>
         <div class="cart-footer">
             <div class="cart-subtotal">
                 <span>Subtotal</span>
@@ -252,17 +266,6 @@
         </div>
     </div>
 
-    <div id="search-overlay" class="search-overlay">
-        <button class="close-search-btn" aria-label="Fechar pesquisa">&times;</button>
-        <div class="search-content">
-            <form action="#" role="search" onsubmit="return false;">
-                <input type="search" id="search-input" placeholder="O que você procura?" autocomplete="off">
-            </form>
-            <div id="search-results" class="search-results">
-                </div>
-        </div>
-    </div>
-
     <script src="script.js"></script>
 </body>
-    </html>
+</html>
