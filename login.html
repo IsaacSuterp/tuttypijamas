@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta - Tutty Pijamas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="login-page">
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div id="login-section" class="auth-section">
+                <h1 class="auth-title">Acessar Conta</h1>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="show-forgot-password">Esqueceu a senha?</a>
+                    <a href="#" id="show-register">Não tem uma conta? <strong>Cadastre-se</strong></a>
+                </div>
+            </div>
+
+            <div id="register-section" class="auth-section" style="display: none;">
+                <h1 class="auth-title">Criar Conta</h1>
+                <form id="register-form">
+                     <div class="input-group">
+                        <label for="register-name">Nome Completo</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-password">Crie uma Senha</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <button type="submit" class="btn">Cadastrar</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="show-login-from-register">Já tem uma conta? <strong>Acesse</strong></a>
+                </div>
+            </div>
+
+            <div id="forgot-password-section" class="auth-section" style="display: none;">
+                <h1 class="auth-title">Recuperar Senha</h1>
+                <p class="auth-subtitle">Insira seu e-mail para receber o link de recuperação.</p>
+                <form id="forgot-password-form">
+                    <div class="input-group">
+                        <label for="forgot-email">Email</label>
+                        <input type="email" id="forgot-email" required>
+                    </div>
+                    <button type="submit" class="btn">Enviar Link</button>
+                </form>
+                <div class="auth-links">
+                    <a href="#" id="show-login-from-forgot">Lembrou a senha? <strong>Acesse</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="auth-return-home">
+            <a href="index.html">Voltar para a página inicial</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginSection = document.getElementById('login-section');
+            const registerSection = document.getElementById('register-section');
+            const forgotPasswordSection = document.getElementById('forgot-password-section');
+
+            const showRegisterLink = document.getElementById('show-register');
+            const showForgotPasswordLink = document.getElementById('show-forgot-password');
+            const showLoginFromRegisterLink = document.getElementById('show-login-from-register');
+            const showLoginFromForgotLink = document.getElementById('show-login-from-forgot');
+
+            // Função para alternar seções
+            const showSection = (sectionToShow) => {
+                loginSection.style.display = 'none';
+                registerSection.style.display = 'none';
+                forgotPasswordSection.style.display = 'none';
+                sectionToShow.style.display = 'block';
+            };
+
+            // Event Listeners
+            showRegisterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(registerSection);
+            });
+
+            showForgotPasswordLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(forgotPasswordSection);
+            });
+
+            showLoginFromRegisterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(loginSection);
+            });
+            
+            showLoginFromForgotLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(loginSection);
+            });
+
+            // Simulação de envio de formulários
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Login efetuado com sucesso! (Simulação)');
+                window.location.href = 'index.html'; // Redireciona para a home
+            });
+
+            document.getElementById('register-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Cadastro realizado com sucesso! (Simulação)');
+                showSection(loginSection); // Mostra a tela de login após o cadastro
+            });
+
+            document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Link de recuperação enviado para o seu e-mail! (Simulação)');
+                showSection(loginSection);
+            });
+        });
+    </script>
+</body>
+</html>
