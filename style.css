@@ -32,7 +32,8 @@ body {
     line-height: 1.6;
 }
 
-body.cart-open {
+body.cart-open,
+body.search-open {
     overflow: hidden;
 }
 
@@ -832,7 +833,135 @@ a:hover {
 }
 
 
-/* 10. RESPONSIVIDADE */
+/* 10. ESTILOS DO OVERLAY DE PESQUISA */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 2500;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.search-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-search-btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.search-content {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+#search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 2.5rem;
+    font-family: var(--font-headings);
+    text-align: center;
+    padding: 15px 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+#search-input:focus {
+    border-bottom-color: var(--primary-color);
+}
+
+.search-results {
+    margin-top: 40px;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.search-results::-webkit-scrollbar {
+    width: 8px;
+}
+.search-results::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+.search-results::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+.search-result-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-result-item img {
+    width: 50px;
+    height: 65px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 3px;
+}
+
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-info .product-name {
+    font-size: 1.1rem;
+    color: white;
+    font-family: var(--font-primary);
+    margin: 0;
+}
+
+.search-result-info .product-price {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.search-no-results {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    text-align: center;
+}
+
+/* 11. RESPONSIVIDADE */
 @media (max-width: 992px) {
     .main-nav {
         display: none;
@@ -867,7 +996,6 @@ a:hover {
         font-size: 2.8rem;
     }
 
-    /* Esconde menus complexos no mobile, pois o menu hambúrguer é o principal */
     .mega-menu, .simple-dropdown {
         display: none !important;
     }
@@ -903,4 +1031,15 @@ a:hover {
         justify-content: center;
         display: flex;
     }
-        }
+
+    .search-content {
+        padding: 0 20px;
+    }
+    #search-input {
+        font-size: 1.8rem;
+    }
+    .close-search-btn {
+        top: 20px;
+        right: 20px;
+    }
+    }
