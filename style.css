@@ -1,144 +1,161 @@
-/* GERAL */
+/* === CONFIGURAÇÕES GLOBAIS E VARIÁVEIS === */
 :root {
-    --primary-color: #7e57c2; /* Roxo suave */
-    --secondary-color: #ffb74d; /* Laranja suave */
-    --text-color: #333;
-    --background-color: #fdfaf6;
-    --white: #fff;
-    --border-color: #eee;
+    --primary-color: #6a5acd; /* Roxo "SlateBlue" - chique e calmo */
+    --secondary-color: #f08080; /* Coral claro "LightCoral" - quente e convidativo */
+    --text-color: #3f3f3f;
+    --background-color: #fdfdfd;
+    --white: #ffffff;
+    --border-color: #e0e0e0;
+    --success-color: #2e8b57; /* Verde "SeaGreen" */
+
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    margin: 0;
     color: var(--text-color);
     background-color: var(--background-color);
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 
-/* HEADER & NAVEGAÇÃO */
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+/* === HEADER E NAVEGAÇÃO === */
 header {
     background-color: var(--white);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    box-shadow: var(--shadow);
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--primary-color);
-    text-decoration: none;
 }
 
 nav ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
-}
-
-nav li {
-    margin-left: 20px;
+    gap: 30px;
 }
 
 nav a {
-    text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    padding: 5px 10px;
-    transition: color 0.3s;
+    padding-bottom: 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
 }
 
 nav a:hover {
     color: var(--primary-color);
 }
 
+nav a:hover::after {
+    width: 100%;
+}
+
 .header-icons {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .header-icons .icon {
-    margin-left: 15px;
+    font-size: 22px;
+    color: var(--text-color);
+    position: relative;
     cursor: pointer;
-    font-size: 20px; /* Para ícones de fontes como FontAwesome */
+}
+
+#cart-icon {
     position: relative;
 }
 
 #cart-count {
     position: absolute;
     top: -8px;
-    right: -10px;
+    right: -12px;
     background-color: var(--secondary-color);
     color: var(--white);
     border-radius: 50%;
     padding: 2px 6px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
+    display: none; /* JS controla a exibição */
 }
 
-/* BANNER PROMOCIONAL */
-.banner {
-    background-image: url('../images/banner-home.jpg');
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    padding: 100px 20px;
-    text-align: center;
-}
-
-.banner h1 {
-    font-size: 48px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.banner p {
-    font-size: 20px;
-}
-
+/* === BOTÃO PRINCIPAL (CTA) === */
 .btn {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 500;
     display: inline-block;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-    background-color: #673ab7; /* Tom mais escuro de roxo */
+    background-color: #5a4bbf; /* Tom mais escuro */
+    transform: translateY(-2px);
 }
 
-/* SEÇÕES */
+/* === SEÇÕES E TÍTULOS === */
 .section {
-    padding: 60px 0;
+    padding: 80px 0;
 }
 
 .section-title {
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: 36px;
+    margin-bottom: 50px;
+    font-weight: 700;
 }
 
-/* GRID DE PRODUTOS */
+/* === GRID DE PRODUTOS === */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .product-card {
@@ -147,99 +164,210 @@ nav a:hover {
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 .product-card h3 {
-    font-size: 16px;
-    margin: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    height: 40px; /* Garante altura consistente */
 }
 
 .product-card .price {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--primary-color);
+    margin-bottom: 5px;
 }
 
-/* PÁGINA DE PRODUTOS (COM FILTROS) */
+.product-card p {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+/* === PÁGINA DE PRODUTOS (FILTROS) === */
 .products-page-layout {
     display: flex;
-    gap: 30px;
+    gap: 40px;
+    align-items: flex-start;
 }
 
 #filters {
-    width: 250px;
+    width: 280px;
     flex-shrink: 0;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
 #filters h3 {
-    border-bottom: 2px solid var(--primary-color);
+    font-size: 1.2rem;
     padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .filter-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .filter-group label {
     display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 500;
 }
 
 .filter-group select, .filter-group input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#products-content {
+    flex-grow: 1;
+}
+
+/* === PÁGINA DO CARRINHO === */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.cart-table thead {
+    background-color: #f8f8f8;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.cart-table th, .cart-table td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.cart-table td {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-table img {
+    width: 70px;
+    height: auto;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.cart-table input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
-/* RODAPÉ */
+.cart-table button {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cart-summary {
+    float: right;
+    width: 100%;
+    max-width: 400px;
+    background: #f8f8f8;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.cart-summary h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.cart-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-summary hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 20px 0;
+}
+
+.cart-summary .btn {
+    width: 100%;
+    text-align: center;
+}
+
+/* === RODAPÉ === */
 footer {
-    background-color: #333;
-    color: var(--white);
-    padding: 40px 20px;
+    background-color: #2c2c2c;
+    color: #f0f0f0;
+    padding: 60px 0 20px 0;
+    margin-top: 80px;
 }
 
 .footer-layout {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.footer-column {
-    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
 }
 
 .footer-column h4 {
-    color: var(--secondary-color);
-    border-bottom: 1px solid var(--secondary-color);
-    padding-bottom: 5px;
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--secondary-color);
 }
 
 .footer-column ul {
     list-style: none;
-    padding: 0;
 }
 
 .footer-column li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .footer-column a {
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.3s;
+    color: #c0c0c0;
+    transition: color 0.3s ease;
 }
 
 .footer-column a:hover {
@@ -248,7 +376,35 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid #555;
+    border-top: 1px solid #444;
+    font-size: 0.9rem;
+    color: #a0a0a0;
 }
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    .products-page-layout {
+        flex-direction: column;
+    }
+
+    #filters {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .cart-summary {
+        float: none;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+    }
