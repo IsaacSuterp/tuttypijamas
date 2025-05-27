@@ -9,17 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Tutty Pijamas</a>
-            
             <nav class="main-nav">
                 <ul>
                     <li><a href="#home">Início</a></li>
@@ -76,7 +76,6 @@
                     <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
-            
             <div class="header-icons">
                 <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
                 <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
@@ -84,41 +83,65 @@
                     <span class="cart-count">0</span>
                 </a>
             </div>
-
-            <button class="hamburger" aria-label="Abrir menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="hamburger" aria-label="Abrir menu"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
     <main>
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1>Noites de Sonho, Dias de Conforto</h1>
-                <p>A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
-                <a href="#products" class="btn btn-primary">Ver Coleção</a>
+                <h1 class="animate-on-scroll">Noites de Sonho, Dias de Conforto</h1>
+                <p class="animate-on-scroll">A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
+                <a href="#products" class="btn btn-primary animate-on-scroll">Ver Coleção</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item animate-on-scroll">
+                        <i class="fas fa-truck-fast"></i>
+                        <h3>Frete Grátis</h3>
+                        <p>Para compras acima de R$ 250 em todo o Brasil.</p>
+                    </div>
+                    <div class="feature-item animate-on-scroll">
+                        <i class="fas fa-award"></i>
+                        <h3>Tecido Premium</h3>
+                        <p>Algodão e tecidos sustentáveis para o máximo conforto.</p>
+                    </div>
+                    <div class="feature-item animate-on-scroll">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Troca Fácil</h3>
+                        <p>Até 30 dias para trocar seu produto sem complicações.</p>
+                    </div>
+                    <div class="feature-item animate-on-scroll">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Sustentável</h3>
+                        <p>Produção consciente que respeita o meio ambiente.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="collections" class="collections-section">
             <div class="container">
-                <h2 class="section-title">Nossas Coleções</h2>
+                <h2 class="section-title animate-on-scroll">Nossas Coleções</h2>
                 <div class="collection-grid">
-                    <div class="collection-card">
+                    <div class="collection-card animate-on-scroll">
                         <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Feminina">
                         <div class="collection-card-overlay">
                             <h3>Feminino</h3>
                             <a href="#products" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
-                    <div class="collection-card">
+                    <div class="collection-card animate-on-scroll">
                         <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Masculina">
                         <div class="collection-card-overlay">
                             <h3>Masculino</h3>
                             <a href="#products" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
-                    <div class="collection-card">
+                    <div class="collection-card animate-on-scroll">
                         <img src="https://images.pexels.com/photos/1648387/pexels-photo-1648387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Infantil">
                         <div class="collection-card-overlay">
                             <h3>Infantil</h3>
@@ -131,67 +154,74 @@
         
         <section id="products" class="product-section">
             <div class="container">
-                <h2 class="section-title">Produtos em Destaque</h2>
+                <h2 class="section-title animate-on-scroll">Produtos em Destaque</h2>
                 <div class="product-grid">
-                    <div class="product-card" data-id="p1" data-name="Pijama de Cetim Sonho Rosa" data-price="189.90" data-image="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama de Seda Rosa">
-                            <span class="product-badge">Novo</span>
-                            <div class="product-actions">
-                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pijama de Cetim Sonho Rosa</h3>
-                            <p class="product-price">R$ 189,90</p>
-                        </div>
+                    <div class="product-card animate-on-scroll" data-id="p1" data-name="Pijama de Cetim Sonho Rosa" data-price="189.90" data-image="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="product-image"><img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama de Seda Rosa"><span class="product-badge">Novo</span><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
+                        <div class="product-info"><h3 class="product-name">Pijama de Cetim Sonho Rosa</h3><p class="product-price">R$ 189,90</p></div>
                     </div>
-                    <div class="product-card" data-id="p2" data-name="Pijama de Algodão Noite Serena" data-price="119.92" data-image="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600">
-                         <div class="product-image">
-                            <img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino de Algodão">
-                            <span class="product-badge sale">-20%</span>
-                             <div class="product-actions">
-                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pijama de Algodão Noite Serena</h3>
-                            <p class="product-price"><span class="old-price">R$ 149,90</span> R$ 119,92</p>
-                        </div>
+                    <div class="product-card animate-on-scroll" data-id="p2" data-name="Pijama de Algodão Noite Serena" data-price="119.92" data-image="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600">
+                         <div class="product-image"><img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino de Algodão"><span class="product-badge sale">-20%</span><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
+                        <div class="product-info"><h3 class="product-name">Pijama de Algodão Noite Serena</h3><p class="product-price"><span class="old-price">R$ 149,90</span> R$ 119,92</p></div>
                     </div>
-                    <div class="product-card" data-id="p3" data-name="Pijama Infantil Urso Amigo" data-price="99.90" data-image="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Infantil de Ursinho">
-                             <div class="product-actions">
-                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pijama Infantil Urso Amigo</h3>
-                            <p class="product-price">R$ 99,90</p>
-                        </div>
+                    <div class="product-card animate-on-scroll" data-id="p3" data-name="Pijama Infantil Urso Amigo" data-price="99.90" data-image="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="product-image"><img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Infantil de Ursinho"><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
+                        <div class="product-info"><h3 class="product-name">Pijama Infantil Urso Amigo</h3><p class="product-price">R$ 99,90</p></div>
                     </div>
-                    <div class="product-card" data-id="p4" data-name="Pijama Xadrez Clássico" data-price="169.90" data-image="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino Xadrez">
-                             <div class="product-actions">
-                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pijama Xadrez Clássico</h3>
-                            <p class="product-price">R$ 169,90</p>
-                        </div>
+                    <div class="product-card animate-on-scroll" data-id="p4" data-name="Pijama Xadrez Clássico" data-price="169.90" data-image="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600">
+                        <div class="product-image"><img src="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino Xadrez"><div class="product-actions"><button class="btn-add-to-cart">Adicionar ao Carrinho</button></div></div>
+                        <div class="product-info"><h3 class="product-name">Pijama Xadrez Clássico</h3><p class="product-price">R$ 169,90</p></div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">O que nossos clientes dizem</h2>
+                <div class="testimonial-slider animate-on-scroll">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"O pijama mais confortável que já usei! A qualidade do tecido é incrível. Virou meu uniforme de home office!"</p>
+                        <h4>- Ana Clara M.</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Comprei para a minha família inteira e todos amaram. A entrega foi super rápida e o atendimento é ótimo."</p>
+                        <h4>- Ricardo Borges</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★☆</div>
+                        <p>"Lindo e confortável! Só gostaria que tivesse mais opções de cores no meu modelo preferido. Fora isso, perfeito."</p>
+                        <h4>- Juliana Pires</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Qualidade impecável e design muito fofo. Recomendo de olhos fechados. Já estou planejando a próxima compra."</p>
+                        <h4>- Mariana F.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="instagram-section">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Siga @TuttyPijamas</h2>
+                <div class="instagram-grid">
+                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/3671083/pexels-photo-3671083.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 1"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/3775087/pexels-photo-3775087.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 3"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/4046313/pexels-photo-4046313.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 4"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="insta-post animate-on-scroll"><img src="https://images.pexels.com/photos/459957/pexels-photo-459957.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Post do Instagram 5"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="newsletter-section">
             <div class="container">
-                <h2>Fique por Dentro</h2>
-                <p>Cadastre-se para receber nossas novidades e promoções exclusivas!</p>
-                <form class="newsletter-form" id="newsletterForm">
+                <h2 class="animate-on-scroll">Fique por Dentro</h2>
+                <p class="animate-on-scroll">Cadastre-se para receber nossas novidades e promoções exclusivas!</p>
+                <form class="newsletter-form animate-on-scroll" id="newsletterForm">
                     <input type="email" id="emailInput" placeholder="Digite seu melhor e-mail" required>
                     <button type="submit" class="btn btn-primary">Inscrever-se</button>
                 </form>
@@ -239,20 +269,18 @@
     
     <div class="cart-overlay"></div>
     <div class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Seu Carrinho</h3>
-            <button class="close-cart-btn">&times;</button>
-        </div>
+        <div class="cart-header"><h3>Seu Carrinho</h3><button class="close-cart-btn">&times;</button></div>
         <div class="cart-items"></div>
         <div class="cart-footer">
-            <div class="cart-subtotal">
-                <span>Subtotal</span>
-                <span class="subtotal-value">R$ 0,00</span>
-            </div>
+            <div class="cart-subtotal"><span>Subtotal</span><span class="subtotal-value">R$ 0,00</span></div>
             <button class="btn btn-primary checkout-btn">Finalizar Compra</button>
         </div>
     </div>
 
+    <a href="#home" id="back-to-top" class="back-to-top-btn" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <script src="script.js"></script>
 </body>
-            </html>
+                            </html>
