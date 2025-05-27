@@ -3,98 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossos Produtos - Tutty Pijamas</title>
+    <title>Coleções - Tutty Pijamas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="products-page">
 
     <header>
-        <div class="container header-content">
-            <a href="index.html" class="logo">Tutty Pijamas</a>
-            <nav>
-                <ul>
-                    <li><a href="produtos.html?category=feminino">Feminino</a></li>
-                    <li><a href="produtos.html?category=masculino">Masculino</a></li>
-                    <li><a href="produtos.html?category=infantil">Infantil</a></li>
-                    <li><a href="produtos.html">Ver Tudo</a></li>
-                </ul>
-            </nav>
-            <div class="header-icons">
-                <div class="icon">🔍</div>
-                <a href="minha-conta.html" class="icon">👤</a>
-                <a href="carrinho.html" class="icon" id="cart-icon">
-                    🛒
-                    <span id="cart-count"></span>
-                </a>
-            </div>
-        </div>
+        <div class="container header-content"><a href="index.html" class="logo">Tutty Pijamas</a><nav><ul><li><a href="produtos.html">Coleções</a></li><li><a href="produtos.html?category=feminino">Feminino</a></li><li><a href="produtos.html?category=masculino">Masculino</a></li><li><a href="produtos.html?category=infantil">Infantil</a></li></ul></nav><div class="header-icons"><a href="minha-conta.html" class="icon">👤</a><a href="carrinho.html" class="icon" id="cart-icon">🛒<span id="cart-count"></span></a></div></div>
     </header>
 
     <main class="section">
-        <div class="container products-page-layout">
-            <aside id="filters">
-                <h3>Filtros</h3>
-                <div class="filter-group">
-                    <label for="filter-category">Categoria</label>
-                    <select id="filter-category">
-                        <option value="">Todas</option>
-                        <option value="feminino">Feminino</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="infantil">Infantil</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="filter-color">Cor</label>
-                    <select id="filter-color">
-                        <option value="">Todas</option>
-                        <option value="preto">Preto</option>
-                        <option value="azul">Azul</option>
-                        <option value="vermelho">Vermelho</option>
-                        <option value="verde">Verde</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="filter-price">Preço até R$ 300</label>
-                    <input type="range" id="filter-price" min="50" max="300" step="10" value="300">
-                </div>
-                
-                <h3>Ordenar por</h3>
-                <div class="filter-group">
-                    <select id="sort-order">
-                        <option value="relevance">Mais Relevantes</option>
-                        <option value="price-asc">Menor Preço</option>
-                        <option value="price-desc">Maior Preço</option>
-                    </select>
-                </div>
-            </aside>
-
-            <section id="products-content">
-                <div id="product-grid" class="product-grid">
-                    </div>
-            </section>
+        <div class="container">
+            <h1 class="section-title">Nossas Coleções</h1>
+            <p class="section-subtitle">Filtre por seus interesses e encontre o pijama perfeito para você.</p>
+            <div class="products-page-layout">
+                <aside id="filters">
+                    <h3>Filtros</h3>
+                    <div class="filter-group"><label for="filter-category">Categoria</label><select id="filter-category"><option value="">Todas</option><option value="feminino">Feminino</option><option value="masculino">Masculino</option><option value="infantil">Infantil</option></select></div>
+                    <div class="filter-group"><label for="filter-color">Cor</label><select id="filter-color"><option value="">Todas</option><option value="preto">Preto</option><option value="azul">Azul</option><option value="vermelho">Vermelho</option><option value="verde">Verde</option></select></div>
+                    <div class="filter-group"><label for="filter-price">Preço até R$ 300</label><input type="range" id="filter-price" min="50" max="300" step="10" value="300"></div>
+                    <h3>Ordenar por</h3>
+                    <div class="filter-group"><select id="sort-order"><option value="relevance">Relevância</option><option value="price-asc">Menor Preço</option><option value="price-desc">Maior Preço</option></select></div>
+                </aside>
+                <section id="products-content">
+                    <div id="product-grid" class="product-grid"></div>
+                </section>
+            </div>
         </div>
     </main>
 
     <footer>
-        <div class="container footer-layout">
-            <div class="footer-column">
-                <h4>Institucional</h4>
-                <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li><li><a href="#">Política de Troca</a></li><li><a href="#">FAQ</a></li></ul>
-            </div>
-            <div class="footer-column">
-                <h4>Minha Conta</h4>
-                <ul><li><a href="minha-conta.html">Meus Pedidos</a></li><li><a href="#">Lista de Desejos</a></li></ul>
-            </div>
-            <div class="footer-column">
-                <h4>Redes Sociais</h4>
-                <ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">TikTok</a></li></ul>
-            </div>
-        </div>
-        <div class="footer-bottom"><p>&copy; 2024 Tutty Pijamas. Todos os direitos reservados.</p></div>
+         <div class="container footer-layout"><div class="footer-column"><h4>Institucional</h4><ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li><li><a href="#">Sustentabilidade</a></li></ul></div><div class="footer-column"><h4>Ajuda</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Política de Troca</a></li><li><a href="#">Guia de Tamanhos</a></li></ul></div><div class="footer-column"><h4>Minha Conta</h4><ul><li><a href="minha-conta.html">Meus Pedidos</a></li><li><a href="#">Lista de Desejos</a></li></ul></div><div class="footer-column"><h4>Redes Sociais</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li><li><a href="#">Facebook</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 Tutty Pijamas. Todos os direitos reservados.</p></div>
     </footer>
 
     <script src="database.js"></script>
