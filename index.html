@@ -76,7 +76,7 @@
                 </ul>
             </nav>
             <div class="header-icons">
-                <a href="#" aria-label="Pesquisar"><i class="fas fa-search"></i></a>
+                <a href="#" aria-label="Pesquisar" id="search-icon"><i class="fas fa-search"></i></a>
                 <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
                 <a href="#" aria-label="Carrinho de compras" class="cart-icon-wrapper">
                     <i class="fas fa-shopping-cart"></i>
@@ -252,6 +252,17 @@
         </div>
     </div>
 
+    <div id="search-overlay" class="search-overlay">
+        <button class="close-search-btn" aria-label="Fechar pesquisa">&times;</button>
+        <div class="search-content">
+            <form action="#" role="search" onsubmit="return false;">
+                <input type="search" id="search-input" placeholder="O que você procura?" autocomplete="off">
+            </form>
+            <div id="search-results" class="search-results">
+                </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-                                </html>
+    </html>
