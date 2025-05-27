@@ -17,7 +17,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-primary); background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+body { font-family: var(--font-primary); background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; cursor: none; }
 body.cart-open { overflow: hidden; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 h1, h2, h3 { font-family: var(--font-headings); color: var(--secondary-color); line-height: 1.2; }
@@ -72,40 +72,69 @@ a:hover { color: var(--secondary-color); }
 
 /* 4. SEÇÃO HERO */
 .hero { min-height: 60vh; padding-top: var(--header-height); background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover; display: flex; justify-content: center; align-items: center; text-align: center; color: var(--white-color); }
-.hero-content h1 { font-size: 4rem; margin-bottom: 20px; color: var(--white-color); }
-.hero-content p { font-size: 1.2rem; margin-bottom: 30px; }
+.hero h1 { font-size: 4rem; color: var(--white-color); }
+.hero p { font-size: 1.2rem; margin: 20px 0 30px; }
 
-/* 5. DEMAIS SEÇÕES (Produtos, etc.) */
-.collections-section, .product-section, .newsletter-section, .main-footer { padding: 80px 0; }
-.product-section { background-color: var(--white-color); }
-.collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.collection-card { position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); height: 400px; }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+/* 5. SEÇÕES DE CONTEÚDO */
+.features-section, .collections-section, .product-section, .testimonials-section, .instagram-section, .newsletter-section { padding: 80px 0; }
+.product-section, .features-section, .instagram-section { background-color: var(--white-color); }
+.collection-grid, .product-grid, .features-grid, .instagram-grid { display: grid; gap: 30px; }
+.collection-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.product-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 .product-card { background: var(--white-color); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-/* ...outros estilos de produto... */
 .product-image { position: relative; overflow: hidden; }
 .product-image img { width: 100%; height: 350px; object-fit: cover; display: block; }
-.product-actions { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; display: flex; justify-content: center; gap: 10px; background: rgba(255,255,255,0.8); transform: translateY(100%); transition: transform 0.4s ease; }
+.product-actions { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; display: flex; justify-content: center; background: rgba(255,255,255,0.8); transform: translateY(100%); transition: transform 0.4s ease; }
 .product-card:hover .product-actions { transform: translateY(0); }
-.btn-add-to-cart { flex-grow: 1; background: var(--secondary-color); color: var(--white-color); border: none; padding: 10px; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; font-weight: bold; transition: background-color 0.3s ease; }
-.btn-add-to-cart:hover { background-color: var(--primary-color); }
-.product-info { padding: 20px; text-align: center; }
 
 /* 6. ESTILOS DO CARRINHO */
 .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; }
 .cart-overlay.open { opacity: 1; visibility: visible; }
 .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background-color: var(--white-color); z-index: 2000; box-shadow: -5px 0 20px rgba(0,0,0,0.15); transition: right 0.4s ease-in-out; display: flex; flex-direction: column; }
 .cart-sidebar.open { right: 0; }
-/* ...estilos internos do carrinho... */
 .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
 .close-cart-btn { background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--text-color); }
 .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px; }
-.cart-item { display: flex; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
-.cart-item:last-child { border-bottom: none; }
-.cart-item img { width: 80px; height: 100px; object-fit: cover; border-radius: 5px; }
 
-/* 7. RESPONSIVIDADE */
+/* 7. NOVAS SEÇÕES DE ESTILO */
+.features-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); text-align: center; }
+.feature-item { padding: 20px; }
+.feature-item i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; transition: transform 0.3s ease; }
+.feature-item h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.feature-item:hover i { transform: scale(1.1) rotate(-5deg); }
+
+.testimonials-section { position: relative; overflow: hidden; }
+.testimonials-section::before { content: '“'; position: absolute; top: -20px; left: 20px; font-size: 15rem; color: rgba(225, 166, 173, 0.1); z-index: 1; line-height: 1; }
+.testimonial-slider { display: grid; grid-auto-flow: column; grid-auto-columns: 80%; gap: 20px; overflow-x: auto; padding: 20px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.testimonial-slider::-webkit-scrollbar { display: none; }
+.testimonial-card { background-color: var(--white-color); padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); scroll-snap-align: center; z-index: 2; }
+.testimonial-card .stars { color: var(--accent-color); font-size: 1.2rem; margin-bottom: 15px; }
+.testimonial-card p { font-size: 1.1rem; font-style: italic; color: #555; margin-bottom: 20px; }
+.testimonial-card h4 { font-family: var(--font-primary); font-weight: bold; color: var(--secondary-color); }
+
+.instagram-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.insta-post { position: relative; overflow: hidden; aspect-ratio: 1 / 1; }
+.insta-post img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.insta-post:hover img { transform: scale(1.1); }
+.insta-post i { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 2.5rem; opacity: 0; transition: opacity 0.4s ease; }
+.insta-post::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.4s ease; }
+.insta-post:hover i, .insta-post:hover::after { opacity: 1; }
+
+/* 8. ELEMENTOS FUNCIONAIS DE UI */
+.back-to-top-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 998; opacity: 0; visibility: hidden; transform: translateY(20px); transition: opacity 0.3s, visibility 0.3s, transform 0.3s; }
+.back-to-top-btn.active { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top-btn:hover { background-color: var(--secondary-color); color: white; }
+
+.animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+.cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; border-radius: 50%; }
+.cursor-dot { width: 8px; height: 8px; background-color: var(--primary-color); transform: translate(-50%, -50%); }
+.cursor-outline { width: 30px; height: 30px; border: 2px solid var(--primary-color); transform: translate(-50%, -50%); transition: all 0.1s ease-out; }
+body a:hover ~ .cursor-outline, body button:hover ~ .cursor-outline { transform: translate(-50%, -50%) scale(1.5); background-color: rgba(225, 166, 173, 0.2); }
+
+/* 9. RESPONSIVIDADE */
 @media (max-width: 992px) {
     .main-nav { display: none; flex-direction: column; position: fixed; top: 0; right: -100%; width: 300px; height: 100vh; background-color: var(--white-color); box-shadow: -5px 0 15px rgba(0,0,0,0.1); padding-top: var(--header-height); transition: right 0.4s ease-in-out; z-index: 1100; }
     .main-nav.active { display: flex; right: 0; }
@@ -115,9 +144,11 @@ a:hover { color: var(--secondary-color); }
     .mega-menu, .simple-dropdown { display: none !important; }
     .has-dropdown > a i { display: none; }
 }
-
 @media (max-width: 768px) {
     .section-title { font-size: 2rem; }
     .hero h1 { font-size: 2.2rem; }
     .hero p { font-size: 1rem; }
-                  }
+    body { cursor: auto; }
+    .cursor-dot, .cursor-outline { display: none; }
+    .testimonial-slider { grid-auto-columns: 90%; }
+                                                                                                                         }
