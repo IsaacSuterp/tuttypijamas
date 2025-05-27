@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutty Pijamas - Noites de Sonho, Dias de Conforto</title>
-    <meta name="description" content="Descubra o conforto e estilo dos pijamas da Tutty Pijamas. Coleções femininas, masculinas e infantis feitas com os melhores tecidos para noites perfeitas.">
-    <meta name="keywords" content="pijamas, roupa de dormir, conforto, moda, feminino, masculino, infantil">
+    <title>Tutty Pijamas - Conforto e Estilo para suas Noites</title>
+    <meta name="description" content="Descubra a coleção de pijamas da Tutty Pijamas. Conforto, estilo e qualidade para homens, mulheres e crianças.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,170 +19,189 @@
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Tutty Pijamas</a>
-            
-            <nav class="main-nav" id="main-nav">
-                <ul class="nav-list">
-                    <li><a href="#home">Home</a></li>
-                    
-                    <li class="nav-item-dropdown">
-                        <a href="#categories" class="nav-link-dropdown" aria-haspopup="true" aria-expanded="false">
-                            Coleções <i class="fas fa-chevron-down dropdown-arrow"></i>
-                        </a>
-                        <div class="megamenu-panel">
-                            <div class="megamenu-content container">
-                                <div class="megamenu-col">
-                                    <h4>Para Elas</h4>
-                                    <ul>
-                                        <li><a href="#">Pijamas de Verão</a></li>
-                                        <li><a href="#">Pijamas de Inverno</a></li>
-                                        <li><a href="#">Camisolas</a></li>
-                                        <li><a href="#">Robes</a></li>
-                                        <li><a href="#">Linha Maternidade</a></li>
-                                    </ul>
-                                </div>
-                                <div class="megamenu-col">
-                                    <h4>Para Eles</h4>
-                                    <ul>
-                                        <li><a href="#">Pijamas Curtos</a></li>
-                                        <li><a href="#">Pijamas Longos</a></li>
-                                        <li><a href="#">Shorts de Dormir</a></li>
-                                        <li><a href="#">Robes Masculinos</a></li>
-                                    </ul>
-                                </div>
-                                <div class="megamenu-col">
-                                    <h4>Infantil</h4>
-                                    <ul>
-                                        <li><a href="#">Meninas</a></li>
-                                        <li><a href="#">Meninos</a></li>
-                                        <li><a href="#">Bebês</a></li>
-                                    </ul>
-                                </div>
-                                <div class="megamenu-col megamenu-promo">
-                                    <a href="#">
-                                        <img src="https://images.unsplash.com/photo-1604176358394-b98a00a1e3b5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBhamFtYXN8ZW58MHx8MHx8fDA%3D" alt="Promoção Nova Coleção">
-                                        <div class="promo-text">
-                                            <span>Lançamento</span>
-                                            <h3>Coleção Inverno</h3>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li><a href="#bestsellers">Mais Vendidos</a></li>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#collections">Coleções</a></li>
+                    <li><a href="#products">Produtos</a></li>
                     <li><a href="#about">Sobre Nós</a></li>
+                    <li><a href="#contact">Contato</a></li>
                 </ul>
             </nav>
-            
             <div class="header-icons">
-                <a href="#" aria-label="Buscar"><i class="fas fa-search"></i></a>
-                <a href="#" aria-label="Minha Conta"><i class="fas fa-user"></i></a>
-                <a href="#" class="cart-icon" id="cart-icon" aria-label="Carrinho de Compras">
+                <a href="#" aria-label="Pesquisar"><i class="fas fa-search"></i></a>
+                <a href="#" aria-label="Conta de usuário"><i class="fas fa-user"></i></a>
+                <a href="#" aria-label="Carrinho de compras" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-counter">0</span>
+                    <span class="cart-count">0</span>
                 </a>
-                <button class="hamburger-menu" id="hamburger-menu" aria-label="Abrir menu" aria-controls="main-nav">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
+            <button class="hamburger" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
     <main>
-        <section id="home" class="hero-section">
+        <section id="home" class="hero">
             <div class="hero-content">
-                <h1>Noites de Sonho, Dias de Conforto</h1>
-                <p>Aconchego e estilo que transformam suas noites e seus dias.</p>
-                <a href="#bestsellers" class="btn-primary">Compre Agora</a>
+                <h1 class="animate-on-scroll">Noites de Sonho, Dias de Conforto</h1>
+                <p class="animate-on-scroll">A nova coleção chegou para transformar suas noites. Sinta o abraço dos nossos tecidos.</p>
+                <a href="#products" class="btn btn-primary animate-on-scroll">Ver Coleção</a>
             </div>
         </section>
 
-        <section id="categories" class="categories-section">
+        <section id="collections" class="collections-section">
             <div class="container">
                 <h2 class="section-title">Nossas Coleções</h2>
-                <div class="category-grid">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1585252489134-b237d7a4f61f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBhamFtYXN8ZW58MHx8MHx8fDA%3D" alt="Pijamas Femininos">
-                        <div class="category-info">
+                <div class="collection-grid">
+                    <div class="collection-card">
+                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Feminina">
+                        <div class="collection-card-overlay">
                             <h3>Feminino</h3>
-                            <a href="#" class="btn-secondary">Ver Coleção</a>
+                            <a href="#" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1620943993315-b2b343bf7240?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG1lbidzJTIwcGFqYW1hc3xlbnwwfHwwfHx8MA%3D%3D" alt="Pijamas Masculinos">
-                        <div class="category-info">
+                    <div class="collection-card">
+                        <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Masculina">
+                        <div class="collection-card-overlay">
                             <h3>Masculino</h3>
-                            <a href="#" class="btn-secondary">Ver Coleção</a>
+                            <a href="#" class="btn btn-secondary">Explorar</a>
                         </div>
                     </div>
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1540404753384-d5143a57a55a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2lkcyUyMHBhamFtYXN8ZW58MHx8MHx8fDA%3D" alt="Pijamas Infantis">
-                        <div class="category-info">
+                    <div class="collection-card">
+                        <img src="https://images.pexels.com/photos/1648387/pexels-photo-1648387.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coleção Infantil">
+                        <div class="collection-card-overlay">
                             <h3>Infantil</h3>
-                            <a href="#" class="btn-secondary">Ver Coleção</a>
+                            <a href="#" class="btn btn-secondary">Explorar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="products" class="product-section">
+            <div class="container">
+                <h2 class="section-title">Produtos em Destaque</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama de Seda Rosa">
+                            <span class="product-badge">Novo</span>
+                            <div class="product-actions">
+                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
+                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pijama de Cetim Sonho Rosa</h3>
+                            <p class="product-price">R$ 189,90</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                         <div class="product-image">
+                            <img src="https://images.pexels.com/photos/3755706/pexels-photo-3755706.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino de Algodão">
+                            <span class="product-badge sale">-20%</span>
+                             <div class="product-actions">
+                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
+                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pijama de Algodão Noite Serena</h3>
+                            <p class="product-price"><span class="old-price">R$ 149,90</span> R$ 119,92</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Infantil de Ursinho">
+                             <div class="product-actions">
+                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
+                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pijama Infantil Urso Amigo</h3>
+                            <p class="product-price">R$ 99,90</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/769749/pexels-photo-769749.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Pijama Masculino Xadrez">
+                             <div class="product-actions">
+                                <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
+                                <button class="btn-quick-view"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Pijama Xadrez Clássico</h3>
+                            <p class="product-price">R$ 169,90</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="bestsellers" class="bestsellers-section">
+        <section id="contact" class="newsletter-section">
             <div class="container">
-                <h2 class="section-title">Mais Vendidos</h2>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="product-card" data-id="1" data-name="Pijama Nuvem de Algodão" data-price="189.90" data-image="https://images.unsplash.com/photo-1617469145729-93369a474a72?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGFqYW1hc3xlbnwwfHwwfHx8MA%3D%3D">
-                            <img src="https://images.unsplash.com/photo-1617469145729-93369a474a72?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGFqYW1hc3xlbnwwfHwwfHx8MA%3D%3D" alt="Pijama Nuvem de Algodão">
-                            <h3>Pijama Nuvem de Algodão</h3>
-                            <p class="price">R$ 189,90</p>
-                            <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                        </div>
-                        <div class="product-card" data-id="2" data-name="Pijama Sonho de Seda" data-price="249.90" data-image="https://images.unsplash.com/photo-1590736704178-591a3214a154?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGFqYW1hc3xlbnwwfHwwfHx8MA%3D%3D">
-                            <img src="https://images.unsplash.com/photo-1590736704178-591a3214a154?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGFqYW1hc3xlbnwwfHwwfHx8MA%3D%3D" alt="Pijama Sonho de Seda">
-                            <h3>Pijama Sonho de Seda</h3>
-                            <p class="price">R$ 249,90</p>
-                            <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                        </div>
-                        <div class="product-card" data-id="3" data-name="Conjunto Moletom Aconchego" data-price="299.90" data-image="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3dlYXRzdWl0fGVufDB8fDB8fHww">
-                            <img src="https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3dlYXRzdWl0fGVufDB8fDB8fHww" alt="Conjunto Moletom Aconchego">
-                            <h3>Conjunto Moletom Aconchego</h3>
-                            <p class="price">R$ 299,90</p>
-                            <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                        </div>
-                        <div class="product-card" data-id="4" data-name="Pijama Verão Leve" data-price="159.90" data-image="https://plus.unsplash.com/premium_photo-1679397746487-1463e2f48542?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBhamFtYXN8ZW58MHx8MHx8fDA%3D">
-                            <img src="https://plus.unsplash.com/premium_photo-1679397746487-1463e2f48542?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBhamFtYXN8ZW58MHx8MHx8fDA%3D" alt="Pijama Verão Leve">
-                            <h3>Pijama Verão Leve</h3>
-                            <p class="price">R$ 159,90</p>
-                            <button class="btn-add-to-cart">Adicionar ao Carrinho</button>
-                        </div>
-                    </div>
-                    <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                </div>
+                <h2>Fique por Dentro</h2>
+                <p>Cadastre-se para receber nossas novidades e promoções exclusivas!</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" id="emailInput" placeholder="Digite seu melhor e-mail" required>
+                    <button type="submit" class="btn btn-primary">Inscrever-se</button>
+                </form>
+                 <p id="form-message"></p>
             </div>
         </section>
     </main>
 
-    <div id="cart-overlay" class="cart-overlay"></div>
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Seu Carrinho</h3>
-            <button id="close-cart-btn" class="close-cart-btn" aria-label="Fechar Carrinho"><i class="fas fa-times"></i></button>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Tutty Pijamas</h4>
+                    <p>Conforto e estilo que te abraçam. Feito com amor, para suas melhores noites.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#products">Produtos</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Serviço</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua dos Sonhos, 123, Brasil</p>
+                    <p><i class="fas fa-envelope"></i> contato@tuttypijamas.com</p>
+                    <p><i class="fas fa-phone"></i> (47) 99999-8888</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Siga-nos</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Tutty Pijamas. Todos os direitos reservados.</p>
+            </div>
         </div>
-        <div id="cart-items" class="cart-items">
-            </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <strong>Subtotal:</strong>
-                <strong id="cart-total-price">R$ 0,00</strong>
-            </div>
-            <a href="#" class="btn-primary btn-checkout">Finalizar Compra</a>
-            <button id="continue-shopping-btn" class="btn-secondary">Continuar Comprando</button>
+    </footer>
+    
+    <div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Detalhes do Produto</h2>
+            <p>Aqui viriam os detalhes do produto selecionado, como mais imagens, seletor de tamanho, cor, etc.</p>
+            <button class="btn btn-primary">Adicionar ao Carrinho</button>
         </div>
     </div>
-    
-    <script src="script.js"></script>
 
+
+    <script src="script.js"></script>
 </body>
-            </html>
+</html>
