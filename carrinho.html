@@ -4,42 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho de Compras - Tutty Pijamas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Estilos específicos da página do carrinho */
-        .cart-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        .cart-table th, .cart-table td { padding: 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
-        .cart-table th { background-color: #f9f9f9; }
-        .cart-table input[type="number"] { width: 60px; padding: 5px; }
-        .cart-totals { float: right; width: 300px; border: 1px solid var(--border-color); padding: 20px; }
-    </style>
 </head>
 <body id="cart-page">
 
     <header>
-        </header>
-
-    <main class="container">
-        <h1 class="section-title">Meu Carrinho</h1>
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th>Quantidade</th>
-                    <th>Total</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody id="cart-items">
-                </tbody>
-        </table>
-        <div id="cart-totals" class="cart-totals">
+        <div class="container header-content">
+            <a href="index.html" class="logo">Tutty Pijamas</a>
+            <nav>
+                <ul><li><a href="produtos.html?category=feminino">Feminino</a></li><li><a href="produtos.html?category=masculino">Masculino</a></li><li><a href="produtos.html?category=infantil">Infantil</a></li><li><a href="produtos.html">Ver Tudo</a></li></ul>
+            </nav>
+            <div class="header-icons">
+                <div class="icon">🔍</div>
+                <a href="minha-conta.html" class="icon">👤</a>
+                <a href="carrinho.html" class="icon" id="cart-icon">🛒<span id="cart-count"></span></a>
             </div>
+        </div>
+    </header>
+
+    <main class="section">
+        <div class="container cart-container">
+            <div class="cart-table-container">
+                <h1 class="section-title">Meu Carrinho</h1>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Total</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        </tbody>
+                </table>
+            </div>
+            <aside id="cart-summary" class="cart-summary">
+                </aside>
+        </div>
     </main>
 
     <footer>
-        </footer>
+        <div class="container footer-layout">
+            <div class="footer-column">
+                <h4>Institucional</h4>
+                <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li><li><a href="#">Política de Troca</a></li><li><a href="#">FAQ</a></li></ul>
+            </div>
+            <div class="footer-column">
+                <h4>Minha Conta</h4>
+                <ul><li><a href="minha-conta.html">Meus Pedidos</a></li><li><a href="#">Lista de Desejos</a></li></ul>
+            </div>
+            <div class="footer-column">
+                <h4>Redes Sociais</h4>
+                <ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">TikTok</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 Tutty Pijamas. Todos os direitos reservados.</p></div>
+    </footer>
 
     <script src="database.js"></script>
     <script src="main.js"></script>
