@@ -1,6 +1,140 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // 1. EFEITO DE SCROLL NO HEADER
+    const body = document.body;
+
+    // ===============================================================
+    //                       1. LÓGICA DO CARRINHO
+    // ===============================================================
+
+    let cart = []; // Array para armazenar os itens do carrinho
+    
+    // Seleção de Elementos do DOM para o Carrinho
+    const cartSidebar = document.querySelector('.cart-sidebar');
+    const cartOverlay = document.querySelector('.cart-overlay');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const cartCountElement = document.querySelector('.cart-count');
+    const subtotalValueElement = document.querySelector('.subtotal-value');
+    const closeCartBtn = document.querySelector('.close-cart-btn');
+    const cartIcon = document.querySelector('.cart-icon-wrapper');
+    const productGrid = document.querySelector('.product-grid');
+
+    // Função para renderizar/atualizar o carrinho na tela
+    function renderCart() {
+        cartItemsContainer.innerHTML = '';
+        let subtotal = 0;
+        let totalItems = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p style="padding: 20px; text-align:center; color:#777;">Seu carrinho está vazio.</p>';
+        } else {
+            cart.forEach(item => {
+                const itemHTML = `
+                    <div class="cart-item" data-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <p class="cart-item-name">${item.name}</p>
+                            <p class="cart-item-price">R$ ${parseFloat(item.price).toFixed(2)}</p>
+                            <div class="quantity-controls">
+                                <button class="quantity-decrease">-</button>
+                                <input type="number" value="${item.quantity}" min="1" readonly>
+                                <button class="quantity-increase">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item-btn"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                cartItemsContainer.innerHTML += itemHTML;
+                subtotal += item.price * item.quantity;
+                totalItems += item.quantity;
+            });
+        }
+        
+        subtotalValueElement.textContent = `R$ ${subtotal.toFixed(2).replace('.',',')}`;
+        cartCountElement.textContent = totalItems;
+    }
+
+    // Função para adicionar item ao carrinho
+    function addToCart(product) {
+        const existingItem = cart.find(item => item.id === product.id);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+        renderCart();
+        openCart();
+    }
+    
+    // Função para atualizar a quantidade ou remover itens
+    function updateCart(productId, action) {
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        if (itemIndex === -1) return;
+
+        const item = cart[itemIndex];
+
+        if (action === 'increase') {
+            item.quantity++;
+        } else if (action === 'decrease') {
+            item.quantity--;
+            if (item.quantity <= 0) {
+                cart.splice(itemIndex, 1);
+            }
+        } else if (action === 'remove') {
+            cart.splice(itemIndex, 1);
+        }
+        renderCart();
+    }
+    
+    // Event listener para adicionar ao carrinho (usando delegação de eventos)
+    productGrid.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-add-to-cart')) {
+            const productCard = e.target.closest('.product-card');
+            const product = {
+                id: productCard.dataset.id,
+                name: productCard.dataset.name,
+                price: parseFloat(productCard.dataset.price),
+                image: productCard.dataset.image
+            };
+            addToCart(product);
+        }
+    });
+    
+    // Event listener para os controles dentro do carrinho
+    cartItemsContainer.addEventListener('click', (e) => {
+        const target = e.target;
+        const cartItem = target.closest('.cart-item');
+        if (!cartItem) return;
+        
+        const productId = cartItem.dataset.id;
+        
+        if (target.classList.contains('quantity-increase')) updateCart(productId, 'increase');
+        if (target.classList.contains('quantity-decrease')) updateCart(productId, 'decrease');
+        if (target.classList.contains('remove-item-btn') || target.closest('.remove-item-btn')) updateCart(productId, 'remove');
+    });
+
+    // Funções para abrir e fechar o carrinho
+    function openCart() {
+        cartSidebar.classList.add('open');
+        cartOverlay.classList.add('open');
+        body.classList.add('cart-open');
+    }
+
+    function closeCart() {
+        cartSidebar.classList.remove('open');
+        cartOverlay.classList.remove('open');
+        body.classList.remove('cart-open');
+    }
+
+    // Event listeners para abrir/fechar o carrinho
+    cartIcon.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+    
+    // ===============================================================
+    //               2. OUTRAS FUNCIONALIDADES DO SITE
+    // ===============================================================
+    
+    // EFEITO DE SCROLL NO HEADER
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -10,62 +144,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 2. MENU HAMBÚRGUER PARA MOBILE
+    // MENU HAMBÚRGUER PARA MOBILE
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.main-nav');
-
     hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
-        // Troca o ícone de barras para 'X'
         const icon = hamburger.querySelector('i');
-        if (icon.classList.contains('fa-bars')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-        }
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
     });
 
-    // Fechar menu ao clicar em um link (opcional)
-    document.querySelectorAll('.main-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburger.querySelector('i').classList.remove('fa-times');
-                hamburger.querySelector('i').classList.add('fa-bars');
-            }
-        });
-    });
-
-    // 3. SIMULAÇÃO DE ADICIONAR AO CARRINHO
-    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
-    const cartCountElement = document.querySelector('.cart-count');
-    let cartItemCount = 0;
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            cartItemCount++;
-            cartCountElement.textContent = cartItemCount;
-
-            // Animação no ícone do carrinho
-            cartCountElement.style.transform = 'scale(1.5)';
-            setTimeout(() => {
-                cartCountElement.style.transform = 'scale(1)';
-            }, 200);
-
-            // Feedback visual no botão
-            button.textContent = 'Adicionado!';
-            button.style.backgroundColor = '#28a745'; // Verde sucesso
-            setTimeout(() => {
-                button.textContent = 'Adicionar ao Carrinho';
-                button.style.backgroundColor = ''; // Volta ao original
-            }, 2000);
-        });
-    });
-
-    // 4. VALIDAÇÃO DO FORMULÁRIO DE NEWSLETTER
+    // VALIDAÇÃO DO FORMULÁRIO DE NEWSLETTER
     const newsletterForm = document.getElementById('newsletterForm');
     const emailInput = document.getElementById('emailInput');
     const formMessage = document.getElementById('form-message');
@@ -73,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     newsletterForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const email = emailInput.value;
-
         if (validateEmail(email)) {
             formMessage.textContent = 'Obrigado por se inscrever!';
             formMessage.style.color = 'green';
@@ -88,26 +176,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
     }
-    
-    // 5. MODAL DE VISUALIZAÇÃO RÁPIDA (QUICK VIEW)
-    const modal = document.getElementById('quickViewModal');
-    const quickViewButtons = document.querySelectorAll('.btn-quick-view');
-    const closeModalButton = document.querySelector('.close-modal');
 
-    quickViewButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-    });
-    
-    closeModalButton.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    // Fechar o modal se clicar fora do conteúdo
-    window.addEventListener('click', (event) => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
+    // ===============================================================
+    //               3. INICIALIZAÇÃO
+    // ===============================================================
+    renderCart(); // Renderiza o carrinho (vazio) ao carregar a página
 });
