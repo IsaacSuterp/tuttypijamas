@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let cart = []; // Array para armazenar os itens do carrinho
     
-    // Seleção de Elementos do DOM para o Carrinho
     const cartSidebar = document.querySelector('.cart-sidebar');
     const cartOverlay = document.querySelector('.cart-overlay');
     const cartItemsContainer = document.querySelector('.cart-items');
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartIcon = document.querySelector('.cart-icon-wrapper');
     const productGrid = document.querySelector('.product-grid');
 
-    // Função para renderizar/atualizar o carrinho na tela
     function renderCart() {
         cartItemsContainer.innerHTML = '';
         let subtotal = 0;
@@ -53,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cartCountElement.textContent = totalItems;
     }
 
-    // Função para adicionar item ao carrinho
     function addToCart(product) {
         const existingItem = cart.find(item => item.id === product.id);
         if (existingItem) {
@@ -65,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         openCart();
     }
     
-    // Função para atualizar a quantidade ou remover itens
     function updateCart(productId, action) {
         const itemIndex = cart.findIndex(item => item.id === productId);
         if (itemIndex === -1) return;
@@ -85,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCart();
     }
     
-    // Event listener para adicionar ao carrinho (usando delegação de eventos)
     productGrid.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-add-to-cart')) {
             const productCard = e.target.closest('.product-card');
@@ -99,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Event listener para os controles dentro do carrinho
     cartItemsContainer.addEventListener('click', (e) => {
         const target = e.target;
         const cartItem = target.closest('.cart-item');
@@ -112,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (target.classList.contains('remove-item-btn') || target.closest('.remove-item-btn')) updateCart(productId, 'remove');
     });
 
-    // Funções para abrir e fechar o carrinho
     function openCart() {
         cartSidebar.classList.add('open');
         cartOverlay.classList.add('open');
@@ -125,13 +118,43 @@ document.addEventListener('DOMContentLoaded', function() {
         body.classList.remove('cart-open');
     }
 
-    // Event listeners para abrir/fechar o carrinho
     cartIcon.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
     
     // ===============================================================
-    //               2. OUTRAS FUNCIONALIDADES DO SITE
+    //               2. LÓGICA DO MENU DROPDOWN (MEGA MENU)
+    // ===============================================================
+    const dropdowns = document.querySelectorAll('.main-nav .has-dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        link.addEventListener('click', function(event) {
+            // Só previne o default se o link for '#' para não quebrar links reais
+            if(link.getAttribute('href') === '#') {
+                event.preventDefault();
+            }
+
+            const wasActive = dropdown.classList.contains('active');
+            closeAllDropdowns();
+            if (!wasActive) {
+                dropdown.classList.add('active');
+            }
+        });
+    });
+
+    function closeAllDropdowns() {
+        dropdowns.forEach(d => d.classList.remove('active'));
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.has-dropdown')) {
+            closeAllDropdowns();
+        }
+    });
+
+    // ===============================================================
+    //               3. OUTRAS FUNCIONALIDADES DO SITE
     // ===============================================================
     
     // EFEITO DE SCROLL NO HEADER
@@ -178,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ===============================================================
-    //               3. INICIALIZAÇÃO
+    //               4. INICIALIZAÇÃO
     // ===============================================================
     renderCart(); // Renderiza o carrinho (vazio) ao carregar a página
 });
