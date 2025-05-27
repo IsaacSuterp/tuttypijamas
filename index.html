@@ -185,16 +185,20 @@
         </div>
     </footer>
     
-    <div id="cart-modal" class="cart-modal">
-        <div class="cart-modal-content">
-            <span class="close-cart-modal">&times;</span>
-            <h2>Seu Carrinho</h2>
-            <div id="cart-items">
-                </div>
-            <div class="cart-total">
-                <strong>Total: R$ <span id="cart-total-price">0.00</span></strong>
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button id="close-cart-btn" class="close-cart-btn" aria-label="Fechar Carrinho"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cart-items" class="cart-items">
             </div>
-            <a href="#" class="btn-primary btn-checkout">Finalizar Compra</a>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Subtotal:</strong>
+                <strong id="cart-total-price">R$ 0,00</strong>
+            </div>
+            <a href="/checkout" class="btn-primary btn-checkout">Finalizar Compra</a>
+            <button id="continue-shopping-btn" class="btn-secondary">Continuar Comprando</button>
         </div>
     </div>
     
