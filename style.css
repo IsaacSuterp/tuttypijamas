@@ -326,3 +326,118 @@ footer {
     .section { padding: 60px 0; }
     .section-title { font-size: 32px; }
               }
+
+/* === ESTILOS PARA PÁGINA DE AUTENTICAÇÃO === */
+#login-page {
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    max-width: 450px;
+    width: 100%;
+    padding: 20px;
+}
+
+.auth-box {
+    background-color: var(--white);
+    padding: 50px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-subtle);
+}
+
+.auth-title {
+    font-family: var(--font-serif);
+    text-align: center;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.auth-subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    margin-top: -15px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.auth-box .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.auth-links {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.auth-links a {
+    display: block;
+    color: #555;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-links a:hover {
+    color: var(--primary-color);
+}
+
+.auth-links a:first-child {
+    margin-bottom: 15px;
+}
+
+.auth-links a strong {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.auth-return-home {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.auth-return-home a {
+    color: #777;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.auth-return-home a:hover {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
