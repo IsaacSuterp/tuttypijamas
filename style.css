@@ -34,7 +34,7 @@ body {
     padding: 0 20px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: var(--primary-font);
     font-weight: 500;
 }
@@ -101,19 +101,29 @@ img {
     color: var(--white-color);
 }
 
-/* ... (Todo o CSS anterior permanece o mesmo até a seção do cabeçalho) ... */
-
-/* --- CABEÇALHO E NAVEGAÇÃO ATUALIZADOS --- */
-.main-nav a {
-    color: var(--dark-color);
-    font-weight: 500;
-    position: relative;
-    padding: 20px 0; /* Aumenta a área de clique */
-    display: inline-block;
+/* --- CABEÇALHO --- */
+.main-header {
+    background-color: var(--white-color);
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-.main-nav a::after {
-    /* ... (estilo do after continua o mesmo) ... */
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--primary-font);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
 }
 
 /* Estilo para o item de menu com dropdown */
@@ -130,6 +140,72 @@ img {
 .dropdown-arrow {
     font-size: 0.7rem;
     transition: transform 0.3s ease;
+}
+
+.main-nav .nav-list {
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--dark-color);
+    font-weight: 500;
+    position: relative;
+    padding: 20px 0;
+    display: inline-block;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icons i {
+    font-size: 1.2rem;
+    color: var(--dark-color);
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-counter {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 /* --- ESTILOS DO MEGAMENU (DESKTOP) --- */
@@ -195,7 +271,6 @@ img {
     padding-left: 5px; /* Efeito sutil no hover */
 }
 
-/* Coluna de promoção */
 .megamenu-promo a {
     display: block;
     position: relative;
@@ -235,85 +310,6 @@ img {
     margin-top: 10px;
     font-size: 1.5rem;
 }
-
-
-/* --- MENU RESPONSIVO (MOBILE) --- */
-@media (max-width: 992px) {
-    /* Esconde o megamenu em telas menores */
-    .megamenu-panel {
-        display: none;
-    }
-    
-    .main-nav {
-        /* ... (estilos anteriores do menu mobile) ... */
-        overflow-y: auto; /* Permite scroll se o menu for grande */
-    }
-
-    .nav-item-dropdown {
-        width: 100%;
-        text-align: left;
-        position: relative; /* Para a seta do dropdown */
-    }
-    
-    .nav-link-dropdown {
-        justify-content: space-between; /* Alinha a seta à direita */
-        width: 100%;
-    }
-
-    /* O megamenu vira um submenu simples dentro do accordion */
-    .nav-item-dropdown .megamenu-panel {
-        display: block; /* Sobrescreve o display:none */
-        position: static;
-        width: 100%;
-        box-shadow: none;
-        border-top: none;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        
-        /* Lógica do Accordion */
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-in-out;
-        padding: 0;
-    }
-
-    .nav-item-dropdown.open .megamenu-panel {
-        max-height: 1000px; /* Altura máxima para a animação */
-    }
-
-    /* Adapta o conteúdo do megamenu para o mobile */
-    .megamenu-content {
-        grid-template-columns: 1fr; /* Coluna única */
-        gap: 0;
-        padding: 10px 0 10px 20px; /* Padding para indentação */
-        background-color: var(--light-color);
-    }
-    
-    .megamenu-col {
-        padding: 10px 0;
-    }
-    
-    .megamenu-col h4 {
-        margin-bottom: 10px;
-        font-size: 0.9rem;
-        border: none;
-        padding: 0;
-    }
-    
-    .megamenu-col ul li a {
-        padding: 10px 0;
-        font-size: 1rem;
-    }
-    
-    .megamenu-promo { display: none; } /* Oculta a promo no menu mobile para simplificar */
-    
-    /* Rotação da seta no mobile */
-    .nav-item-dropdown.open .dropdown-arrow {
-        transform: rotate(180deg);
-    }
-}
-/* ... (o resto do CSS de responsividade continua igual) ... */
 
 /* --- SEÇÃO HERO --- */
 .hero-section {
@@ -482,117 +478,6 @@ section {
 .prev-btn { left: -25px; }
 .next-btn { right: -25px; }
 
-/* --- SEÇÃO SOBRE NÓS --- */
-.about-section {
-    background-color: var(--secondary-color);
-}
-
-.about-content {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.about-image {
-    flex: 1;
-}
-
-.about-image img {
-    border-radius: 10px;
-}
-
-.about-text {
-    flex: 1;
-}
-
-.about-text .section-title {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.about-text h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.about-text p {
-    margin-bottom: 30px;
-}
-
-
-/* --- SEÇÃO NEWSLETTER --- */
-.newsletter-section {
-    text-align: center;
-    background-color: var(--light-color);
-}
-
-.newsletter-form {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 30px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.newsletter-form input {
-    width: 70%;
-    padding: 15px;
-    border-radius: 50px;
-    border: 1px solid #ddd;
-}
-
-/* --- RODAPÉ --- */
-.main-footer {
-    background-color: var(--dark-color);
-    color: var(--light-color);
-    padding-top: 60px;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 40px;
-    padding-bottom: 40px;
-}
-
-.footer-col h3, .footer-col h4 {
-    font-family: var(--primary-font);
-    margin-bottom: 20px;
-}
-
-.footer-col p {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-
-.footer-col ul li {
-    margin-bottom: 10px;
-}
-
-.footer-col a {
-    color: var(--light-color);
-}
-.footer-col a:hover {
-    color: var(--primary-color);
-}
-
-.social-icons a {
-    display: inline-block;
-    margin-right: 15px;
-    font-size: 1.3rem;
-}
-
-.footer-bottom {
-    border-top: 1px solid #5a5a5a;
-    padding: 20px 0;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-/* ... (Todo o CSS anterior permanece o mesmo) ... */
-
 /* --- ANIMAÇÃO ÍCONE CARRINHO --- */
 @keyframes jiggle {
     0%, 100% { transform: scale(1); }
@@ -603,11 +488,7 @@ section {
     animation: jiggle 0.5s ease;
 }
 
-
-/* --- MODAL DO CARRINHO (REMOVIDO/SUBSTITUÍDO) --- */
-/* O CSS anterior para .cart-modal foi removido */
-
-/* --- NOVO ESTILO PARA CARRINHO SIDEBAR --- */
+/* --- ESTILO PARA CARRINHO SIDEBAR --- */
 .cart-overlay {
     position: fixed;
     top: 0;
@@ -763,66 +644,8 @@ section {
     padding: 15px;
     text-align: center;
     margin-top: 10px;
-    border-radius: 5px; /* Cantos menos arredondados para um look mais sério */
-}
-
-/* ... (O resto do CSS, como responsividade, continua o mesmo) ... */
-
-/* --- MODAL NEWSLETTER --- */
-.newsletter-modal {
-    display: none; /* Oculto por padrão */
-    position: fixed;
-    z-index: 1002;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-}
-
-.newsletter-modal-content {
-    background: var(--white-color);
-    padding: 40px;
-    border-radius: 10px;
-    text-align: center;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    animation: zoomIn 0.5s;
-}
-
-@keyframes zoomIn {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.close-newsletter-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
-    color: #aaa;
-    cursor: pointer;
-}
-
-.newsletter-modal-content h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-}
-
-.newsletter-form-modal {
-    margin-top: 20px;
-}
-.newsletter-form-modal input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 15px;
     border-radius: 5px;
-    border: 1px solid #ddd;
 }
-
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 992px) {
@@ -830,23 +653,22 @@ section {
     .hero-content h1 { font-size: 3rem; }
     .hero-content p { font-size: 1.2rem; }
     .product-card { flex-basis: 50%; } /* 2 produtos por vez */
-    .about-content { flex-direction: column; }
-}
-
-@media (max-width: 768px) {
+    
     /* Menu Hamburger */
     .main-nav {
         position: fixed;
-        top: 0;
+        top: 75px; /* Altura do header */
         right: -100%; /* Começa fora da tela */
-        width: 70%;
-        height: 100vh;
+        width: 100%;
+        height: calc(100vh - 75px);
         background-color: var(--white-color);
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         transition: right 0.5s ease-in-out;
+        padding: 20px;
+        overflow-y: auto;
     }
     
     .main-nav.active {
@@ -855,14 +677,93 @@ section {
 
     .main-nav .nav-list {
         flex-direction: column;
-        text-align: center;
-        gap: 40px;
+        width: 100%;
+        text-align: left;
+        gap: 0;
+    }
+    
+    .main-nav .nav-list li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
     }
 
-    .main-nav a { font-size: 1.5rem; }
+    .main-nav a { 
+        font-size: 1.2rem; 
+        padding: 15px 10px;
+        width: 100%;
+    }
+    .main-nav a::after { display: none; }
+    
     .hamburger-menu { display: block; }
     
-    .footer-grid { grid-template-columns: 1fr 1fr; }
+    /* Esconde o megamenu em telas menores */
+    .megamenu-panel {
+        display: none;
+    }
+    
+    .nav-item-dropdown {
+        width: 100%;
+        text-align: left;
+        position: relative; /* Para a seta do dropdown */
+    }
+    
+    .nav-link-dropdown {
+        justify-content: space-between; /* Alinha a seta à direita */
+        width: 100%;
+    }
+
+    /* O megamenu vira um submenu simples dentro do accordion */
+    .nav-item-dropdown .megamenu-panel {
+        display: block; /* Sobrescreve o display:none */
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border-top: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        
+        /* Lógica do Accordion */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        padding: 0;
+    }
+
+    .nav-item-dropdown.open .megamenu-panel {
+        max-height: 1000px; /* Altura máxima para a animação */
+    }
+
+    /* Adapta o conteúdo do megamenu para o mobile */
+    .megamenu-content {
+        grid-template-columns: 1fr; /* Coluna única */
+        gap: 0;
+        padding: 10px 0 10px 20px; /* Padding para indentação */
+        background-color: var(--light-color);
+    }
+    
+    .megamenu-col {
+        padding: 10px 0;
+    }
+    
+    .megamenu-col h4 {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        border: none;
+        padding: 0;
+    }
+    
+    .megamenu-col ul li a {
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+    
+    .megamenu-promo { display: none; } /* Oculta a promo no menu mobile para simplificar */
+    
+    /* Rotação da seta no mobile */
+    .nav-item-dropdown.open .dropdown-arrow {
+        transform: rotate(180deg);
+    }
 }
 
 @media (max-width: 576px) {
@@ -871,7 +772,4 @@ section {
     .carousel-btn { width: 40px; height: 40px; font-size: 1.2rem; }
     .prev-btn { left: 10px; }
     .next-btn { right: 10px; }
-    .newsletter-form { flex-direction: column; }
-    .newsletter-form input { width: 100%; margin-bottom: 10px; }
-    .footer-grid { grid-template-columns: 1fr; }
-                                           }
+    }
