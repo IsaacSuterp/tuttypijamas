@@ -1,202 +1,113 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // --- LÓGICA DO MENU HAMBURGER E DROPDOWN ---
-    const hamburger = document.getElementById('hamburger-menu');
-    const navMenu = document.getElementById('main-nav');
-    const dropdownLinks = document.querySelectorAll('.nav-link-dropdown');
+    // 1. EFEITO DE SCROLL NO HEADER
+    const header = document.querySelector('.main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // 2. MENU HAMBÚRGUER PARA MOBILE
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.main-nav');
 
     hamburger.addEventListener('click', () => {
         navMenu.classList.toggle('active');
-        hamburger.toggleAttribute('aria-expanded');
-
+        // Troca o ícone de barras para 'X'
         const icon = hamburger.querySelector('i');
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-times');
+        if (icon.classList.contains('fa-bars')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
     });
 
-    dropdownLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Apenas ativa a função de accordion em telas móveis
-            if (window.innerWidth <= 992) {
-                e.preventDefault(); // Impede a navegação do link no clique
-                
-                const dropdownItem = link.parentElement;
-                dropdownItem.classList.toggle('open');
-                
-                // Atualiza o atributo ARIA
-                const isExpanded = dropdownItem.classList.contains('open');
-                link.setAttribute('aria-expanded', isExpanded);
+    // Fechar menu ao clicar em um link (opcional)
+    document.querySelectorAll('.main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                hamburger.querySelector('i').classList.remove('fa-times');
+                hamburger.querySelector('i').classList.add('fa-bars');
             }
         });
     });
 
-    // --- LÓGICA DO CARROSSEL ---
-    const track = document.querySelector('.carousel-track');
-    if (track && track.children.length > 0) {
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelector('.next-btn');
-        const prevButton = document.querySelector('.prev-btn');
-        
-        let itemsToShow = window.innerWidth > 992 ? 4 : (window.innerWidth > 576 ? 2 : 1);
-        const slideWidth = track.parentElement.offsetWidth / itemsToShow;
-
-        slides.forEach((slide, index) => {
-            slide.style.minWidth = `${slideWidth}px`;
-        });
-
-        let currentIndex = 0;
-
-        const moveToSlide = (newIndex) => {
-            if (newIndex < 0) {
-                newIndex = 0;
-            }
-            if (newIndex > slides.length - itemsToShow) {
-                newIndex = slides.length - itemsToShow;
-            }
-
-            track.style.transform = `translateX(-${newIndex * slideWidth}px)`;
-            currentIndex = newIndex;
-        };
-
-        nextButton.addEventListener('click', () => {
-            moveToSlide(currentIndex + 1);
-        });
-
-        prevButton.addEventListener('click', () => {
-            moveToSlide(currentIndex - 1);
-        });
-        
-        window.addEventListener('resize', () => {
-            itemsToShow = window.innerWidth > 992 ? 4 : (window.innerWidth > 576 ? 2 : 1);
-            const newSlideWidth = track.parentElement.offsetWidth / itemsToShow;
-            slides.forEach(slide => slide.style.minWidth = `${newSlideWidth}px`);
-            moveToSlide(currentIndex);
-        });
-    }
-
-    // --- LÓGICA DO CARRINHO DE COMPRAS ---
-    const cartIcon = document.getElementById('cart-icon');
-    const cartSidebar = document.getElementById('cart-sidebar');
-    const cartOverlay = document.getElementById('cart-overlay');
-    const closeCartBtn = document.getElementById('close-cart-btn');
-    const continueShoppingBtn = document.getElementById('continue-shopping-btn');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartCounterEl = document.querySelector('.cart-counter');
-    const cartTotalPriceEl = document.getElementById('cart-total-price');
+    // 3. SIMULAÇÃO DE ADICIONAR AO CARRINHO
     const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
-
-    let cart = JSON.parse(localStorage.getItem('tuttyPijamasCart')) || [];
-
-    const saveCart = () => {
-        localStorage.setItem('tuttyPijamasCart', JSON.stringify(cart));
-    };
-
-    const renderCart = () => {
-        cartItemsContainer.innerHTML = '';
-        if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p style="text-align: center; color: #888;">Seu carrinho está vazio.</p>';
-        } else {
-            cart.forEach(item => {
-                const cartItemHTML = `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
-                        <div class="cart-item-details">
-                            <p class="cart-item-name">${item.name}</p>
-                            <p class="cart-item-price">R$ ${parseFloat(item.price).toFixed(2)}</p>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn decrease-btn" aria-label="Diminuir quantidade">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="quantity-btn increase-btn" aria-label="Aumentar quantidade">+</button>
-                            </div>
-                        </div>
-                        <button class="remove-item-btn" aria-label="Remover item"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                `;
-                cartItemsContainer.insertAdjacentHTML('beforeend', cartItemHTML);
-            });
-        }
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCounterEl.textContent = totalItems;
-        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        cartTotalPriceEl.textContent = `R$ ${totalPrice.toFixed(2)}`;
-    };
-
-    const addProductToCart = (product) => {
-        const existingItem = cart.find(item => item.id === product.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
-        saveCart();
-        renderCart();
-        openCart();
-        cartIcon.classList.add('jiggle');
-        setTimeout(() => cartIcon.classList.remove('jiggle'), 500);
-    };
-
-    const handleQuantityChange = (productId, change) => {
-        const item = cart.find(item => item.id === productId);
-        if (!item) return;
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            cart = cart.filter(cartItem => cartItem.id !== productId);
-        }
-        saveCart();
-        renderCart();
-    };
-
-    const removeItemFromCart = (productId) => {
-        cart = cart.filter(item => item.id !== productId);
-        saveCart();
-        renderCart();
-    };
-    
-    const openCart = () => {
-        cartOverlay.classList.add('active');
-        cartSidebar.classList.add('active');
-    };
-
-    const closeCart = () => {
-        cartOverlay.classList.remove('active');
-        cartSidebar.classList.remove('active');
-    };
-
-    cartIcon.addEventListener('click', (e) => {
-        e.preventDefault();
-        openCart();
-    });
-    closeCartBtn.addEventListener('click', closeCart);
-    continueShoppingBtn.addEventListener('click', closeCart);
-    cartOverlay.addEventListener('click', closeCart);
+    const cartCountElement = document.querySelector('.cart-count');
+    let cartItemCount = 0;
 
     addToCartButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            const card = e.target.closest('.product-card');
-            const product = {
-                id: card.dataset.id,
-                name: card.dataset.name,
-                price: card.dataset.price,
-                image: card.dataset.image,
-            };
-            addProductToCart(product);
+            e.preventDefault();
+            cartItemCount++;
+            cartCountElement.textContent = cartItemCount;
+
+            // Animação no ícone do carrinho
+            cartCountElement.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                cartCountElement.style.transform = 'scale(1)';
+            }, 200);
+
+            // Feedback visual no botão
+            button.textContent = 'Adicionado!';
+            button.style.backgroundColor = '#28a745'; // Verde sucesso
+            setTimeout(() => {
+                button.textContent = 'Adicionar ao Carrinho';
+                button.style.backgroundColor = ''; // Volta ao original
+            }, 2000);
         });
     });
 
-    cartItemsContainer.addEventListener('click', (e) => {
-        const target = e.target;
-        const cartItem = target.closest('.cart-item');
-        if (!cartItem) return;
-        const productId = cartItem.dataset.id;
-        if (target.matches('.increase-btn')) {
-            handleQuantityChange(productId, 1);
-        } else if (target.matches('.decrease-btn')) {
-            handleQuantityChange(productId, -1);
-        } else if (target.closest('.remove-item-btn')) {
-            removeItemFromCart(productId);
+    // 4. VALIDAÇÃO DO FORMULÁRIO DE NEWSLETTER
+    const newsletterForm = document.getElementById('newsletterForm');
+    const emailInput = document.getElementById('emailInput');
+    const formMessage = document.getElementById('form-message');
+
+    newsletterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = emailInput.value;
+
+        if (validateEmail(email)) {
+            formMessage.textContent = 'Obrigado por se inscrever!';
+            formMessage.style.color = 'green';
+            emailInput.value = '';
+        } else {
+            formMessage.textContent = 'Por favor, insira um e-mail válido.';
+            formMessage.style.color = 'red';
         }
     });
 
-    // INICIALIZAÇÃO
-    renderCart();
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
+    // 5. MODAL DE VISUALIZAÇÃO RÁPIDA (QUICK VIEW)
+    const modal = document.getElementById('quickViewModal');
+    const quickViewButtons = document.querySelectorAll('.btn-quick-view');
+    const closeModalButton = document.querySelector('.close-modal');
+
+    quickViewButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+    });
+    
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Fechar o modal se clicar fora do conteúdo
+    window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
 });
