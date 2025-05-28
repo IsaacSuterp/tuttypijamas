@@ -23,19 +23,45 @@ const uiService = {
             grid.innerHTML = productsToRender.map(this.renderProductCard).join('');
         }
     },
-    renderCartPage: function() {
-        const cart = cartService.get(); const container = document.querySelector(".cart-container");
-        const itemsContainer = document.getElementById("cart-items"); const summaryContainer = document.getElementById("cart-summary");
-        if (!container) return;
-        if (cart.length === 0) { container.innerHTML = "<div style='text-align:center; width:100%;'><h1 class='section-title'>Seu carrinho está vazio.</h1><a href='produtos.html' class='btn'>Ver produtos</a></div>"; return; }
-        let subtotal = 0;
-        itemsContainer.innerHTML = cart.map(item => {
-            const itemTotal = item.price * item.quantity; subtotal += itemTotal;
-            return `<tr><td><div style="display: flex; align-items: center;"><img src="${item.images[0]}" alt="${item.name}"><span>${item.name}</span></div></td><td>R$ ${item.price.toFixed(2).replace('.', ',')}</td><td><input class="cart-quantity-input" type="number" value="${item.quantity}" min="1" data-product-id="${item.id}"></td><td>R$ ${itemTotal.toFixed(2).replace('.', ',')}</td><td><button class="remove-from-cart-btn" data-product-id="${item.id}">Remover</button></td></tr>`;
-        }).join('');
-        const frete = 15.00; const total = subtotal + frete;
-        summaryContainer.innerHTML = `<h3>Resumo do Pedido</h3><p><span>Subtotal</span> <strong>R$ ${subtotal.toFixed(2).replace('.', ',')}</strong></p><p><span>Frete</span> <strong>R$ ${frete.toFixed(2).replace('.', ',')}</strong></p><hr><p><span>Total</span> <strong>R$ ${total.toFixed(2).replace('.', ',')}</strong></p><a href="#" class="btn">Finalizar Compra</a>`;
-    },
+function renderCartPage() {
+    const cart = cartService.get();
+    const container = document.querySelector(".cart-container");
+    const itemsContainer = document.getElementById("cart-items");
+    const summaryContainer = document.getElementById("cart-summary");
+
+    if (!container) return;
+
+    if (cart.length === 0) {
+        container.innerHTML = "<div style='text-align:center; width:100%;'><h1 class='section-title'>Seu carrinho está vazio.</h1><a href='produtos.html' class='btn'>Ver produtos</a></div>";
+        return;
+    }
+
+    let subtotal = 0;
+    itemsContainer.innerHTML = cart.map(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        // ATUALIZAÇÃO AQUI: Adicionamos os atributos data-label
+        return `
+            <tr>
+                <td data-label="Produto">
+                    <div class="cart-product-info">
+                        <img src="${item.images[0]}" alt="${item.name}">
+                        <span>${item.name}</span>
+                    </div>
+                </td>
+                <td data-label="Preço">R$ ${item.price.toFixed(2).replace('.', ',')}</td>
+                <td data-label="Quantidade"><input class="cart-quantity-input" type="number" value="${item.quantity}" min="1" data-product-id="${item.id}"></td>
+                <td data-label="Total">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td>
+                <td data-label="Remover"><button class="remove-from-cart-btn" data-product-id="${item.id}">Remover</button></td>
+            </tr>
+        `;
+    }).join('');
+
+    const frete = 15.00;
+    const total = subtotal + frete;
+
+    summaryContainer.innerHTML = `<h3>Resumo do Pedido</h3><p><span>Subtotal</span> <strong>R$ ${subtotal.toFixed(2).replace('.', ',')}</strong></p><p><span>Frete</span> <strong>R$ ${frete.toFixed(2).replace('.', ',')}</strong></p><hr><p><span>Total</span> <strong>R$ ${total.toFixed(2).replace('.', ',')}</strong></p><a href="#" class="btn">Finalizar Compra</a>`;
+},
     updateCartCount: function() {
         const cart = cartService.get(); const countElement = document.getElementById("cart-count");
         if (countElement) {
