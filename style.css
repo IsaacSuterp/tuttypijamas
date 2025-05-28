@@ -172,7 +172,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-box {
    display: flex;
    width: 90%; /* Ocupa 90% da largura da tela */
-   max-width: 768px; /* Define uma largura máxima razoável para desktop */
+   max-width: 500px; /* Define uma largura máxima razoável para desktop */
    background-color: var(--white);
    position: relative;
    transform: scale(0.95);
