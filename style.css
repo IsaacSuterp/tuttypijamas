@@ -5,9 +5,25 @@
     --font-serif: 'Playfair Display', serif; --font-sans: 'Lato', sans-serif;
     --shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.05); --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
-/* === ESTILOS GERAIS PARA O SITE PRINCIPAL === */
-body { font-family: var(--font-sans); color: var(--text-color); background-color: var(--background-color); line-height: 1.7; margin: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-.container { max-width: 1320px; margin: 0 auto; padding: 0 30px; }
+/* === ESTILOS GERAIS E CORREÇÕES DE LAYOUT === */
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Previne scroll horizontal acidental */
+}
+body { 
+    font-family: var(--font-sans); color: var(--text-color); background-color: var(--background-color); 
+    line-height: 1.7; margin: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
+}
+/* --- REVISÃO DE CENTRALIZAÇÃO ---
+   Garantindo que o container principal sempre se centralize. */
+.container { 
+    width: 100%;
+    max-width: 1320px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px; 
+    box-sizing: border-box;
+}
 a { text-decoration: none; color: var(--primary-color); transition: color 0.4s ease; }
 
 /* Cabeçalho do Site Principal */
@@ -27,18 +43,22 @@ nav a:hover::after { width: 100%; }
 .btn { background-color: var(--primary-color); color: var(--white); padding: 14px 35px; border-radius: 2px; font-weight: 400; font-family: var(--font-sans); letter-spacing: 1px; text-transform: uppercase; font-size: 13px; display: inline-block; border: 1px solid var(--primary-color); cursor: pointer; transition: all 0.4s ease; }
 .btn:hover { background-color: var(--white); color: var(--primary-color); }
 .section { padding: 100px 0; }
+
+/* --- REVISÃO DE CENTRALIZAÇÃO --- 
+   Garantindo que títulos e subtítulos fiquem perfeitamente centrados. */
 .section-title { font-family: var(--font-serif); text-align: center; font-size: 42px; font-weight: 400; margin-bottom: 20px; color: var(--primary-color); }
 .section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 60px auto; font-size: 16px; font-weight: 300; color: #555; }
+
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
-.product-card { background-color: var(--white); text-align: center; padding: 20px; position: relative; overflow: hidden; transition: box-shadow 0.4s ease; }
+.product-card { background-color: var(--white); text-align: center; padding: 20px; position: relative; overflow: hidden; transition: box-shadow 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; }
 .product-card:hover { box-shadow: var(--shadow-hover); }
 .product-card img { max-width: 100%; height: auto; margin-bottom: 20px; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .product-card:hover img { transform: scale(1.05); }
 .product-card h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; margin-bottom: 10px; color: var(--primary-color); }
 .product-card .price { font-size: 1.1rem; font-weight: 400; color: var(--text-color); margin-bottom: 15px; }
-.product-card p { font-size: 0.8rem; color: #777; margin-bottom: 60px; }
-.product-card .btn { position: absolute; bottom: 20px; left: 50%; transform: translate(-50%, 10px); opacity: 0; visibility: hidden; transition: all 0.4s ease; width: 80%; padding: 12px 20px; }
-.product-card:hover .btn { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.product-card p { font-size: 0.8rem; color: #777; margin-bottom: 15px; flex-grow: 1; }
+.product-card .btn { width: 80%; margin: 15px auto 0 auto; /* Botão centralizado */ }
+
 .products-page-layout { display: flex; gap: 50px; align-items: flex-start; }
 #filters { width: 300px; flex-shrink: 0; }
 #filters h3 { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 500; padding-bottom: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); }
@@ -61,7 +81,6 @@ nav a:hover::after { width: 100%; }
 .cart-summary hr { border: 0; height: 1px; background-color: var(--border-color); margin: 20px 0; }
 .cart-summary .btn { width: 100%; text-align: center; }
 
-/* Rodapé do Site Principal */
 footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; margin-top: 100px; }
 .footer-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
 .footer-column h4 { font-family: var(--font-sans); color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
@@ -70,6 +89,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .footer-column a { color: #a0a0a0; }
 .footer-column a:hover { color: var(--secondary-color); }
 .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #3a3a3a; font-size: 14px; }
+
 
 /* === ESTILOS EXCLUSIVOS PARA A PÁGINA DE LOGIN INDEPENDENTE === */
 #login-page { padding: 0; margin: 0; }
@@ -83,8 +103,8 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .form-side-container { max-width: 420px; width: 100%; position: relative; }
 .auth-section { opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s 0.5s; position: absolute; width: 100%; top: 0; left: 0; }
 .auth-section.active { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; position: static; }
-.auth-title { font-family: var(--font-serif); font-size: 32px; font-weight: 500; color: var(--primary-color); margin-bottom: 10px; }
-.auth-subtitle { font-size: 16px; color: #666; margin-bottom: 30px; }
+.auth-title { font-family: var(--font-serif); font-size: 32px; font-weight: 500; color: var(--primary-color); margin-bottom: 10px; text-align: left; }
+.auth-subtitle { font-size: 16px; color: #666; margin-bottom: 30px; text-align: left; }
 .social-login { display: flex; gap: 15px; margin-bottom: 20px; }
 .social-btn { flex-grow: 1; width: 50%; padding: 12px; font-size: 14px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--white); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .social-btn:hover { background-color: #f5f5f5; border-color: #ccc; }
@@ -94,7 +114,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .separator:not(:empty)::after { margin-left: .25em; }
 .input-group { position: relative; margin-bottom: 20px; }
 .input-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; }
-.input-group input { width: 100%; padding: 14px 14px 14px 45px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 15px; transition: border-color 0.3s ease; background-color: #fdfdfd; }
+.input-group input { width: 100%; padding: 14px 14px 14px 45px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 15px; transition: border-color 0.3s ease; background-color: #fdfdfd; box-sizing: border-box;}
 .input-group input:focus { outline: none; border-color: var(--secondary-color); }
 .input-group input::placeholder { color: #aaa; }
 .toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #aaa; cursor: pointer; }
@@ -109,6 +129,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .notification.show { opacity: 1; visibility: visible; top: 20px; }
 .notification.success { background-color: #2ecc71; }
 .notification.error { background-color: #e74c3c; }
+
 
 /* === POPUP DE NEWSLETTER === */
 .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; }
@@ -127,6 +148,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 #popup-success-content { animation: fadeIn 0.8s ease; }
 .success-icon { font-size: 50px; color: #2ecc71; margin-top: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
 
 /* === RESPONSIVIDADE GERAL === */
 @media (max-width: 992px) {
