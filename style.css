@@ -139,7 +139,17 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-close { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 32px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
 .popup-close:hover { color: var(--primary-color); }
 .popup-image { width: 45%; background-image: url('https://images.unsplash.com/photo-1620756236232-ff4354226d5c?q=80&w=1887&auto=format&fit=crop'); background-size: cover; background-position: center; }
-.popup-content { width: 55%; padding: 50px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+/* --- CORREÇÃO DE CENTRALIZAÇÃO DO POP-UP --- */
+.popup-content {
+    width: 55%;
+    padding: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Garante o alinhamento central dos itens flex */
+    justify-content: center; /* Garante o alinhamento vertical */
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+}
 .popup-title { font-family: var(--font-serif); font-size: 32px; font-weight: 500; line-height: 1.3; color: var(--primary-color); margin-bottom: 15px; }
 .popup-body { font-size: 16px; color: #555; margin-bottom: 30px; line-height: 1.6; }
 #newsletter-form .input-group { margin-bottom: 15px; }
@@ -154,7 +164,10 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 @media (max-width: 992px) {
     .auth-image-side { display: none; }
     .auth-form-side { width: 100%; }
-    .cart-container { flex-direction: column; }
+    .cart-container {
+        flex-direction: column;
+        align-items: center; /* Centraliza os blocos na vertical */
+    }
     .cart-summary { max-width: 100%; }
 }
 @media (max-width: 768px) {
