@@ -276,70 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             uiService.renderProductGrid(filteredProducts);
         },
 
-        // === NOVA FUNÇÃO PARA A PÁGINA DE CHECKOUT ===
-        initCheckoutPage() {
-            const form = document.getElementById('checkout-form');
-            if (!form) return;
-
-            const inputs = {
-                nome: document.getElementById('nome'), email: document.getElementById('email'),
-                cpf: document.getElementById('cpf'), celular: document.getElementById('celular'),
-                cep: document.getElementById('cep'), endereco: document.getElementById('endereco'),
-                numero: document.getElementById('numero'), complemento: document.getElementById('complemento'),
-                bairro: document.getElementById('bairro'), cidade: document.getElementById('cidade'),
-                estado: document.getElementById('estado'), cardNumber: document.getElementById('card-number'),
-                cardName: document.getElementById('card-name'), cardExpiry: document.getElementById('card-expiry'),
-                cardCvv: document.getElementById('card-cvv'),
-            };
-
-            const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
-            const paymentDetailsDivs = {
-                card: document.getElementById('card-details'), pix: document.getElementById('pix-details'),
-                boleto: document.getElementById('boleto-details'), wallet: document.getElementById('wallet-details'),
-            };
-            const finalizeBtn = document.getElementById('finalize-purchase-btn');
-            const buscarCepBtn = document.getElementById('buscar-cep-btn');
-            const copyPixBtn = document.getElementById('copy-pix-code-btn');
-            const cardBrandIcon = document.getElementById('card-brand-icon');
-            const cardInstallmentsSelect = document.getElementById('card-installments');
-            const summaryTotalEl = document.getElementById('summary-total');
-
-            // --- MÁSCARAS ---
-            const applyMask = (element, maskFunction) => {
-                if(element) element.addEventListener('input', (e) => {
-                    e.target.value = maskFunction(e.target.value);
-                    validateAllFields();
-                });
-            };
-            const cpfMask = value => value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            const celularMask = value => value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1');
-            const cepMask = value => value.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0,9);
-            const cardExpiryMask = value => value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 5);
-            const cardNumberMask = value => value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').slice(0, 19);
-            const cvvMask = value => value.replace(/\D/g, '').slice(0,4);
-
-            applyMask(inputs.cpf, cpfMask);
-            applyMask(inputs.celular, celularMask);
-            applyMask(inputs.cep, cepMask);
-            applyMask(inputs.cardExpiry, cardExpiryMask);
-            applyMask(inputs.cardNumber, cardNumberMask);
-            applyMask(inputs.cardCvv, cvvMask);
-            
-            if (summaryTotalEl && cardInstallmentsSelect) {
-                const totalValue = parseFloat(summaryTotalEl.textContent.replace('R$ ', '').replace(',', '.'));
-                if (!isNaN(totalValue) && totalValue > 0) {
-                    cardInstallmentsSelect.innerHTML = ''; 
-                    for (let i = 1; i <= 10; i++) {
-                        const installmentValue = (totalValue / i).toFixed(2).replace('.', ',');
-                        const option = document.createElement('option');
-                        option.value = i;
-                        option.textContent = `${i}x de R$ ${installmentValue} ${i === 1 ? '' : (i <= 3 ? 'sem juros' : 'com juros')}`; // Exemplo de lógica de juros
-                        cardInstallmentsSelect.appendChild(option);
-                    }
-                } else {
-                     cardInstallmentsSelect.innerHTML = '<option value="1">1x de R$ 0,00</option>';
-                }
-            }
+        
 
             const showError = (inputElement, message) => {
                 const formGroup = inputElement.closest('.form-group');
@@ -427,7 +364,143 @@ document.addEventListener('DOMContentLoaded', () => {
                      // Poderia adicionar uma mensagem de erro geral para seleção de pagamento
                 }
                 
-                finalizeBtn.disabled = !allValid;
+// Dentro do objeto App no seu main.js
+
+        initCheckoutPage() {
+            const form = document.getElementById('checkout-form');
+            if (!form) return;
+
+            // Chamada para renderizar o resumo do pedido dinamicamente
+            this.renderCheckoutSummary(); // ADICIONADO AQUI
+
+            const inputs = {
+                nome: document.getElementById('nome'), email: document.getElementById('email'),
+                cpf: document.getElementById('cpf'), celular: document.getElementById('celular'),
+                cep: document.getElementById('cep'), endereco: document.getElementById('endereco'),
+                numero: document.getElementById('numero'), complemento: document.getElementById('complemento'),
+                bairro: document.getElementById('bairro'), cidade: document.getElementById('cidade'),
+                estado: document.getElementById('estado'), cardNumber: document.getElementById('card-number'),
+                cardName: document.getElementById('card-name'), cardExpiry: document.getElementById('card-expiry'),
+                cardCvv: document.getElementById('card-cvv'),
+            };
+
+            const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
+            const paymentDetailsDivs = {
+                card: document.getElementById('card-details'), pix: document.getElementById('pix-details'),
+                boleto: document.getElementById('boleto-details'), wallet: document.getElementById('wallet-details'),
+            };
+            const finalizeBtn = document.getElementById('finalize-purchase-btn');
+            const buscarCepBtn = document.getElementById('buscar-cep-btn');
+            const copyPixBtn = document.getElementById('copy-pix-code-btn');
+            const cardBrandIcon = document.getElementById('card-brand-icon');
+            
+            // --- MÁSCARAS ---
+            const applyMask = (element, maskFunction) => {
+                if(element) element.addEventListener('input', (e) => {
+                    e.target.value = maskFunction(e.target.value);
+                    validateAllFields();
+                });
+            };
+            const cpfMask = value => value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            const celularMask = value => value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1');
+            const cepMask = value => value.replace(/\D/g, '').replace(/^(\d{5})(\d)/, '$1-$2').slice(0,9);
+            const cardExpiryMask = value => value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').slice(0, 5);
+            const cardNumberMask = value => value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').slice(0, 19);
+            const cvvMask = value => value.replace(/\D/g, '').slice(0,4);
+
+            applyMask(inputs.cpf, cpfMask);
+            applyMask(inputs.celular, celularMask);
+            applyMask(inputs.cep, cepMask);
+            applyMask(inputs.cardExpiry, cardExpiryMask);
+            applyMask(inputs.cardNumber, cardNumberMask);
+            applyMask(inputs.cardCvv, cvvMask);
+            
+            const showError = (inputElement, message) => {
+                const formGroup = inputElement.closest('.form-group');
+                if (!formGroup) return;
+                const errorElement = formGroup.querySelector('.error-message');
+                if (errorElement) errorElement.textContent = message;
+                inputElement.classList.add('input-error');
+            };
+            const clearError = (inputElement) => {
+                const formGroup = inputElement.closest('.form-group');
+                 if (!formGroup) return;
+                const errorElement = formGroup.querySelector('.error-message');
+                if (errorElement) errorElement.textContent = '';
+                inputElement.classList.remove('input-error');
+            };
+
+            const validators = {
+                nome: value => value.trim().length > 2 ? null : "Nome muito curto.",
+                email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? null : "E-mail inválido.",
+                cpf: value => /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value) ? null : "CPF inválido.",
+                celular: value => /^\(\d{2}\)\s\d{5}-\d{4}$/.test(value) ? null : "Celular inválido.",
+                cep: value => /^\d{5}-\d{3}$/.test(value) ? null : "CEP inválido.",
+                endereco: value => value.trim().length > 5 ? null : "Endereço muito curto.",
+                numero: value => value.trim().length > 0 ? null : "Número obrigatório.",
+                bairro: value => value.trim().length > 2 ? null : "Bairro muito curto.",
+                cidade: value => value.trim().length > 2 ? null : "Cidade muito curta.",
+                estado: value => value.trim().length === 2 ? null : "Estado inválido (use sigla, ex: SC).",
+                cardNumber: value => value.replace(/\s/g, '').length >= 13 && value.replace(/\s/g, '').length <= 16 ? null : "Número do cartão inválido.",
+                cardName: value => value.trim().length > 5 ? null : "Nome no cartão muito curto.",
+                cardExpiry: value => {
+                    if (!/^\d{2}\/\d{2}$/.test(value)) return "Data inválida (MM/AA).";
+                    const [month, year] = value.split('/');
+                    const currentYear = new Date().getFullYear() % 100;
+                    const currentMonth = new Date().getMonth() + 1;
+                    if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) return "Cartão expirado.";
+                    if (parseInt(month) < 1 || parseInt(month) > 12) return "Mês inválido.";
+                    return null;
+                },
+                cardCvv: value => /^\d{3,4}$/.test(value) ? null : "CVV inválido."
+            };
+
+            const validateField = (inputElement) => {
+                if (!inputElement) return true; 
+                if (!inputElement.hasAttribute('required') && !inputElement.value.trim()) {
+                    clearError(inputElement); return true;
+                }
+                if (!inputElement.value.trim() && inputElement.hasAttribute('required')){
+                    showError(inputElement, "Campo obrigatório."); return false;
+                }
+                const validator = validators[inputElement.id];
+                if (validator) {
+                    const error = validator(inputElement.value);
+                    if (error) { showError(inputElement, error); return false; }
+                }
+                clearError(inputElement); return true;
+            };
+            
+            const validateAllFields = () => {
+                let allValid = true;
+                let firstInvalidField = null;
+
+                const fieldsToValidate = ['nome', 'email', 'cpf', 'celular', 'cep'];
+                if (inputs.endereco && !inputs.endereco.disabled) {
+                    fieldsToValidate.push('endereco', 'numero', 'bairro', 'cidade', 'estado');
+                }
+
+                fieldsToValidate.forEach(id => {
+                    if (inputs[id] && !validateField(inputs[id])) {
+                        allValid = false;
+                        if (!firstInvalidField) firstInvalidField = inputs[id];
+                    }
+                });
+
+                const selectedPaymentMethodRadio = form.querySelector('input[name="payment-method"]:checked');
+                if (selectedPaymentMethodRadio) {
+                    const selectedPaymentMethod = selectedPaymentMethodRadio.value;
+                    if (selectedPaymentMethod === 'card') {
+                        if (inputs.cardNumber && !validateField(inputs.cardNumber)) { allValid = false; if (!firstInvalidField) firstInvalidField = inputs.cardNumber;}
+                        if (inputs.cardName && !validateField(inputs.cardName)) { allValid = false; if (!firstInvalidField) firstInvalidField = inputs.cardName;}
+                        if (inputs.cardExpiry && !validateField(inputs.cardExpiry)) { allValid = false; if (!firstInvalidField) firstInvalidField = inputs.cardExpiry;}
+                        if (inputs.cardCvv && !validateField(inputs.cardCvv)) { allValid = false; if (!firstInvalidField) firstInvalidField = inputs.cardCvv;}
+                    }
+                } else { 
+                    allValid = false;
+                }
+                
+                if (finalizeBtn) finalizeBtn.disabled = !allValid;
                 return { allValid, firstInvalidField };
             };
 
@@ -456,19 +529,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if(buscarCepBtn) buscarCepBtn.addEventListener('click', () => {
                 clearError(inputs.cep);
                 if (inputs.cep && /^\d{5}-\d{3}$/.test(inputs.cep.value)) {
-                    uiService.showNotification('CEP encontrado! (Simulação)');
+                    uiService.showNotification('CEP encontrado! Endereço preenchido. (Simulação)');
                     ['endereco', 'numero', 'complemento', 'bairro', 'cidade', 'estado'].forEach(id => {
                         if(inputs[id]) {
                             inputs[id].disabled = false;
-                            inputs[id].dispatchEvent(new Event('input')); // Para revalidar e limpar erros
+                           // inputs[id].dispatchEvent(new Event('input')); // Não precisa mais se validamos abaixo
                         }
                     });
                     if(inputs.endereco) inputs.endereco.value = "Rua dos Pijamas Felizes";
                     if(inputs.bairro) inputs.bairro.value = "Centro Sonolento";
                     if(inputs.cidade) inputs.cidade.value = "Cidade dos Sonhos";
                     if(inputs.estado) inputs.estado.value = "SC";
-                     ['endereco', 'bairro', 'cidade', 'estado'].forEach(id => {
-                        if(inputs[id]) validateField(inputs[id]); // Validar campos preenchidos
+                    if(inputs.numero) inputs.numero.value = "123"; // Adicionado para exemplo
+                     ['endereco', 'bairro', 'cidade', 'estado', 'numero'].forEach(id => {
+                        if(inputs[id]) validateField(inputs[id]); 
                     });
                     validateAllFields();
                 } else if (inputs.cep) {
@@ -519,8 +593,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const { allValid, firstInvalidField } = validateAllFields(); // Valida tudo uma última vez
-                if (allValid) {
+                const validationResult = validateAllFields(); 
+                if (validationResult.allValid) {
                     const selectedPaymentMethodRadio = form.querySelector('input[name="payment-method"]:checked');
                     let paymentMethodText = "Não selecionado";
                     if (selectedPaymentMethodRadio) {
@@ -532,16 +606,82 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                     uiService.showNotification(`Pedido realizado com sucesso via ${paymentMethodText}! Obrigado, ${inputs.nome.value}!`);
-                    cartService.clearCart(); // Limpa o carrinho
-                    setTimeout(() => window.location.href = 'index.html', 3000); // Redireciona para home
+                    cartService.clearCart(); 
+                    setTimeout(() => window.location.href = 'index.html', 3000); 
                 } else {
                      uiService.showNotification('Por favor, corrija os erros no formulário.', 'error');
-                     if (firstInvalidField) firstInvalidField.focus();
+                     if (validationResult.firstInvalidField) validationResult.firstInvalidField.focus();
                 }
             });
-            validateAllFields(); // Estado inicial do botão
-        }
+            validateAllFields(); 
+        },
 
+        // NOVA FUNÇÃO PARA RENDERIZAR O RESUMO DO PEDIDO NO CHECKOUT
+        renderCheckoutSummary() {
+            const cart = cartService.get();
+            const itemsContainer = document.getElementById('checkout-order-items');
+            const subtotalEl = document.getElementById('summary-subtotal');
+            const shippingEl = document.getElementById('summary-shipping'); // Assumindo frete fixo
+            const totalEl = document.getElementById('summary-total');
+            const cardInstallmentsSelect = document.getElementById('card-installments');
+
+            if (!itemsContainer || !subtotalEl || !shippingEl || !totalEl) return;
+
+            itemsContainer.innerHTML = ''; // Limpa itens anteriores
+            let currentSubtotal = 0;
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
+                // Idealmente, aqui você desabilitaria o restante do checkout ou redirecionaria.
+            } else {
+                cart.forEach(item => {
+                    const itemSubtotal = item.price * item.quantity;
+                    currentSubtotal += itemSubtotal;
+                    const itemHTML = `
+                        <div class="order-item">
+                            <img src="${item.images[0]}" alt="${item.name}">
+                            <div class="item-details">
+                                <p class="item-name">${item.name} ${item.selectedSize ? `(Tam: ${item.selectedSize})` : ''}</p>
+                                <p class="item-qty-price">Qtd: ${item.quantity} | R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+                            </div>
+                            <p class="item-total">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</p>
+                        </div>
+                    `;
+                    itemsContainer.innerHTML += itemHTML;
+                });
+            }
+
+            const shippingCost = 15.00; // Frete fixo
+            const currentTotal = currentSubtotal + shippingCost;
+
+            subtotalEl.textContent = `R$ ${currentSubtotal.toFixed(2).replace('.', ',')}`;
+            shippingEl.textContent = `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+            totalEl.textContent = `R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+            
+            // Atualizar opções de parcelamento com base no novo total
+            this.updateInstallmentOptions(currentTotal);
+        },
+
+        // NOVA FUNÇÃO PARA ATUALIZAR OPÇÕES DE PARCELAMENTO
+        updateInstallmentOptions(totalValue) {
+            const cardInstallmentsSelect = document.getElementById('card-installments');
+            if (cardInstallmentsSelect) {
+                cardInstallmentsSelect.innerHTML = ''; // Limpa opções existentes
+                if (totalValue > 0) {
+                    for (let i = 1; i <= 10; i++) { // Ex: até 10x
+                        const installmentValue = (totalValue / i).toFixed(2).replace('.', ',');
+                        const option = document.createElement('option');
+                        option.value = i;
+                        // Exemplo simples de lógica de juros (sem juros até 3x)
+                        option.textContent = `${i}x de R$ ${installmentValue} ${i === 1 ? '' : (i <= 3 ? 'sem juros' : 'com juros')}`;
+                        cardInstallmentsSelect.appendChild(option);
+                    }
+                } else {
+                    cardInstallmentsSelect.innerHTML = '<option value="1">1x de R$ 0,00</option>';
+                }
+            }
+        }
+        // ... (resto das funções do objeto App como initProductDetailPage, initZoomEffect, applyFilters)
     };
     App.init();
 });
