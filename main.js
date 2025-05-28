@@ -9,7 +9,6 @@ const uiService = {
                 <h3>${product.name}</h3>
                 <div class="price">${priceFormatted}</div>
                 <p>até ${product.installments}x de R$ ${installmentPrice}</p>
-                {/* ATUALIZADO: Texto e classe do botão */}
                 <button class="btn view-product-btn" data-product-id="${product.id}">Ver Mais</button>
             </div>
         `;
@@ -66,7 +65,7 @@ const uiService = {
 const cartService = {
     get: function() { return JSON.parse(localStorage.getItem("tutty_pijamas_cart")) || []; },
     save: function(cart) { localStorage.setItem("tutty_pijamas_cart", JSON.stringify(cart)); uiService.updateCartCount(); },
-    add: function(productId, quantity = 1, size = null) { // Função add original para uso na página de detalhes
+    add: function(productId, quantity = 1, size = null) {
         let cart = this.get();
         const product = products.find(p => p.id === parseInt(productId));
         if (!product) return;
@@ -81,18 +80,26 @@ const cartService = {
         alert(`${product.name} ${size ? '(Tamanho: ' + size + ')' : ''} foi adicionado ao carrinho!`);
     },
     updateQuantity: function(productId, quantity) {
-        let cart = this.get(); const item = cart.find(p => p.id === parseInt(productId)); // Assumindo que no carrinho o ID é único por linha, se não, usar cartItemId
-        if (item) {
-            item.quantity = parseInt(quantity, 10);
-            if (item.quantity <= 0) { cart = cart.filter(p => p.cartItemId !== item.cartItemId); } // Usar cartItemId para remover
+        let cart = this.get();
+        const itemToUpdate = cart.find(p => p.id === parseInt(productId)); // Supondo que o ID no input é o product.id
+        if (itemToUpdate) { // Idealmente, você identificaria o item pelo cartItemId se houver variações
+            itemToUpdate.quantity = parseInt(quantity, 10);
+            if (itemToUpdate.quantity <= 0) {
+                cart = cart.filter(p => p.cartItemId !== itemToUpdate.cartItemId);
+            }
             this.save(cart);
         }
     },
-    remove: function(productId) { // Assumindo que no carrinho o ID é único por linha, se não, usar cartItemId
+    remove: function(productId) {
         let cart = this.get();
-        const itemToRemove = cart.find(p => p.id === parseInt(productId));
+        // Esta lógica de remoção pode precisar ser mais específica se o mesmo produto.id puder existir com diferentes cartItemIds (tamanhos)
+        // Por ora, ela remove a primeira ocorrência ou todas as ocorrências com esse productId, dependendo se cartItemId foi usado na adição.
+        // Vamos refinar para remover com base no cartItemId se ele existir, ou product.id se não.
+        const itemToRemove = cart.find(p => p.id === parseInt(productId)); // Assume que o botão remove passa o product.id
         if (itemToRemove) {
-            cart = cart.filter(item => item.cartItemId !== itemToRemove.cartItemId);
+             // Se os itens no carrinho têm cartItemId (produto + tamanho), use-o para remover o item específico
+             // Se não, e você só tem productId, esta lógica pode remover o item errado se houver várias variações do mesmo produto
+            cart = cart.filter(item => item.cartItemId !== itemToRemove.cartItemId); // Idealmente, o botão passaria o cartItemId
             this.save(cart);
         }
     }
@@ -108,30 +115,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         bindEvents() {
             document.body.addEventListener('click', event => {
-                // NOVO: Evento para o botão "Ver Mais" nos cards de produto
                 if (event.target.matches('.view-product-btn')) {
                     const productId = event.target.dataset.productId;
                     if (productId) {
                         window.location.href = `produto-detalhe.html?id=${productId}`;
                     }
                 }
-                // Evento para remover do carrinho (continua o mesmo)
                 if (event.target.matches('.remove-from-cart-btn')) {
-                    // Para o remove, precisamos identificar unicamente o item se ele tiver variações.
-                    // Se o data-product-id no botão for o 'cartItemId', então está ok.
-                    // Se for apenas o 'product.id', e houver itens com mesmo id mas tamanhos diferentes,
-                    // precisaríamos de uma forma mais específica de identificar.
-                    // Assumindo por agora que o data-product-id no botão remover é o ID original do produto
-                    // e que a lógica de remoção no cartService lida com isso (idealmente usaria um cartItemId).
-                    // A função cartService.remove foi simplificada e pode precisar de ajuste
-                    // se você permitir o mesmo produto com tamanhos diferentes como itens separados no carrinho.
-                    // Por ora, se o botão do 'remove' tiver o ID do produto (e não o cartItemId), o cartService.remove
-                    // removerá a primeira ocorrência ou precisaria de um cartItemId.
-                    // Para simplificar, vamos assumir que o botão remove usa o product.id original e o cartService.remove
-                    // remove o item que corresponde a esse product.id e talvez a primeira ocorrência se houver duplicatas com variações.
                     const productId = event.target.dataset.productId;
-                     // A lógica de remoção no cartService pode precisar ser ajustada para usar cartItemId se produtos com variações são adicionados como itens distintos
-                    cartService.remove(productId); 
+                    cartService.remove(productId);
                     if (document.body.id === 'cart-page') uiService.renderCartPage();
                 }
                 if (event.target.matches('.popup-close') || event.target.matches('.popup-overlay')) {
@@ -141,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const targetPage = event.target.dataset.target;
                     if (targetPage) window.location.href = targetPage;
                 }
-                 // Lógica específica da página de produto
                 if(document.body.id === 'product-detail-page'){
                     if(event.target.matches('#size-guide-link')) {
                         event.preventDefault();
@@ -152,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if(event.target.matches('.thumbnail')) {
                         const mainImage = document.getElementById('main-product-image');
-                        mainImage.src = event.target.src;
+                        if(mainImage) mainImage.src = event.target.src;
                         document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
                         event.target.classList.add('active');
                     }
@@ -165,24 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
                         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                         event.target.classList.add('active');
-                        document.getElementById(tabId).classList.add('active');
+                        const targetTabContent = document.getElementById(tabId);
+                        if(targetTabContent) targetTabContent.classList.add('active');
                     }
-                    if(event.target.matches('#add-to-cart-detail')) { // Botão "Adicionar ao Carrinho" da página de detalhes
+                    if(event.target.matches('#add-to-cart-detail')) {
                         const productId = event.target.dataset.productId;
-                        const quantity = parseInt(document.getElementById('quantity').value);
+                        const quantityInput = document.getElementById('quantity');
+                        const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
                         const selectedSizeEl = document.querySelector('.size-btn.active');
                         if(!selectedSizeEl) {
                             alert('Por favor, selecione um tamanho.');
                             return;
                         }
                         const size = selectedSizeEl.textContent;
-                        cartService.add(productId, quantity, size); // Usa a função add original
+                        cartService.add(productId, quantity, size);
                     }
                 }
             });
             document.body.addEventListener('change', event => {
                 if (event.target.matches('.cart-quantity-input')) {
-                    // Similar ao remove, o updateQuantity precisa identificar o item corretamente, idealmente por cartItemId
                     cartService.updateQuantity(event.target.dataset.productId, event.target.value);
                     if (document.body.id === 'cart-page') uiService.renderCartPage();
                 }
@@ -194,8 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newsletterForm) {
                  newsletterForm.addEventListener('submit', event => {
                     event.preventDefault();
-                    document.getElementById('popup-form-content').style.display = 'none';
-                    document.getElementById('popup-success-content').style.display = 'block';
+                    const formContent = document.getElementById('popup-form-content');
+                    const successContent = document.getElementById('popup-success-content');
+                    if(formContent) formContent.style.display = 'none';
+                    if(successContent) successContent.style.display = 'block';
                     setTimeout(() => uiService.closePopup(), 4000);
                 });
             }
@@ -209,33 +203,55 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'product-detail-page': this.initProductDetailPage(); break;
             }
         },
-        initProductDetailPage() { // Função da página de detalhes do produto (mantida)
+        initProductDetailPage() {
             const params = new URLSearchParams(window.location.search);
             const productId = params.get('id');
-            if (!productId) { document.querySelector('.product-page-layout').innerHTML = '<h1>Produto não encontrado.</h1>'; return; }
+            const layoutElement = document.querySelector('.product-page-layout');
+
+            if (!productId) { if(layoutElement) layoutElement.innerHTML = '<h1>Produto não encontrado.</h1>'; return; }
             const product = products.find(p => p.id === parseInt(productId));
-            if (!product) { document.querySelector('.product-page-layout').innerHTML = '<h1>Produto não encontrado.</h1>'; return; }
+            if (!product) { if(layoutElement) layoutElement.innerHTML = '<h1>Produto não encontrado.</h1>'; return; }
+
             document.title = `${product.name} - Tutty Pijamas`;
-            document.getElementById('product-name').textContent = product.name;
-            document.getElementById('product-rating').innerHTML = `⭐ ${product.rating} (${product.reviews} avaliações)`;
-            document.getElementById('reviews-count').textContent = `Ver todas as ${product.reviews} avaliações`;
-            document.getElementById('product-price').textContent = `R$ ${product.price.toFixed(2).replace('.', ',')}`;
-            document.getElementById('product-installments').textContent = `em até ${product.installments}x de R$ ${(product.price / product.installments).toFixed(2).replace('.', ',')}`;
-            document.getElementById('product-short-description').textContent = product.description;
-            document.getElementById('product-full-description').textContent = product.description + " Mais detalhes sobre o caimento, tecido e modelagem podem ser adicionados aqui para fornecer uma visão completa da peça.";
-            const specsList = document.getElementById('product-specs');
-            specsList.innerHTML = `<li><strong>Composição:</strong> ${product.fabric}</li><li><strong>Cor:</strong> ${product.color}</li><li><strong>Estilo:</strong> ${product.style}</li><li><strong>Cuidados:</strong> Lavar à mão com água fria. Não usar alvejante. Secar à sombra.</li>`;
-            document.getElementById('main-product-image').src = product.images[0];
-            const thumbnailsContainer = document.getElementById('product-thumbnails');
-            thumbnailsContainer.innerHTML = product.images.map((img, index) => `<img src="${img}" alt="Miniatura ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}">`).join('');
-            const sizeSelector = document.getElementById('size-selector');
-            sizeSelector.innerHTML = product.sizes.map(size => `<button class="size-btn">${size}</button>`).join('');
-            document.getElementById('add-to-cart-detail').dataset.productId = product.id;
+            const productNameEl = document.getElementById('product-name');
+            const productRatingEl = document.getElementById('product-rating');
+            const reviewsCountEl = document.getElementById('reviews-count');
+            const productPriceEl = document.getElementById('product-price');
+            const productInstallmentsEl = document.getElementById('product-installments');
+            const productShortDescEl = document.getElementById('product-short-description');
+            const productFullDescEl = document.getElementById('product-full-description');
+            const specsListEl = document.getElementById('product-specs');
+            const mainImageEl = document.getElementById('main-product-image');
+            const thumbnailsContainerEl = document.getElementById('product-thumbnails');
+            const sizeSelectorEl = document.getElementById('size-selector');
+            const addToCartDetailBtn = document.getElementById('add-to-cart-detail');
+            const relatedProductsGridEl = document.getElementById('related-products-grid');
+
+
+            if(productNameEl) productNameEl.textContent = product.name;
+            if(productRatingEl) productRatingEl.innerHTML = `⭐ ${product.rating} (${product.reviews} avaliações)`;
+            if(reviewsCountEl) reviewsCountEl.textContent = `Ver todas as ${product.reviews} avaliações`;
+            if(productPriceEl) productPriceEl.textContent = `R$ ${product.price.toFixed(2).replace('.', ',')}`;
+            if(productInstallmentsEl) productInstallmentsEl.textContent = `em até ${product.installments}x de R$ ${(product.price / product.installments).toFixed(2).replace('.', ',')}`;
+            if(productShortDescEl) productShortDescEl.textContent = product.description; // Usando a descrição principal aqui
+            if(productFullDescEl) productFullDescEl.textContent = product.description + " Detalhes adicionais sobre material, caimento, e ocasiões de uso para uma descrição completa e atraente.";
+            
+            if(specsListEl) specsListEl.innerHTML = `<li><strong>Composição:</strong> ${product.fabric}</li><li><strong>Cor:</strong> ${product.color}</li><li><strong>Estilo:</strong> ${product.style}</li><li><strong>Cuidados:</strong> Lavar à mão com água fria. Não usar alvejante. Secar à sombra.</li>`;
+            if(mainImageEl) mainImageEl.src = product.images[0];
+            if(thumbnailsContainerEl) thumbnailsContainerEl.innerHTML = product.images.map((img, index) => `<img src="${img}" alt="Miniatura ${index + 1}" class="thumbnail ${index === 0 ? 'active' : ''}">`).join('');
+            if(sizeSelectorEl) sizeSelectorEl.innerHTML = product.sizes.map(size => `<button class="size-btn">${size}</button>`).join('');
+            if(addToCartDetailBtn) addToCartDetailBtn.dataset.productId = product.id;
+            
             const relatedProducts = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 4);
-            document.getElementById('related-products-grid').innerHTML = relatedProducts.map(p => uiService.renderProductCard(p)).join('');
+            if(relatedProductsGridEl && relatedProducts.length > 0) {
+                relatedProductsGridEl.innerHTML = relatedProducts.map(p => uiService.renderProductCard(p)).join('');
+            } else if (relatedProductsGridEl) {
+                relatedProductsGridEl.innerHTML = "<p>Sem produtos relacionados no momento.</p>";
+            }
+            
             this.initZoomEffect();
         },
-        initZoomEffect() { // Função do zoom (mantida)
+        initZoomEffect() {
             const container = document.querySelector('.main-image-container');
             const img = document.getElementById('main-product-image');
             if (!container || !img) return;
