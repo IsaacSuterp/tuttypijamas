@@ -231,7 +231,7 @@ main {
     transform: scale(1.03);
     box-shadow: var(--shadow-hover);
 }
-#masculino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507680464027-827663820934?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
+#masculino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-13-993_com.instagram.android.jpg'); }
 #feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-33-612_com.instagram.android.jpg'); }
 #inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-54-427_com.instagram.android.jpg'); }
 #infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-44-177_com.instagram.android.jpg'); }
