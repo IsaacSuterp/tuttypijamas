@@ -232,3 +232,94 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
     .popup-title { font-size: 26px; }
     .popup-close { color: var(--white); text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 }
+
+/* === CORREÇÃO: RESPONSIVIDADE DA TABELA DO CARRINHO === */
+
+/* Estilo inicial para o container do produto na tabela */
+.cart-product-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Aplica a transformação para telas menores que 768px */
+@media screen and (max-width: 768px) {
+    .cart-table {
+        border: 0;
+    }
+
+    /* Esconde o cabeçalho da tabela no mobile */
+    .cart-table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    /* Transforma cada linha da tabela em um "card" */
+    .cart-table tr {
+        display: block;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+        border-radius: 4px;
+        padding: 15px;
+    }
+
+    /* Transforma cada célula em uma linha com a etiqueta de dados */
+    .cart-table td {
+        display: flex;
+        justify-content: space-between; /* Alinha a etiqueta e o valor */
+        align-items: center;
+        text-align: right; /* Alinha o valor à direita */
+        padding: 10px 0;
+        border-bottom: 1px dashed var(--border-color);
+    }
+    
+    .cart-table td:last-child {
+        border-bottom: none;
+    }
+
+    /* Cria a etiqueta (ex: "Preço:") antes do conteúdo da célula */
+    .cart-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: var(--primary-color);
+        text-align: left;
+    }
+    
+    /* Ajustes específicos para as células no modo card */
+    .cart-table td[data-label="Produto"] {
+        padding-bottom: 15px;
+    }
+
+    .cart-table td[data-label="Produto"]::before {
+        display: none; /* Não precisamos da etiqueta "Produto" */
+    }
+
+    .cart-table td[data-label="Remover"] {
+        justify-content: flex-end; /* Alinha o botão remover à direita */
+    }
+
+    .cart-product-info {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        width: 100%;
+    }
+    .cart-product-info img {
+        margin-bottom: 10px;
+        width: 60px;
+    }
+
+    .cart-quantity-input {
+        width: 60px;
+        padding: 5px;
+        text-align: center;
+    }
+}
