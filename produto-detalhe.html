@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto - Tutty Pijamas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body id="product-detail-page">
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Tutty Pijamas</a>
+            <nav>
+                <ul>
+                    <li><a href="produtos.html">Nossas Peças</a></li>
+                    <li><a href="estilo-colecao.html">Estilo</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                    <li><a href="infantil-colecao.html">Infantil</a></li>
+                    <li><a href="inverno.html">Inverno</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="login.html" class="icon">👤</a>
+                <a href="carrinho.html" class="icon" id="cart-icon">
+                    🛒
+                    <span id="cart-count"></span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="product-page-layout">
+            <div class="product-gallery">
+                <div class="main-image-container">
+                    <img id="main-product-image" src="" alt="Imagem principal do produto">
+                </div>
+                <div id="product-thumbnails" class="thumbnails">
+                    </div>
+            </div>
+
+            <div class="product-info">
+                <h1 id="product-name"></h1>
+                <div class="product-reviews-summary">
+                    <span id="product-rating"></span>
+                    <a href="#product-tabs-section" id="reviews-count"></a>
+                </div>
+                <div class="product-price">
+                    <span id="product-price" class="current-price"></span>
+                    <span id="product-installments" class="installments"></span>
+                </div>
+                <p id="product-short-description" class="short-description"></p>
+                
+                <div class="product-variants">
+                    <div class="variant-group">
+                        <label>Cor: <span id="selected-color-name"></span></label>
+                        <div id="color-selector" class="color-options">
+                            </div>
+                    </div>
+                    <div class="variant-group">
+                        <div class="size-header">
+                            <label>Tamanho:</label>
+                            <a href="#" id="size-guide-link">Guia de Tamanhos</a>
+                        </div>
+                        <div id="size-selector" class="size-options">
+                             </div>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <label for="quantity">Quantidade:</label>
+                        <input type="number" id="quantity" value="1" min="1">
+                    </div>
+                    <button id="add-to-cart-detail" class="btn btn-large">Adicionar ao Carrinho</button>
+                </div>
+                
+                <div class="shipping-info">
+                    <label for="zip-code">Calcular frete e prazo</label>
+                    <div class="zip-code-input-group">
+                        <input type="text" id="zip-code" placeholder="Digite seu CEP">
+                        <button class="btn-secondary">Calcular</button>
+                    </div>
+                </div>
+
+                <div class="return-policy">
+                    <p>🔁 Devolução grátis em até 7 dias.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="product-tabs-section" class="product-detailed-info">
+            <nav class="tabs-nav">
+                <button class="tab-link active" data-tab="tab-description">Descrição</button>
+                <button class="tab-link" data-tab="tab-specs">Especificações</button>
+                <button class="tab-link" data-tab="tab-reviews">Avaliações</button>
+            </nav>
+            <div id="tab-description" class="tab-content active">
+                <h3>Descrição Completa</h3>
+                <p id="product-full-description"></p>
+            </div>
+            <div id="tab-specs" class="tab-content">
+                <h3>Especificações e Cuidados</h3>
+                <ul id="product-specs">
+                    </ul>
+            </div>
+            <div id="tab-reviews" class="tab-content">
+                <h3>Avaliações de Clientes</h3>
+                <div id="customer-reviews-container">
+                    <p>Seja o primeiro a avaliar este produto!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="related-products-section">
+            <h2 class="section-title">Complete o Look</h2>
+            <div id="related-products-grid" class="product-grid">
+                </div>
+        </section>
+    </main>
+
+    <div id="size-guide-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" aria-label="Fechar">&times;</button>
+            <h3 class="modal-title">Guia de Tamanhos</h3>
+            <p>Compare suas medidas com a tabela abaixo para encontrar o tamanho ideal.</p>
+            <table class="size-table">
+                <thead>
+                    <tr><th>Tamanho</th><th>Busto (cm)</th><th>Cintura (cm)</th><th>Quadril (cm)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>PP</td><td>78-82</td><td>60-64</td><td>88-92</td></tr>
+                    <tr><td>P</td><td>83-88</td><td>65-70</td><td>93-98</td></tr>
+                    <tr><td>M</td><td>89-94</td><td>71-76</td><td>99-104</td></tr>
+                    <tr><td>G</td><td>95-100</td><td>77-82</td><td>105-110</td></tr>
+                    <tr><td>GG</td><td>101-106</td><td>83-88</td><td>111-116</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-layout">
+            <div class="footer-column"><h4>Institucional</h4><ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li></ul></div>
+            <div class="footer-column"><h4>Ajuda</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Política de Troca</a></li></ul></div>
+            <div class="footer-column"><h4>Redes Sociais</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Tutty Pijamas.</p></div>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="main.js"></script>
+</body>
+  </html>
