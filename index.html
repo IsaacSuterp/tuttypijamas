@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutty Pijamas - Conforto e Estilo</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 <body id="home-page">
 
@@ -33,29 +33,49 @@
     </header>
 
     <main>
-        <section class="section">
+        <section class="section collections-section">
+            <div class="container">
+                <h1 class="section-title">Nossas Coleções</h1>
+                <div class="collections-container">
+                    <div class="collection-card" id="masculino">
+                        <div class="card-content">
+                            <h2>Coleção Masculina</h2>
+                            <button class="collection-button" data-target="masculino.html">Ver Produtos</button>
+                        </div>
+                    </div>
+        
+                    <div class="collection-card" id="feminino">
+                        <div class="card-content">
+                            <h2>Coleção Feminina</h2>
+                            <button class="collection-button" data-target="feminino.html">Ver Produtos</button>
+                        </div>
+                    </div>
+        
+                    <div class="collection-card" id="inverno">
+                        <div class="card-content">
+                            <h2>Especial de Inverno</h2>
+                            <button class="collection-button" data-target="inverno.html">Ver Produtos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section featured-products-section">
              <div class="container">
-                <h1 class="section-title">Noites de Luxo e Conforto</h1>
-                <p class="section-subtitle">Descubra nossas coleções exclusivas, feitas com os melhores tecidos para garantir o seu bem-estar.</p>
-                <div id="featured-products-grid" class="product-grid"></div>
+                <h2 class="section-title">Produtos em Destaque</h2>
+                <p class="section-subtitle">Os queridinhos da estação, escolhidos para você.</p>
+                <div id="featured-products-grid" class="product-grid">
+                    </div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container footer-layout">
-            <div class="footer-column">
-                <h4>Institucional</h4>
-                <ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li></ul>
-            </div>
-            <div class="footer-column">
-                <h4>Ajuda</h4>
-                <ul><li><a href="#">FAQ</a></li><li><a href="#">Política de Troca</a></li></ul>
-            </div>
-            <div class="footer-column">
-                <h4>Redes Sociais</h4>
-                <ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li></ul>
-            </div>
+            <div class="footer-column"><h4>Institucional</h4><ul><li><a href="#">Sobre Nós</a></li><li><a href="#">Contato</a></li></ul></div>
+            <div class="footer-column"><h4>Ajuda</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Política de Troca</a></li></ul></div>
+            <div class="footer-column"><h4>Redes Sociais</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li></ul></div>
         </div>
         <div class="footer-bottom"><p>&copy; 2025 Tutty Pijamas.</p></div>
     </footer>
@@ -67,24 +87,22 @@
             <div class="popup-content">
                 <div id="popup-form-content">
                     <h2 class="popup-title">Bem-vindo(a)! <br>Um presente para você.</h2>
-                    <p class="popup-body">Cadastre seu e-mail e desbloqueie um cupom exclusivo para usar agora mesmo.</p>
+                    <p class="popup-body">Cadastre seu e-mail e desbloqueie um cupom exclusivo.</p>
                     <form id="newsletter-form">
-                        <div class="input-group">
-                            <i class="fa-regular fa-envelope input-icon"></i>
-                            <input type="email" id="popup-email" placeholder="Digite seu melhor e-mail" required>
-                        </div>
+                        <div class="input-group"><i class="fa-regular fa-envelope input-icon"></i><input type="email" required placeholder="Digite seu melhor e-mail"></div>
                         <button type="submit" class="btn">Desbloquear Meu Desconto</button>
                     </form>
                     <p class="consent-text">Prometemos não lotar sua caixa de entrada.</p>
                 </div>
                 <div id="popup-success-content" style="display: none;">
                      <h2 class="popup-title">Obrigado!</h2>
-                     <p class="popup-body">Seu cupom exclusivo foi enviado para o seu e-mail. Confira sua caixa de entrada!</p>
+                     <p class="popup-body">Seu cupom foi enviado para o seu e-mail!</p>
                      <i class="fa-solid fa-check-circle success-icon"></i>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="database.js"></script>
     <script src="main.js"></script>
 </body>
