@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
 
+    // === LÓGICA DO POP-UP DE NEWSLETTER ===
+    const newsletterPopup = document.getElementById('newsletter-popup');
+    const closePopupButton = document.querySelector('.popup-close');
+    const newsletterForm = document.getElementById('newsletter-form');
+    const popupFormContent = document.getElementById('popup-form-content');
+    const popupSuccessContent = document.getElementById('popup-success-content');
+
+    // Função para mostrar o pop-up
+    const showPopup = () => {
+        // Verifica se o pop-up já foi mostrado nesta sessão
+        if (!sessionStorage.getItem('popupShown')) {
+            newsletterPopup.classList.add('active');
+            sessionStorage.setItem('popupShown', 'true'); // Marca como mostrado
+        }
+
     if (document.body.id === "home-page") {
         renderFeaturedProducts();
     }
