@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Tutty Pijamas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body id="checkout-page">
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Tutty Pijamas</a>
+            <nav>
+                <ul>
+                    <li><a href="produtos.html">Continuar Comprando</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <a href="login.html" class="icon">👤</a>
+                <a href="carrinho.html" class="icon" id="cart-icon">
+                    🛒<span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container checkout-container">
+        <form id="checkout-form">
+            <div class="checkout-details-column">
+                <section class="checkout-section">
+                    <h2 class="section-title-checkout">Dados Pessoais e Entrega</h2>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo*</label>
+                        <input type="text" id="nome" name="nome" required>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" name="email" required>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cpf">CPF*</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="celular">Celular*</label>
+                            <input type="tel" id="celular" name="celular" placeholder="(00) 00000-0000" required>
+                            <small class="error-message"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cep">CEP*</label>
+                        <div class="input-with-button">
+                            <input type="text" id="cep" name="cep" required>
+                            <button type="button" id="buscar-cep-btn" class="btn-secondary-outline">Buscar</button>
+                        </div>
+                        <small class="error-message"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="endereco">Endereço*</label>
+                        <input type="text" id="endereco" name="endereco" required disabled>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="numero">Número*</label>
+                            <input type="text" id="numero" name="numero" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" id="complemento" name="complemento" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bairro">Bairro*</label>
+                        <input type="text" id="bairro" name="bairro" required disabled>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cidade">Cidade*</label>
+                            <input type="text" id="cidade" name="cidade" required disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado*</label>
+                            <input type="text" id="estado" name="estado" required disabled>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="checkout-section payment-methods-section">
+                    <h2 class="section-title-checkout">Escolha a Forma de Pagamento</h2>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <input type="radio" id="pay-card" name="payment-method" value="card" checked>
+                            <label for="pay-card"><i class="fas fa-credit-card"></i> Cartão de Crédito</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="pay-pix" name="payment-method" value="pix">
+                            <label for="pay-pix"><i class="fab fa-pix"></i> Pix</label>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="pay-boleto" name="payment-method" value="boleto">
+                            <label for="pay-boleto"><i class="fas fa-barcode"></i> Boleto Bancário</label>
+                        </div>
+                         <div class="payment-option">
+                            <input type="radio" id="pay-wallet" name="payment-method" value="wallet">
+                            <label for="pay-wallet"><i class="fas fa-wallet"></i> Carteiras Digitais</label>
+                        </div>
+                    </div>
+
+                    <div id="card-details" class="payment-details active">
+                        <div class="form-group">
+                            <label for="card-number">Número do Cartão*</label>
+                            <div class="input-with-icon">
+                                <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000">
+                                <span id="card-brand-icon" class="card-brand-icon"></span>
+                            </div>
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Nome no Cartão*</label>
+                            <input type="text" id="card-name" name="card-name" placeholder="Como está no cartão">
+                            <small class="error-message"></small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="card-expiry">Validade (MM/AA)*</label>
+                                <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/AA">
+                                <small class="error-message"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-cvv">CVV*</label>
+                                <input type="text" id="card-cvv" name="card-cvv" placeholder="000">
+                                <small class="error-message"></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-installments">Parcelamento</label>
+                            <select id="card-installments" name="card-installments">
+                                <option value="1">1x de R$ 0,00 sem juros</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div id="pix-details" class="payment-details">
+                        <p>Pague com Pix e seu pedido será confirmado em instantes!</p>
+                        <img src="https://via.placeholder.com/200x200.png?text=QR+Code+PIX" alt="QR Code Pix" class="pix-qr-code">
+                        <div class="form-group">
+                            <label for="pix-code">Pix Copia e Cola:</label>
+                            <div class="input-with-button">
+                                <input type="text" id="pix-code" readonly value="00020126580014br.gov.bcb.pix0136... (código exemplo)">
+                                <button type="button" id="copy-pix-code-btn" class="btn-secondary-outline"><i class="fas fa-copy"></i> Copiar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="boleto-details" class="payment-details">
+                        <p><i class="fas fa-barcode" style="font-size: 2em; margin-right: 10px;"></i>O boleto será gerado após a finalização do pedido e enviado para o seu e-mail. O pagamento pode levar até 3 dias úteis para ser confirmado.</p>
+                    </div>
+                    
+                    <div id="wallet-details" class="payment-details digital-wallets">
+                        <p>Escolha sua carteira digital preferida:</p>
+                        <button type="button" class="wallet-btn paypal"><i class="fab fa-paypal"></i> Pagar com PayPal</button>
+                        <button type="button" class="wallet-btn google-pay"><i class="fab fa-google-pay"></i> Pagar com Google Pay</button>
+                        <button type="button" class="wallet-btn mercado-pago"> Pagar com Mercado Pago</button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="checkout-summary-column">
+                <aside class="checkout-section order-summary">
+                    <h2 class="section-title-checkout">Resumo do Pedido</h2>
+                    <div class="order-item">
+                        <img src="https://via.placeholder.com/80x100.png?text=Pijama1" alt="Produto 1">
+                        <div class="item-details">
+                            <p class="item-name">Pijama de Seda Clássico</p>
+                            <p class="item-qty-price">Qtd: 1 | R$ 259,90</p>
+                        </div>
+                        <p class="item-total">R$ 259,90</p>
+                    </div>
+                    <div class="order-item">
+                        <img src="https://via.placeholder.com/80x100.png?text=Pijama2" alt="Produto 2">
+                        <div class="item-details">
+                            <p class="item-name">Pijama de Algodão Estampado</p>
+                            <p class="item-qty-price">Qtd: 1 | R$ 129,90</p>
+                        </div>
+                        <p class="item-total">R$ 129,90</p>
+                    </div>
+                    <hr class="summary-divider">
+                    <div class="summary-line">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">R$ 389,80</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Frete:</span>
+                        <span id="summary-shipping">R$ 15,00</span>
+                    </div>
+                    <hr class="summary-divider">
+                    <div class="form-group coupon-group">
+                        <label for="coupon-code">Cupom de Desconto</label>
+                        <div class="input-with-button">
+                             <input type="text" id="coupon-code" placeholder="Digite seu cupom">
+                             <button type="button" id="apply-coupon-btn" class="btn-secondary-outline">Aplicar</button>
+                        </div>
+                    </div>
+                     <hr class="summary-divider">
+                    <div class="summary-line total-line">
+                        <span>Total:</span>
+                        <span id="summary-total">R$ 404,80</span>
+                    </div>
+                    <button type="submit" id="finalize-purchase-btn" class="btn btn-large" disabled>Finalizar Compra</button>
+                </aside>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+         <div class="container footer-bottom" style="padding-top:40px; margin-top:60px;">
+            <p>&copy; 2025 Tutty Pijamas. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="database.js"></script>
+    <script src="main.js"></script>
+</body>
+                                  </html>
