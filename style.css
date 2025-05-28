@@ -302,6 +302,10 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
         display: none; /* Não precisamos da etiqueta "Produto" */
     }
 
+    .cart-table td[data-label="Remover"]::before {
+    content: none; /* Remove a etiqueta "REMOVER" duplicada */
+    }
+
     .cart-table td[data-label="Remover"] {
         justify-content: flex-end; /* Alinha o botão remover à direita */
     }
@@ -321,9 +325,5 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
         width: 60px;
         padding: 5px;
         text-align: center;
-    }
-
-    .cart-table td[data-label="Remover"]::before {
-    content: none; /* Remove a etiqueta "REMOVER" duplicada */
     }
 }
