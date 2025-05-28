@@ -30,17 +30,14 @@
                 <div id="login-section" class="auth-section active">
                     <h1 class="auth-title">Bem-vindo(a) de volta</h1>
                     <p class="auth-subtitle">Acesse sua conta para continuar.</p>
-                    
                     <div class="social-login">
                         <button class="social-btn google"><i class="fab fa-google"></i> Continuar com Google</button>
-                        <button class="social-btn facebook"><i class="fab fa-facebook-f"></i> Continuar com Facebook</button>
                     </div>
                     <div class="separator"><span>OU</span></div>
-
                     <form id="login-form">
                         <div class="input-group">
                             <i class="fa-regular fa-envelope input-icon"></i>
-                            <input type="email" id="login-email" required placeholder="Seu e-mail">
+                            <input type="email" required placeholder="Seu e-mail">
                         </div>
                         <div class="input-group">
                             <i class="fa-solid fa-lock input-icon"></i>
@@ -61,11 +58,11 @@
                     <form id="register-form">
                          <div class="input-group">
                             <i class="fa-regular fa-user input-icon"></i>
-                            <input type="text" id="register-name" required placeholder="Nome Completo">
+                            <input type="text" required placeholder="Nome Completo">
                         </div>
                         <div class="input-group">
                             <i class="fa-regular fa-envelope input-icon"></i>
-                            <input type="email" id="register-email" required placeholder="Seu e-mail">
+                            <input type="email" required placeholder="Seu e-mail">
                         </div>
                         <div class="input-group">
                             <i class="fa-solid fa-lock input-icon"></i>
@@ -89,9 +86,9 @@
                     <form id="forgot-password-form">
                         <div class="input-group">
                             <i class="fa-regular fa-envelope input-icon"></i>
-                            <input type="email" id="forgot-email" required placeholder="Seu e-mail de cadastro">
+                            <input type="email" required placeholder="Seu e-mail de cadastro">
                         </div>
-                        <button type="submit" class="btn">Enviar Link de Recuperação</button>
+                        <button type="submit" class="btn">Enviar Link</button>
                     </form>
                     <div class="auth-links">
                         <a href="#" id="show-login-from-forgot">Lembrou a senha? <strong>Acesse</strong></a>
@@ -102,32 +99,28 @@
     </div>
 
     <script>
+        // O JavaScript da resposta anterior continua o mesmo.
+        // Ele controla a troca de formulários e as notificações.
         document.addEventListener('DOMContentLoaded', () => {
             const sections = {
                 login: document.getElementById('login-section'),
                 register: document.getElementById('register-section'),
                 forgot: document.getElementById('forgot-password-section')
             };
-
             const showSection = (sectionName) => {
                 Object.values(sections).forEach(section => section.classList.remove('active'));
                 sections[sectionName].classList.add('active');
             };
-
             document.getElementById('show-register').addEventListener('click', (e) => { e.preventDefault(); showSection('register'); });
             document.getElementById('show-forgot-password').addEventListener('click', (e) => { e.preventDefault(); showSection('forgot'); });
             document.getElementById('show-login-from-register').addEventListener('click', (e) => { e.preventDefault(); showSection('login'); });
             document.getElementById('show-login-from-forgot').addEventListener('click', (e) => { e.preventDefault(); showSection('login'); });
-
-            // Notificação
             const notification = document.getElementById('notification');
             const showNotification = (message, type = 'success') => {
                 notification.textContent = message;
                 notification.className = `notification ${type} show`;
                 setTimeout(() => { notification.classList.remove('show'); }, 4000);
             };
-
-            // Toggle de visibilidade da senha
             document.querySelectorAll('.toggle-password').forEach(toggle => {
                 toggle.addEventListener('click', () => {
                     const input = toggle.previousElementSibling;
@@ -137,50 +130,23 @@
                     toggle.classList.toggle('fa-eye-slash');
                 });
             });
-
-            // Indicador de força de senha
             const registerPassword = document.getElementById('register-password');
             const strengthBar = document.querySelector('.strength-bar');
             const strengthText = document.querySelector('.strength-text');
             if(registerPassword) {
                 registerPassword.addEventListener('input', () => {
-                    const pass = registerPassword.value;
-                    let strength = 0;
-                    if (pass.length > 7) strength++;
-                    if (pass.match(/[a-z]/) && pass.match(/[A-Z]/)) strength++;
-                    if (pass.match(/\d/)) strength++;
-                    if (pass.match(/[^a-zA-Z\d]/)) strength++;
-                    
+                    const pass = registerPassword.value; let strength = 0;
+                    if (pass.length > 7) strength++; if (pass.match(/[a-z]/) && pass.match(/[A-Z]/)) strength++;
+                    if (pass.match(/\d/)) strength++; if (pass.match(/[^a-zA-Z\d]/)) strength++;
                     strengthBar.style.width = (strength * 25) + '%';
-                    if (strength <= 1) {
-                        strengthBar.style.backgroundColor = '#e74c3c'; // fraca
-                        strengthText.textContent = 'Senha fraca';
-                    } else if (strength === 2) {
-                        strengthBar.style.backgroundColor = '#f39c12'; // média
-                        strengthText.textContent = 'Senha média';
-                    } else {
-                        strengthBar.style.backgroundColor = '#2ecc71'; // forte
-                        strengthText.textContent = 'Senha forte';
-                    }
+                    if (strength <= 1) { strengthBar.style.backgroundColor = '#e74c3c'; strengthText.textContent = 'Senha fraca';}
+                    else if (strength === 2) { strengthBar.style.backgroundColor = '#f39c12'; strengthText.textContent = 'Senha média';}
+                    else { strengthBar.style.backgroundColor = '#2ecc71'; strengthText.textContent = 'Senha forte';}
                 });
             }
-
-            // Simulação de envio de formulários
-            document.getElementById('login-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                showNotification('Login efetuado com sucesso!');
-                setTimeout(() => window.location.href = 'index.html', 1500);
-            });
-            document.getElementById('register-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                showNotification('Cadastro realizado! Faça o login para continuar.');
-                setTimeout(() => showSection('login'), 1500);
-            });
-            document.getElementById('forgot-password-form').addEventListener('submit', (e) => {
-                e.preventDefault();
-                showNotification('Link de recuperação enviado para seu e-mail.');
-                setTimeout(() => showSection('login'), 1500);
-            });
+            document.getElementById('login-form').addEventListener('submit', (e) => { e.preventDefault(); showNotification('Login efetuado com sucesso!'); setTimeout(() => window.location.href = 'index.html', 1500); });
+            document.getElementById('register-form').addEventListener('submit', (e) => { e.preventDefault(); showNotification('Cadastro realizado! Faça o login.'); setTimeout(() => showSection('login'), 1500); });
+            document.getElementById('forgot-password-form').addEventListener('submit', (e) => { e.preventDefault(); showNotification('Link de recuperação enviado.'); setTimeout(() => showSection('login'), 1500); });
         });
     </script>
 </body>
