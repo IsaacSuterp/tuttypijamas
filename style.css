@@ -359,7 +359,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-close:hover { color: var(--primary-color); }
 .popup-image {
     width: 40%;
-    background-image: url('tutty-pijamas-logo.jpg'); /* CAMINHO PARA O SEU LOGO NA RAIZ */
+    background-image: url('Screenshot_2025-05-28-13-14-02-221_com.instagram.android.jpg'); /* CAMINHO PARA O SEU LOGO NA RAIZ */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
