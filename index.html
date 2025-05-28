@@ -17,9 +17,11 @@
             <a href="index.html" class="logo">Tutty Pijamas</a>
             <nav>
                 <ul>
-                    <li><a href="produtos.html">Coleções</a></li>
-                    <li><a href="produtos.html?category=feminino">Feminino</a></li>
-                    <li><a href="produtos.html?category=masculino">Masculino</a></li>
+                    <li><a href="produtos.html">Nossas Peças</a></li>
+                    <li><a href="masculino.html">Masculino</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                    <li><a href="infantil-colecao.html">Infantil</a></li>
+                    <li><a href="inverno.html">Inverno</a></li>
                 </ul>
             </nav>
             <div class="header-icons">
@@ -35,7 +37,7 @@
     <main>
         <section class="section collections-section">
             <div class="container">
-                <h1 class="section-title">Nossas Coleções</h1>
+                <h1 class="section-title">Explore Nossas Coleções</h1>
                 <div class="collections-container">
                     <div class="collection-card" id="masculino">
                         <div class="card-content">
@@ -55,6 +57,13 @@
                         <div class="card-content">
                             <h2>Especial de Inverno</h2>
                             <button class="collection-button" data-target="inverno.html">Ver Produtos</button>
+                        </div>
+                    </div>
+
+                    <div class="collection-card" id="infantil-colecao">
+                        <div class="card-content">
+                            <h2>Coleção Infantil</h2>
+                            <button class="collection-button" data-target="infantil-colecao.html">Ver Produtos</button>
                         </div>
                     </div>
                 </div>
@@ -89,7 +98,7 @@
                     <h2 class="popup-title">Bem-vindo(a)! <br>Um presente para você.</h2>
                     <p class="popup-body">Cadastre seu e-mail e desbloqueie um cupom exclusivo.</p>
                     <form id="newsletter-form">
-                        <div class="input-group"><i class="fa-regular fa-envelope input-icon"></i><input type="email" required placeholder="Digite seu melhor e-mail"></div>
+                        <div class="input-group"><i class="fa-regular fa-envelope input-icon"></i><input type="email" id="popup-email" placeholder="Digite seu melhor e-mail" required></div>
                         <button type="submit" class="btn">Desbloquear Meu Desconto</button>
                     </form>
                     <p class="consent-text">Prometemos não lotar sua caixa de entrada.</p>
