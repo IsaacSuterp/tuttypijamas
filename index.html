@@ -65,6 +65,32 @@
         <div class="footer-bottom"><p>&copy; 2025 Tutty Pijamas. Todos os direitos reservados.</p></div>
     </footer>
 
+    <div id="newsletter-popup" class="popup-overlay">
+    <div class="popup-box">
+        <button class="popup-close" aria-label="Fechar">&times;</button>
+        <div class="popup-image">
+            </div>
+        <div class="popup-content">
+            <div id="popup-form-content">
+                <h2 class="popup-title">Bem-vindo(a)! <br>Um presente para você.</h2>
+                <p class="popup-body">Queremos que sua primeira experiência seja inesquecível. Cadastre seu e-mail e desbloqueie um cupom exclusivo para usar agora mesmo.</p>
+                <form id="newsletter-form">
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope input-icon"></i>
+                        <input type="email" id="popup-email" placeholder="Digite seu melhor e-mail" required>
+                    </div>
+                    <button type="submit" class="btn">Desbloquear Meu Desconto</button>
+                </form>
+                <p class="consent-text">Prometemos não lotar sua caixa de entrada.</p>
+            </div>
+            <div id="popup-success-content" style="display: none;">
+                 <h2 class="popup-title">Obrigado!</h2>
+                 <p class="popup-body">Seu cupom exclusivo foi enviado para o seu e-mail. Confira sua caixa de entrada e aproveite!</p>
+                 <i class="fa-solid fa-check-circle success-icon"></i>
+            </div>
+        </div>
+    </div>
+    
     <script src="database.js"></script>
     <script src="main.js"></script>
 </body>
