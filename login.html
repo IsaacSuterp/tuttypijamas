@@ -7,9 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="login-page">
@@ -22,11 +20,9 @@
                 <p>O conforto que abraça seus sonhos.</p>
              </div>
         </div>
-
         <div class="auth-form-side">
             <div class="form-side-container">
                 <div id="notification" class="notification"></div>
-
                 <div id="login-section" class="auth-section active">
                     <h1 class="auth-title">Bem-vindo(a) de volta</h1>
                     <p class="auth-subtitle">Acesse sua conta para continuar.</p>
@@ -51,7 +47,6 @@
                         <a href="#" id="show-register">Não tem uma conta? <strong>Cadastre-se</strong></a>
                     </div>
                 </div>
-
                 <div id="register-section" class="auth-section">
                     <h1 class="auth-title">Crie sua Conta</h1>
                     <p class="auth-subtitle">Rápido e fácil, para uma experiência completa.</p>
@@ -79,7 +74,6 @@
                         <a href="#" id="show-login-from-register">Já tem uma conta? <strong>Acesse</strong></a>
                     </div>
                 </div>
-
                 <div id="forgot-password-section" class="auth-section">
                     <h1 class="auth-title">Recuperar Senha</h1>
                     <p class="auth-subtitle">Insira seu e-mail e enviaremos um link para você.</p>
@@ -97,38 +91,18 @@
             </div>
         </div>
     </div>
-
     <script>
-        // O JavaScript da resposta anterior continua o mesmo.
-        // Ele controla a troca de formulários e as notificações.
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = {
-                login: document.getElementById('login-section'),
-                register: document.getElementById('register-section'),
-                forgot: document.getElementById('forgot-password-section')
-            };
-            const showSection = (sectionName) => {
-                Object.values(sections).forEach(section => section.classList.remove('active'));
-                sections[sectionName].classList.add('active');
-            };
+            const sections = { login: document.getElementById('login-section'), register: document.getElementById('register-section'), forgot: document.getElementById('forgot-password-section') };
+            const showSection = (sectionName) => { Object.values(sections).forEach(section => section.classList.remove('active')); sections[sectionName].classList.add('active'); };
             document.getElementById('show-register').addEventListener('click', (e) => { e.preventDefault(); showSection('register'); });
             document.getElementById('show-forgot-password').addEventListener('click', (e) => { e.preventDefault(); showSection('forgot'); });
             document.getElementById('show-login-from-register').addEventListener('click', (e) => { e.preventDefault(); showSection('login'); });
             document.getElementById('show-login-from-forgot').addEventListener('click', (e) => { e.preventDefault(); showSection('login'); });
             const notification = document.getElementById('notification');
-            const showNotification = (message, type = 'success') => {
-                notification.textContent = message;
-                notification.className = `notification ${type} show`;
-                setTimeout(() => { notification.classList.remove('show'); }, 4000);
-            };
+            const showNotification = (message, type = 'success') => { notification.textContent = message; notification.className = `notification ${type} show`; setTimeout(() => { notification.classList.remove('show'); }, 4000); };
             document.querySelectorAll('.toggle-password').forEach(toggle => {
-                toggle.addEventListener('click', () => {
-                    const input = toggle.previousElementSibling;
-                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-                    input.setAttribute('type', type);
-                    toggle.classList.toggle('fa-eye');
-                    toggle.classList.toggle('fa-eye-slash');
-                });
+                toggle.addEventListener('click', () => { const input = toggle.previousElementSibling; const type = input.getAttribute('type') === 'password' ? 'text' : 'password'; input.setAttribute('type', type); toggle.classList.toggle('fa-eye'); toggle.classList.toggle('fa-eye-slash'); });
             });
             const registerPassword = document.getElementById('register-password');
             const strengthBar = document.querySelector('.strength-bar');
