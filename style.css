@@ -64,19 +64,12 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-.logo { /* Usado para "Tutty Pijamas" */
+.logo {
     font-family: var(--font-primary);
     font-size: 28px;
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--primary-color);
-}
-header h1.site-title { /* Usado para "Minha Loja de Moda" no exemplo de coleções, mas pode ser o .logo */
-    font-family: var(--font-primary);
-    color: var(--primary-color);
-    font-size: 2.5rem;
-    margin: 0;
-    text-align: center;
 }
 nav ul {
     list-style: none;
@@ -146,7 +139,7 @@ nav a:hover::after {
     cursor: pointer;
     transition: all 0.4s ease;
 }
-.btn:hover, .collection-button:hover { /* Estilo de hover unificado */
+.btn:hover, .collection-button:hover {
     background-color: var(--white);
     color: var(--primary-color);
     border-color: var(--primary-color);
@@ -184,7 +177,7 @@ main {
     justify-content: center;
     gap: 30px;
     margin-bottom: 60px;
-    padding: 20px 0; /* Espaçamento interno da seção de coleções */
+    padding: 20px 0;
 }
 .collection-card {
     width: 360px;
@@ -196,7 +189,7 @@ main {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     background-size: cover;
     background-position: center;
-    display: flex; /* Para centralizar .card-content */
+    display: flex;
 }
 .collection-card:hover {
     transform: scale(1.03);
@@ -205,8 +198,9 @@ main {
 #masculino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=60'); }
 #feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1525845859779-54d477ff291f?auto=format&fit=crop&w=800&q=60'); }
 #inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519145899568-0ff150a5e201?auto=format&fit=crop&w=800&q=60'); }
+#infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1503919005314-30d93d03611d?auto=format&fit=crop&w=800&q=60'); }
 
-.collection-card .card-content { /* Conteúdo dentro do card de coleção */
+.collection-card .card-content {
     position: relative; z-index: 2; color: var(--text-color-light); text-align: center;
     padding: 20px; width: 100%; display: flex; flex-direction: column;
     justify-content: center; align-items: center;
@@ -215,9 +209,9 @@ main {
     font-family: var(--font-primary); font-size: 2.2rem; margin-bottom: 25px;
     font-weight: 500; line-height: 1.2;
 }
-.collection-button { /* Estilo específico para botões de coleção, se necessário, sobrepõe .btn */
+.collection-button {
     border: 2px solid var(--border-color-light);
-    background-color: transparent; /* Fundo transparente por padrão */
+    background-color: transparent;
     color: var(--text-color-light);
     border-radius: 50px;
 }
@@ -367,7 +361,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
     .section-title { font-size: 32px; }
     /* Coleções Mobile */
     .collections-container { gap: 20px; }
-    .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; /* Ajuste se o gap não for suficiente */ }
+    .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
     header h1.site-title { font-size: 2rem; }
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
