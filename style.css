@@ -357,7 +357,17 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-overlay.active .popup-box { transform: scale(1); }
 .popup-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
 .popup-close:hover { color: var(--primary-color); }
-.popup-image { width: 40%; background-image: url('https://images.unsplash.com/photo-1585435465945-b9a131843288?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); background-size: cover; background-position: center; min-height: 200px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; }
+.popup-image {
+    width: 40%;
+    background-image: url('tutty-pijamas-logo.jpg'); /* CAMINHO PARA O SEU LOGO NA RAIZ */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 200px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: var(--white);
+}
 #popup-form-content, #popup-success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
 #popup-success-content { display: none; text-align: center; animation: fadeIn 0.8s ease; }
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
@@ -398,12 +408,11 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
     /* Coleções Mobile */
     .collections-container { gap: 20px; }
     .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
-    header h1.site-title { font-size: 2rem; }
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
     /* Popup Mobile */
     .popup-box { flex-direction: column; width: 95%; max-width: 400px; margin: 20px auto; border-radius: 3px; }
-    .popup-image { display: none; } /* Ocultar imagem do popup no mobile para economizar espaço */
+    .popup-image { display: none; }
     .popup-content { width: 100%; padding: 30px 25px; text-align: center; align-items: center; }
     .popup-title { font-size: 24px; text-align: center; }
     .popup-body { font-size: 15px; text-align: center; margin-bottom: 20px; }
