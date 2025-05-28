@@ -1,119 +1,62 @@
 // --- SERVIÇO DE UI (INTERFACE DO USUÁRIO) ---
 const uiService = {
-    // Renderiza um único card de produto
     renderProductCard: function(product) {
         const priceFormatted = `R$ ${product.price.toFixed(2).replace('.', ',')}`;
         const installmentPrice = (product.price / product.installments).toFixed(2).replace('.', ',');
         return `
             <div class="product-card">
                 <a href="produto-detalhe.html?id=${product.id}"><img src="${product.images[0]}" alt="${product.name}"></a>
-                <h3>${product.name}</h3>
-                <div class="price">${priceFormatted}</div>
+                <h3>${product.name}</h3><div class="price">${priceFormatted}</div>
                 <p>até ${product.installments}x de R$ ${installmentPrice}</p>
                 <button class="btn add-to-cart-btn" data-product-id="${product.id}">Comprar</button>
             </div>
         `;
     },
-
-    // Renderiza os produtos em destaque na home
-    renderFeaturedProducts: function(products) {
+    renderFeaturedProducts: function(products) { // Mostra os 4 primeiros como destaque
         const grid = document.getElementById("featured-products-grid");
-        if (grid) {
-            const featured = products.slice(0, 4);
-            grid.innerHTML = featured.map(this.renderProductCard).join('');
-        }
+        if (grid) { const featured = products.slice(0, 4); grid.innerHTML = featured.map(this.renderProductCard).join(''); }
     },
-
-    // Renderiza a grade de produtos na página de coleções
     renderProductGrid: function(productsToRender) {
         const grid = document.getElementById("product-grid");
         if (grid) {
-            if (productsToRender.length === 0) {
-                grid.innerHTML = "<p>Nenhum produto encontrado.</p>";
-                return;
-            }
+            if (productsToRender.length === 0) { grid.innerHTML = "<p>Nenhum produto encontrado.</p>"; return; }
             grid.innerHTML = productsToRender.map(this.renderProductCard).join('');
         }
     },
-    
-    // CORRIGIDO: Esta é a função do carrinho com a sintaxe correta e os data-labels para o mobile
     renderCartPage: function() {
-        const cart = cartService.get();
-        const container = document.querySelector(".cart-container");
-        const itemsContainer = document.getElementById("cart-items");
-        const summaryContainer = document.getElementById("cart-summary");
-
+        const cart = cartService.get(); const container = document.querySelector(".cart-container");
+        const itemsContainer = document.getElementById("cart-items"); const summaryContainer = document.getElementById("cart-summary");
         if (!container) return;
-
-        if (cart.length === 0) {
-            container.innerHTML = "<div style='text-align:center; width:100%;'><h1 class='section-title'>Seu carrinho está vazio.</h1><a href='produtos.html' class='btn'>Ver produtos</a></div>";
-            return;
-        }
-
+        if (cart.length === 0) { container.innerHTML = "<div style='text-align:center; width:100%;'><h1 class='section-title'>Seu carrinho está vazio.</h1><a href='produtos.html' class='btn'>Ver produtos</a></div>"; return; }
         let subtotal = 0;
         itemsContainer.innerHTML = cart.map(item => {
-            const itemTotal = item.price * item.quantity;
-            subtotal += itemTotal;
-            return `
-                <tr>
-                    <td data-label="Produto">
-                        <div class="cart-product-info">
-                            <img src="${item.images[0]}" alt="${item.name}">
-                            <span>${item.name}</span>
-                        </div>
-                    </td>
-                    <td data-label="Preço">R$ ${item.price.toFixed(2).replace('.', ',')}</td>
-                    <td data-label="Quantidade"><input class="cart-quantity-input" type="number" value="${item.quantity}" min="1" data-product-id="${item.id}"></td>
-                    <td data-label="Total">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td>
-                    <td data-label="Remover"><button class="remove-from-cart-btn" data-product-id="${item.id}">Remover</button></td>
-                </tr>
-            `;
+            const itemTotal = item.price * item.quantity; subtotal += itemTotal;
+            return `<tr><td data-label="Produto"><div class="cart-product-info"><img src="${item.images[0]}" alt="${item.name}"><span>${item.name}</span></div></td><td data-label="Preço">R$ ${item.price.toFixed(2).replace('.', ',')}</td><td data-label="Quantidade"><input class="cart-quantity-input" type="number" value="${item.quantity}" min="1" data-product-id="${item.id}"></td><td data-label="Total">R$ ${itemTotal.toFixed(2).replace('.', ',')}</td><td data-label="Remover"><button class="remove-from-cart-btn" data-product-id="${item.id}">Remover</button></td></tr>`;
         }).join('');
-
-        const frete = 15.00;
-        const total = subtotal + frete;
+        const frete = 15.00; const total = subtotal + frete;
         summaryContainer.innerHTML = `<h3>Resumo do Pedido</h3><p><span>Subtotal</span> <strong>R$ ${subtotal.toFixed(2).replace('.', ',')}</strong></p><p><span>Frete</span> <strong>R$ ${frete.toFixed(2).replace('.', ',')}</strong></p><hr><p><span>Total</span> <strong>R$ ${total.toFixed(2).replace('.', ',')}</strong></p><a href="#" class="btn">Finalizar Compra</a>`;
     },
-
-    // Atualiza o contador de itens no ícone do carrinho
     updateCartCount: function() {
-        const cart = cartService.get();
-        const countElement = document.getElementById("cart-count");
+        const cart = cartService.get(); const countElement = document.getElementById("cart-count");
         if (countElement) {
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            countElement.textContent = totalItems;
-            countElement.style.display = totalItems > 0 ? "block" : "none";
+            countElement.textContent = totalItems; countElement.style.display = totalItems > 0 ? "block" : "none";
         }
     },
-
-    // Inicializa o pop-up
     initPopup: function() {
         const popup = document.getElementById('newsletter-popup');
         if (!popup || sessionStorage.getItem('popupShown')) return;
-        setTimeout(() => {
-            popup.classList.add('active');
-            sessionStorage.setItem('popupShown', 'true');
-        }, 2000);
+        setTimeout(() => { popup.classList.add('active'); sessionStorage.setItem('popupShown', 'true'); }, 2000);
     },
-
-    // Fecha o pop-up
     closePopup: function() {
         const popup = document.getElementById('newsletter-popup');
         if (popup) popup.classList.remove('active');
     },
-
-    // Mostra notificações (usado na página de login)
     showNotification: function(message, type = 'success') {
         const notification = document.getElementById('notification');
-        if (!notification) {
-            alert(message);
-            return;
-        }
-        notification.textContent = message;
-        notification.className = `notification ${type} show`;
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 4000);
+        if (!notification) { alert(message); return; }
+        notification.textContent = message; notification.className = `notification ${type} show`;
+        setTimeout(() => { notification.classList.remove('show'); }, 4000);
     }
 };
 
@@ -122,35 +65,23 @@ const cartService = {
     get: function() { return JSON.parse(localStorage.getItem("tutty_pijamas_cart")) || []; },
     save: function(cart) { localStorage.setItem("tutty_pijamas_cart", JSON.stringify(cart)); uiService.updateCartCount(); },
     add: function(productId) {
-        const cart = this.get();
-        const product = products.find(p => p.id === parseInt(productId));
+        const cart = this.get(); const product = products.find(p => p.id === parseInt(productId));
         if (!product) return;
         const existingProduct = cart.find(item => item.id === product.id);
-        if (existingProduct) {
-            existingProduct.quantity++;
-        } else {
-            cart.push({ ...product, quantity: 1 });
-        }
+        if (existingProduct) { existingProduct.quantity++; } else { cart.push({ ...product, quantity: 1 }); }
         this.save(cart);
-        // Usando a notificação da UI em vez de um alert simples
-        // Para usar, precisaríamos ter o elemento de notificação em todas as páginas,
-        // então vamos manter o alert por simplicidade aqui.
         alert(`${product.name} foi adicionado ao carrinho!`);
     },
     updateQuantity: function(productId, quantity) {
-        let cart = this.get();
-        const item = cart.find(p => p.id === parseInt(productId));
+        let cart = this.get(); const item = cart.find(p => p.id === parseInt(productId));
         if (item) {
             item.quantity = parseInt(quantity, 10);
-            if (item.quantity <= 0) {
-                cart = cart.filter(p => p.id !== parseInt(productId));
-            }
+            if (item.quantity <= 0) { cart = cart.filter(p => p.id !== parseInt(productId)); }
             this.save(cart);
         }
     },
     remove: function(productId) {
-        let cart = this.get();
-        cart = cart.filter(item => item.id !== parseInt(productId));
+        let cart = this.get(); cart = cart.filter(item => item.id !== parseInt(productId));
         this.save(cart);
     }
 };
@@ -170,25 +101,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (event.target.matches('.remove-from-cart-btn')) {
                     cartService.remove(event.target.dataset.productId);
-                    uiService.renderCartPage();
+                    if (document.body.id === 'cart-page') uiService.renderCartPage(); // Só re-renderiza se estiver na página do carrinho
                 }
                 if (event.target.matches('.popup-close') || event.target.matches('.popup-overlay')) {
                     uiService.closePopup();
+                }
+                // Evento para os botões das coleções
+                if (event.target.matches('.collection-button')) {
+                    const targetPage = event.target.dataset.target;
+                    if (targetPage) {
+                        window.location.href = targetPage;
+                    }
                 }
             });
             document.body.addEventListener('change', event => {
                 if (event.target.matches('.cart-quantity-input')) {
                     cartService.updateQuantity(event.target.dataset.productId, event.target.value);
-                    uiService.renderCartPage();
+                    if (document.body.id === 'cart-page') uiService.renderCartPage(); // Só re-renderiza se estiver na página do carrinho
                 }
             });
             const filters = document.getElementById("filters");
-            if (filters) {
-                filters.addEventListener("change", () => this.applyFilters());
-            }
+            if (filters) { filters.addEventListener("change", () => this.applyFilters()); }
+            
             const newsletterForm = document.getElementById('newsletter-form');
             if (newsletterForm) {
-                newsletterForm.addEventListener('submit', event => {
+                 newsletterForm.addEventListener('submit', event => {
                     event.preventDefault();
                     document.getElementById('popup-form-content').style.display = 'none';
                     document.getElementById('popup-success-content').style.display = 'block';
@@ -199,27 +136,28 @@ document.addEventListener('DOMContentLoaded', () => {
         handlePageSpecifics() {
             const pageId = document.body.id;
             switch (pageId) {
-                case 'home-page':
-                    uiService.renderFeaturedProducts(products);
-                    uiService.initPopup();
-                    break;
-                case 'products-page':
-                    this.applyFilters();
-                    break;
-                case 'cart-page':
-                    uiService.renderCartPage();
-                    break;
+                case 'home-page': uiService.renderFeaturedProducts(products); uiService.initPopup(); break;
+                case 'products-page': this.applyFilters(); break;
+                case 'cart-page': uiService.renderCartPage(); break;
             }
         },
         applyFilters() {
             let filteredProducts = [...products];
-            const category = document.getElementById("filter-category").value;
-            const color = document.getElementById("filter-color").value;
-            const maxPrice = parseFloat(document.getElementById("filter-price").value);
-            const sortOrder = document.getElementById("sort-order").value;
+            const categoryElement = document.getElementById("filter-category");
+            const colorElement = document.getElementById("filter-color");
+            const priceElement = document.getElementById("filter-price");
+            const sortElement = document.getElementById("sort-order");
+
+            const category = categoryElement ? categoryElement.value : "";
+            const color = colorElement ? colorElement.value : "";
+            const maxPrice = priceElement ? parseFloat(priceElement.value) : Infinity;
+            const sortOrder = sortElement ? sortElement.value : "relevance";
+
             if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
             if (color) filteredProducts = filteredProducts.filter(p => p.color === color);
-            if (!isNaN(maxPrice)) filteredProducts = filteredProducts.filter(p => p.price <= maxPrice);
+            if (priceElement && !isNaN(maxPrice) && maxPrice !== Infinity) { // Certifique-se que maxPrice não é Infinity para o filtro
+                 filteredProducts = filteredProducts.filter(p => p.price <= maxPrice);
+            }
             switch (sortOrder) {
                 case "price-asc": filteredProducts.sort((a, b) => a.price - b.price); break;
                 case "price-desc": filteredProducts.sort((a, b) => b.price - a.price); break;
