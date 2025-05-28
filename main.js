@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    updateCartCount();
+    // ... (seu código existente como updateCartCount(), etc.)
 
     // === LÓGICA DO POP-UP DE NEWSLETTER ===
     const newsletterPopup = document.getElementById('newsletter-popup');
@@ -15,6 +15,42 @@ document.addEventListener("DOMContentLoaded", () => {
             newsletterPopup.classList.add('active');
             sessionStorage.setItem('popupShown', 'true'); // Marca como mostrado
         }
+    };
+
+    // Função para fechar o pop-up
+    const closePopup = () => {
+        newsletterPopup.classList.remove('active');
+    };
+
+    // Mostrar o pop-up após 2 segundos
+    setTimeout(showPopup, 2000);
+
+    // Event listeners para fechar
+    if (newsletterPopup) {
+        closePopupButton.addEventListener('click', closePopup);
+
+        newsletterPopup.addEventListener('click', (e) => {
+            // Fecha se o clique for no overlay escuro, fora da caixa do pop-up
+            if (e.target === newsletterPopup) {
+                closePopup();
+            }
+        });
+    }
+    
+    // Event listener para o envio do formulário
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulação de envio
+            // Esconde o formulário e mostra a mensagem de sucesso
+            popupFormContent.style.display = 'none';
+            popupSuccessContent.style.display = 'block';
+
+            // Fecha o pop-up automaticamente após 4 segundos
+            setTimeout(closePopup, 4000);
+        });
+    }
 
     if (document.body.id === "home-page") {
         renderFeaturedProducts();
