@@ -58,31 +58,30 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--border-color);
-    text-align: center; /* Centraliza o H1 por padrão */
 }
-.header-content { /* Usado se quiser mais itens no header e alinhar */
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.logo { /* Se for usar uma classe específica para o logo */
+.logo { /* Usado para "Tutty Pijamas" */
     font-family: var(--font-primary);
     font-size: 28px;
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--primary-color);
 }
-header h1.site-title { /* Se o título for h1 */
+header h1.site-title { /* Usado para "Minha Loja de Moda" no exemplo de coleções, mas pode ser o .logo */
     font-family: var(--font-primary);
     color: var(--primary-color);
     font-size: 2.5rem;
     margin: 0;
+    text-align: center;
 }
 nav ul {
     list-style: none;
     display: flex;
     gap: 40px;
-    justify-content: center; /* Para centralizar a navegação no header-content */
 }
 nav a {
     font-size: 16px;
@@ -147,24 +146,24 @@ nav a:hover::after {
     cursor: pointer;
     transition: all 0.4s ease;
 }
-.btn:hover, .collection-button:hover {
+.btn:hover, .collection-button:hover { /* Estilo de hover unificado */
     background-color: var(--white);
     color: var(--primary-color);
-    border-color: var(--primary-color); /* Garante que a borda mude também */
+    border-color: var(--primary-color);
 }
 
 /* === SEÇÕES E TÍTULOS PADRÃO === */
-main { /* Adicionado para dar padding geral ao conteúdo principal */
+main {
     padding-top: 40px;
     padding-bottom: 40px;
 }
 .section {
-    padding: 60px 0; /* Reduzido um pouco para acomodar mais seções */
+    padding: 60px 0;
 }
 .section-title {
     font-family: var(--font-primary);
     text-align: center;
-    font-size: 38px; /* Levemente ajustado */
+    font-size: 38px;
     font-weight: 500;
     margin-bottom: 20px;
     color: var(--primary-color);
@@ -172,19 +171,20 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
 .section-subtitle {
     text-align: center;
     max-width: 600px;
-    margin: 0 auto 50px auto; /* Ajustado */
+    margin: 0 auto 50px auto;
     font-size: 16px;
     font-weight: 300;
     color: #555;
 }
 
-/* === SEÇÃO DE COLEÇÕES (NOVA) === */
+/* === SEÇÃO DE COLEÇÕES (PÁGINA INICIAL) === */
 .collections-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 60px; /* Espaço após as coleções */
+    margin-bottom: 60px;
+    padding: 20px 0; /* Espaçamento interno da seção de coleções */
 }
 .collection-card {
     width: 360px;
@@ -196,7 +196,7 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     background-size: cover;
     background-position: center;
-    display: flex;
+    display: flex; /* Para centralizar .card-content */
 }
 .collection-card:hover {
     transform: scale(1.03);
@@ -205,7 +205,8 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
 #masculino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=60'); }
 #feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1525845859779-54d477ff291f?auto=format&fit=crop&w=800&q=60'); }
 #inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519145899568-0ff150a5e201?auto=format&fit=crop&w=800&q=60'); }
-.collection-card .card-content {
+
+.collection-card .card-content { /* Conteúdo dentro do card de coleção */
     position: relative; z-index: 2; color: var(--text-color-light); text-align: center;
     padding: 20px; width: 100%; display: flex; flex-direction: column;
     justify-content: center; align-items: center;
@@ -214,19 +215,16 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
     font-family: var(--font-primary); font-size: 2.2rem; margin-bottom: 25px;
     font-weight: 500; line-height: 1.2;
 }
-.collection-button { /* Herda de .btn mas pode ter especificidades */
-    font-family: var(--font-secondary); background-color: transparent;
-    border: 2px solid var(--border-color-light); color: var(--text-color-light);
-    padding: 12px 30px; font-size: 1rem; font-weight: bold;
-    text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+.collection-button { /* Estilo específico para botões de coleção, se necessário, sobrepõe .btn */
+    border: 2px solid var(--border-color-light);
+    background-color: transparent; /* Fundo transparente por padrão */
+    color: var(--text-color-light);
     border-radius: 50px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 .collection-button:hover {
     background-color: var(--white); color: var(--primary-color);
     border-color: var(--white);
 }
-
 
 /* === GRID DE PRODUTOS E CARDS (Produtos em Destaque) === */
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
@@ -234,7 +232,7 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
     background-color: var(--white); text-align: center; padding: 20px;
     position: relative; overflow: hidden; transition: box-shadow 0.4s ease;
     display: flex; flex-direction: column; justify-content: space-between;
-    border: 1px solid var(--border-color); border-radius: 4px; /* Adicionado para consistência */
+    border: 1px solid var(--border-color); border-radius: 4px;
 }
 .product-card:hover { box-shadow: var(--shadow-hover); }
 .product-card img { max-width: 100%; height: auto; margin-bottom: 20px; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -244,9 +242,7 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
 .product-card p { font-size: 0.8rem; color: #777; margin-bottom: 15px; flex-grow: 1; }
 .product-card .btn { width: 80%; margin: 15px auto 0 auto; }
 
-
 /* === PÁGINA DE PRODUTOS (FILTROS) === */
-/* Estilos já existentes para .products-page-layout, #filters, etc., mantidos */
 .products-page-layout { display: flex; gap: 50px; align-items: flex-start; }
 #filters { width: 300px; flex-shrink: 0; }
 #filters h3 { font-family: var(--font-primary); font-size: 1.5rem; font-weight: 500; padding-bottom: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); }
@@ -256,19 +252,18 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
 #products-content { flex-grow: 1; }
 
 /* === PÁGINA DO CARRINHO === */
-/* Estilos já existentes para .cart-container, .cart-table, .cart-summary, etc., mantidos */
 .cart-container { display: flex; gap: 40px; align-items: flex-start; }
 .cart-table-container { flex-grow: 1; }
 .cart-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
 .cart-table thead { border-bottom: 1px solid var(--primary-color); }
 .cart-table th { padding: 20px 10px; text-align: left; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
 .cart-table td { padding: 25px 10px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+.cart-table td[data-label="Quantidade"] { text-align: center; }
+.cart-quantity-input { width: 70px; padding: 8px; text-align: center; border: 1px solid var(--border-color); border-radius: 3px; box-sizing: border-box; }
 .cart-product-info { display: flex; align-items: center; }
 .cart-table img { width: 80px; height: auto; margin-right: 20px; border-radius: 3px; }
 .cart-table button.remove-from-cart-btn { background: none; border: none; font-family: var(--font-sans); text-transform: uppercase; font-size: 12px; letter-spacing: 1px; cursor: pointer; opacity: 0.6; transition: opacity 0.3s ease; padding: 5px; }
 .cart-table button.remove-from-cart-btn:hover { opacity: 1; }
-.cart-table td[data-label="Quantidade"] { text-align: center; }
-.cart-quantity-input { width: 70px; padding: 8px; text-align: center; border: 1px solid var(--border-color); border-radius: 3px; box-sizing: border-box; }
 .cart-summary { background: var(--white); padding: 30px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; flex-shrink: 0; box-sizing: border-box; display: flex; flex-direction: column; }
 .cart-summary h3, .cart-summary p, .cart-summary hr { width: 100%; }
 .cart-summary h3 { font-family: var(--font-primary); font-size: 1.8rem; font-weight: 500; margin-bottom: 20px; }
@@ -276,9 +271,7 @@ main { /* Adicionado para dar padding geral ao conteúdo principal */
 .cart-summary hr { border: 0; height: 1px; background-color: var(--border-color); margin: 20px 0; }
 .cart-summary .btn { width: 100%; text-align: center; margin-top: 30px; }
 
-
 /* === RODAPÉ DO SITE PRINCIPAL === */
-/* Estilos já existentes para footer, .footer-layout, etc., mantidos */
 footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; margin-top: 100px; }
 .footer-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
 .footer-column h4 { font-family: var(--font-sans); color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
@@ -289,13 +282,12 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #3a3a3a; font-size: 14px; }
 
 /* === ESTILOS PÁGINA DE LOGIN INDEPENDENTE === */
-/* Estilos já existentes para #login-page, .auth-page-container, etc., mantidos */
 #login-page { padding: 0; margin: 0; background-color: var(--background-color); }
 .auth-page-container { display: flex; min-height: 100vh; width: 100%; }
 .auth-image-side { width: 50%; background-image: url('https://images.unsplash.com/photo-1593026338279-4f75b778b877?q=80&w=1887&auto=format&fit=crop'); background-size: cover; background-position: center; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 60px; }
 .auth-image-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); }
 .image-side-content { position: relative; z-index: 2; color: var(--white); }
-.image-side-content .logo { color: var(--white); font-size: 32px; } /* Ajustar para o logo da loja de pijamas, se aplicável */
+.image-side-content .logo { color: var(--white); font-size: 32px; }
 .image-side-content p { font-size: 18px; font-weight: 300; max-width: 300px; margin-top: 10px; }
 .auth-form-side { width: 50%; display: flex; align-items: center; justify-content: center; padding: 40px; background-color: var(--white); }
 .form-side-container { max-width: 420px; width: 100%; position: relative; }
@@ -329,7 +321,6 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .notification.error { background-color: #e74c3c; }
 
 /* === POPUP DE NEWSLETTER === */
-/* Estilos já existentes e corrigidos para .popup-overlay, .popup-box, etc., mantidos */
 .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; padding: 20px; box-sizing: border-box; }
 .popup-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
 .popup-box { display: flex; width: 100%; max-width: 768px; background-color: var(--white); position: relative; transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); margin: 0 auto; border-radius: 5px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); flex-direction: row; align-items: stretch; }
@@ -337,11 +328,10 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
 .popup-close:hover { color: var(--primary-color); }
 .popup-image { width: 40%; background-image: url('https://images.unsplash.com/photo-1620756236232-ff4354226d5c?q=80&w=1887&auto=format&fit=crop'); background-size: cover; background-position: center; min-height: 200px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; }
-#popup-success-content { display: none; text-align: center; animation: fadeIn 0.8s ease; align-items: center; justify-content: center; flex-direction: column; }
-#popup-form-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+#popup-form-content, #popup-success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+#popup-success-content { display: none; text-align: center; animation: fadeIn 0.8s ease; }
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
 
 /* === RESPONSIVIDADE GERAL E ESPECÍFICA === */
 @media (min-width: 769px) { /* Desktop e telas maiores - Pop-up */
@@ -377,11 +367,33 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
     .section-title { font-size: 32px; }
     /* Coleções Mobile */
     .collections-container { gap: 20px; }
-    .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
+    .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; /* Ajuste se o gap não for suficiente */ }
     header h1.site-title { font-size: 2rem; }
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
     /* Popup Mobile */
     .popup-box { flex-direction: column; width: 95%; max-width: 400px; margin: 20px auto; border-radius: 3px; }
     .popup-image { width: 100%; min-height: 150px; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-    .popup-c
+    .popup-content { width: 100%; padding: 30px 25px; text-align: center; align-items: center; }
+    .popup-title { font-size: 24px; text-align: center; }
+    .popup-body { font-size: 15px; text-align: center; margin-bottom: 20px; }
+    #newsletter-form .btn { width: 100%; max-width: none; }
+    #newsletter-form .input-group { max-width: none; }
+    .consent-text { font-size: 10px; text-align: center; }
+    .popup-close { color: var(--white); text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+
+    /* Responsividade da Tabela do Carrinho */
+    .cart-table { border: 0; }
+    .cart-table thead { border: none; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+    .cart-table tr { display: block; border: 1px solid var(--border-color); margin-bottom: 20px; border-radius: 4px; padding: 15px; }
+    .cart-table td { display: flex; justify-content: space-between; align-items: center; text-align: right; padding: 10px 0; border-bottom: 1px dashed var(--border-color); }
+    .cart-table td:last-child { border-bottom: none; }
+    .cart-table td::before { content: attr(data-label); float: left; font-weight: bold; text-transform: uppercase; font-size: 13px; color: var(--primary-color); text-align: left; margin-right: 10px; }
+    .cart-table td[data-label="Produto"] { padding-bottom: 15px; flex-direction: column; align-items: flex-start; text-align: left; }
+    .cart-table td[data-label="Produto"]::before { display: none; }
+    .cart-table td[data-label="Remover"]::before { content: none; }
+    .cart-table td[data-label="Remover"] { justify-content: flex-end; }
+    .cart-product-info { flex-direction: row; align-items: center; text-align: left; width: 100%; }
+    .cart-product-info img { margin-bottom: 0; margin-right:10px; width: 60px; }
+    .cart-quantity-input { width: 60px; padding: 5px; text-align: center; }
+}
