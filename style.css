@@ -322,4 +322,8 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
         padding: 5px;
         text-align: center;
     }
+
+    .cart-table td[data-label="Remover"]::before {
+    content: none; /* Remove a etiqueta "REMOVER" duplicada */
+    }
 }
