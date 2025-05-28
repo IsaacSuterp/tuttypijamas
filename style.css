@@ -231,10 +231,11 @@ main {
     transform: scale(1.03);
     box-shadow: var(--shadow-hover);
 }
-#masculino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-13-993_com.instagram.android.jpg'); }
-#feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-33-612_com.instagram.android.jpg'); }
-#inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-54-427_com.instagram.android.jpg'); }
-#infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('Screenshot_2025-05-28-13-13-44-177_com.instagram.android.jpg'); }
+/* ATUALIZADO o seletor #masculino para #estilo-colecao */
+#estilo-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507680464027-827663820934?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
+#feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1530903334433-a3c31a78e036?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
+#inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1605152276395-52033c4129a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
+#infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548123378-8de3e846a10d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
 
 .collection-card .card-content {
     position: relative; z-index: 2; color: var(--text-color-light); text-align: center;
@@ -359,7 +360,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
 .popup-close:hover { color: var(--primary-color); }
 .popup-image {
     width: 40%;
-    background-image: url('Screenshot_2025-05-28-13-14-02-221_com.instagram.android.jpg'); /* CAMINHO PARA O SEU LOGO NA RAIZ */
+    background-image: url('tutty-pijamas-logo.jpg'); /* CAMINHO ATUALIZADO PARA O LOGO NA RAIZ */
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -408,6 +409,7 @@ footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; marg
     /* Coleções Mobile */
     .collections-container { gap: 20px; }
     .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
+    header h1.site-title { font-size: 2rem; }
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
     /* Popup Mobile */
