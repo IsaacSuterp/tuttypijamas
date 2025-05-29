@@ -41,9 +41,14 @@ const App = {
         backdrop.addEventListener('click', () => { console.log("DEBUG: Backdrop clicado"); closeMenu(); });
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function(event) {
-                console.log(`DEBUG: Link do menu mobile clicado: ${this.href}`); event.stopPropagation();
-                if (mainNav.classList.contains('active')) { console.log("DEBUG: Menu ativo. Chamando closeMenu()."); closeMenu(); }
-                else { console.log("DEBUG: Menu não estava ativo, navegação direta."); }
+                console.log(`DEBUG: Link do menu mobile clicado: ${this.href}`);
+                // event.stopPropagation(); // <<<< LINHA CORRIGIDA: Comentada para permitir navegação
+                if (mainNav.classList.contains('active')) {
+                    console.log("DEBUG: Menu ativo. Chamando closeMenu().");
+                    closeMenu();
+                } else {
+                    console.log("DEBUG: Menu não estava ativo, navegação direta.");
+                }
             });
         });
     },
@@ -61,9 +66,6 @@ const App = {
 
             priceRangeValueSpan.textContent = `R$ ${value}`;
 
-            // Atualiza o background para navegadores WebKit (Chrome, Safari, Edge)
-            // e para Firefox se o ::-moz-range-progress não for suficiente ou para um visual mais controlado
-            // O CSS base já define a cor da trilha não preenchida (var(--border-color))
             priceRangeSlider.style.background = `linear-gradient(to right, 
                 var(--secondary-color) 0%, 
                 var(--secondary-color) ${percentage}%, 
@@ -121,7 +123,6 @@ const App = {
         if (priceRangeSlider) {
             priceRangeSlider.addEventListener('input', () => { // Evento 'input' para atualização em tempo real
                 this.updatePriceRangeDisplay();
-                // Opcional: this.applyFilters(); // Se quiser filtrar dinamicamente ao arrastar
             });
         }
         
