@@ -16,7 +16,38 @@
 <body id="cart-page">
 
     <header>
-        <div class="container header-content"><a href="index.html" class="logo">Tutty Pijamas</a><nav><ul><li><a href="produtos.html">Coleções</a></li><li><a href="produtos.html?category=feminino">Feminino</a></li><li><a href="produtos.html?category=masculino">Masculino</a></li><li><a href="produtos.html?category=infantil">Infantil</a></li></ul></nav><div class="header-icons"><a href="login.html" class="icon">👤</a><a href="carrinho.html" class="icon" id="cart-icon">🛒<span id="cart-count"></span></a></div></div>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Tutty Pijamas</a>
+            
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <i class="fas fa-bars icon-open"></i>
+                <i class="fas fa-times icon-close"></i>
+            </button>
+
+            <nav id="main-nav">
+                <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Fechar menu">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="produtos.html">Nossas Peças</a></li>
+                    <li><a href="estilo-colecao.html">Estilo</a></li>
+                    <li><a href="feminino.html">Feminino</a></li>
+                    <li><a href="infantil-colecao.html">Infantil</a></li>
+                    <li><a href="inverno.html">Inverno</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-icons">
+                <a href="login.html" class="icon">👤</a>
+                <a href="carrinho.html" class="icon" id="cart-icon">
+                    🛒
+                    <span id="cart-count"></span>
+                </a>
+            </div>
+        </div>
     </header>
 
     <main class="section">
