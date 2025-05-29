@@ -17,26 +17,26 @@
     .consent-text { font-size: 11px; color: #999; margin-top: 10px; text-align: center; }
 
     .product-page-layout {
-        grid-template-columns: repeat(2, 1fr); /* Duas colunas no desktop */
+        grid-template-columns: repeat(2, 1fr);
     }
     .product-info {
         padding-top: 0;
     }
     .product-actions {
-        flex-direction: row; /* Botões lado a lado */
+        flex-direction: row; 
         align-items: center;
     }
     .quantity-selector {
         max-width: 150px;
         margin-bottom: 0;
     }
-    .btn-large { /* Botão Adicionar ao Carrinho na PDP */
+    .btn-large { 
         width: auto; 
         flex-grow: 1; 
     }
 }
 
-@media (max-width: 992px) { /* Tablet e abaixo - Layout Geral e Checkout */
+@media (max-width: 992px) { /* Tablet  */
     .auth-image-side { display: none; }
     .auth-form-side { width: 100%; }
     .checkout-container { flex-direction: column-reverse; } 
@@ -46,90 +46,83 @@
     .cart-summary { max-width: 100%; }
     .product-page-layout { grid-template-columns: 1fr; }
     .product-info h1.product-page-title { font-size: 2rem; }
-
-    /* Ajustes no header para tablet - pode esconder nav e mostrar toggle um pouco antes */
-    /* Dependendo do número de links, a navegação principal pode precisar virar hambúrguer já em 992px */
-    /* Exemplo:
-    .header-content nav { display: none; }
-    .mobile-menu-toggle { display: block; order: 3;}
-    */
+    
+    /* Transição para menu hambúrguer em tablets (opcional, se 768px for muito pequeno) */
+    /* .header-content nav#main-nav { display: none; } */
+    /* .mobile-menu-toggle { display: block; } */
 }
 
-@media (max-width: 768px) { /* Mobile e abaixo - Layout Geral e Menu Mobile */
-    .header-content {
-        /* O logo e os ícones já estão em space-between, o toggle se encaixa */
+@media (max-width: 768px) { /* Mobile */
+    .header-content nav#main-nav { /* Esconde nav desktop no mobile */
+         /* display: none;  Será controlado por transform e .active */
     }
-    nav ul { /* Esconde a navegação desktop original no mobile */
-        display: none;
-    }
-    
     .mobile-menu-toggle {
-        display: block; /* Mostra o botão hambúrguer */
-         /* order: 1; Se quiser o hambúrguer à esquerda */
+        display: block;
     }
     
-    #main-nav { /* Estilos do Menu Mobile Overlay */
-        display: none; /* Escondido por padrão */
+    #main-nav { /* Estilo do Menu Mobile Lateral */
+        display: flex; 
+        flex-direction: column;
+        align-items: flex-start; 
+        justify-content: flex-start;
         position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
+        left: 0; 
+        width: 280px; 
         height: 100vh; 
         background-color: var(--primary-color); 
         color: var(--text-color-light);
         z-index: 1050; 
         overflow-y: auto;
-        transform: translateX(100%);
+        padding: 20px;
+        padding-top: 70px; 
+        box-shadow: 3px 0px 15px rgba(0,0,0,0.2);
+        transform: translateX(-100%); 
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 80px; /* Espaço para o botão de fechar se ele estiver no topo */
     }
 
     #main-nav.active { /* Quando o menu está aberto */
-        display: flex;
-        transform: translateX(0%);
+        transform: translateX(0%); 
     }
 
-    #main-nav ul { /* Lista de links dentro do menu mobile */
-        display: flex; /* Para que o flex-direction funcione */
-        flex-direction: column;
+    #main-nav ul {
+        display: flex; /* Garante que o flex-direction abaixo funcione */
+        flex-direction: column; 
         gap: 0; 
         width: 100%;
-        text-align: center;
+        text-align: left; 
     }
-
-    #main-nav li {
-        width: 100%;
-    }
-
-    #main-nav a { /* Links dentro do menu mobile */
+    #main-nav li { width: 100%; }
+    #main-nav a {
         display: block; 
-        padding: 20px;
-        font-size: 1.3rem; 
+        padding: 15px 10px; 
+        font-size: 1.1rem; 
         color: var(--text-color-light);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, padding-left 0.3s ease;
     }
-    #main-nav li:last-child a {
-        border-bottom: none;
-    }
+    #main-nav li:last-child a { border-bottom: none; }
     #main-nav a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: var(--secondary-color); /* Destaque ao passar o mouse */
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--secondary-color);
+        padding-left: 15px; 
     }
-     #main-nav a::after { /* Remove o sublinhado do desktop no menu mobile */
-        display: none;
+    #main-nav a::after { display: none; }
+
+    .mobile-menu-close { display: block; }
+
+    body.mobile-menu-open .header-icons {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+    }
+    .header-icons { /* Estado padrão para animação de entrada */
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.2s ease 0.2s, visibility 0s linear;
     }
 
-    .mobile-menu-close { /* Mostra o botão de fechar dentro do menu mobile */
-        display: block; /* Já definido em layout.css, mas reforça aqui */
-    }
-
-    body.mobile-menu-open {
-        overflow: hidden; /* Previne scroll da página atrás do menu */
-    }
+    body.mobile-menu-open { overflow: hidden; }
 
     /* Outros estilos mobile */
     .products-page-layout { flex-direction: column; }
