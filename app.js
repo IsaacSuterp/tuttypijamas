@@ -1,6 +1,4 @@
 // js/app.js
-// Este arquivo agora contém o objeto App e o DOMContentLoaded para iniciar tudo.
-
 const App = {
     init() {
         if (typeof uiService !== 'undefined') {
@@ -10,6 +8,41 @@ const App = {
         }
         this.handlePageSpecifics();
         this.bindEvents();
+        this.initMobileMenu(); // NOVA CHAMADA PARA INICIAR O MENU MOBILE
+    },
+
+    initMobileMenu() { // NOVA FUNÇÃO
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        const menuClose = document.getElementById('mobile-menu-close');
+        const mainNav = document.getElementById('main-nav');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                menuToggle.classList.toggle('active'); 
+                document.body.classList.toggle('mobile-menu-open');
+            });
+        }
+
+        if (menuClose && mainNav) {
+            menuClose.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                if(menuToggle) menuToggle.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+        }
+
+        if (mainNav) {
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        if(menuToggle) menuToggle.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+        }
     },
 
     bindEvents() {
@@ -138,11 +171,6 @@ const App = {
         uiService.renderProductGrid(filteredProducts);
     },
     
-    // Essas funções foram movidas para PageInitializers.initCheckoutPage
-    // mas o App precisa delas se PageInitializers.initCheckoutPage chamar App.renderCheckoutSummary
-    // Portanto, é melhor que essas funções sejam parte do App para serem acessíveis
-    // ou que PageInitializers.initCheckoutPage as defina/chame localmente.
-    // Para simplificar, vamos mantê-las aqui, chamadas pelo initCheckoutPage
     renderCheckoutSummary() {
         if (typeof cartService === 'undefined' || typeof uiService === 'undefined') return;
         const cart = cartService.get();
