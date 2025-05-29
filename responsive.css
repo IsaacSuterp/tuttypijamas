@@ -49,43 +49,33 @@
 }
 
 @media (max-width: 768px) { /* Mobile e abaixo - Layout Geral e Menu Mobile */
-    .header-content nav#main-nav > ul { 
-        /* Esta regra estava causando o problema de esconder os links no menu mobile.
-           A visibilidade do menu mobile é controlada pelo transform no #main-nav.
-           Quando o #main-nav está ativo, seu ul deve ser display: flex; flex-direction: column;
-           Se removermos esta, precisamos garantir que o UL do desktop não apareça antes do toggle.
-           O #main-nav (painel) já tem display:flex e o ul interno também, vertical.
-           A navegação desktop é controlada pelo #main-nav ul direto no layout.css.
-           No mobile, o #main-nav é o painel que desliza.
-        */
-        /* display: none; <-- REMOVA OU COMENTE ESTA LINHA SE EXISTIR */
-    }
+    /* .header-content nav#main-nav > ul {  // Removido para corrigir links no menu mobile } */
     
     .mobile-menu-toggle {
         display: block;
     }
     
-    #main-nav { /* Painel do Menu Mobile Lateral Deslizante */
+    #main-nav { /* ESTILO DO MENU MOBILE LATERAL DESLIZANTE PELA DIREITA */
         display: flex; 
         flex-direction: column;
-        align-items: stretch; /* Para que os LIs e As ocupem a largura */
+        align-items: stretch; /* Faz os <a> filhos ocuparem a largura total */
         justify-content: flex-start; /* Links começam do topo */
         
         position: fixed;
         top: 0;
-        left: 0; 
-        width: 280px; /* Largura do menu (aprox. metade da tela) */
+        right: 0; /* ALTERADO: Posicionado na borda direita */
+        width: 280px; 
         height: 100vh; 
-        background-color: var(--primary-color); /* Fundo escuro primário do site */
+        background-color: var(--primary-color); 
         color: var(--text-color-light);
         z-index: 1050; 
         overflow-y: auto;
         
-        padding: 20px 0; /* Padding vertical, sem padding lateral para os links ocuparem tudo */
-        padding-top: 70px; /* Espaço para o botão de fechar */
-        box-shadow: 3px 0px 15px rgba(0,0,0,0.2);
+        padding: 20px 0; /* Padding vertical, 0 lateral para links ocuparem tudo */
+        padding-top: 70px; 
+        box-shadow: -3px 0px 15px rgba(0,0,0,0.2); /* ALTERADO: Sombra para a esquerda */
 
-        transform: translateX(-100%); 
+        transform: translateX(100%); /* ALTERADO: Começa totalmente fora da tela à direita */
         transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
@@ -93,36 +83,40 @@
         transform: translateX(0%); 
     }
 
-    #main-nav ul { /* Lista de links DENTRO do menu mobile */
+    #main-nav ul { 
         display: flex; 
         flex-direction: column; 
-        gap: 0; /* Sem gap, o padding do <a> fará o espaçamento */
+        gap: 0; 
         width: 100%;
-        text-align: left; /* Alinhamento do texto dos links */
+        text-align: left; 
+        padding: 0; /* Garante que não haja padding no UL */
+        margin: 0; /* Garante que não haja margin no UL */
+        list-style: none; /* Remove bullets da lista */
     }
     #main-nav li { 
         width: 100%; 
     }
-    #main-nav a { /* Links DENTRO do menu mobile */
+    #main-nav a { 
         display: block; 
-        padding: 18px 30px; /* Padding aumentado para toque e visual */
+        padding: 18px 30px; 
         font-size: 1.1rem; 
-        font-weight: 400; /* Peso normal para links */
+        font-weight: 400; 
         color: var(--text-color-light);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        text-decoration: none; /* Garante que não haja sublinhado */
     }
     #main-nav li:first-child a {
-        border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borda no topo do primeiro item */
+        border-top: 1px solid rgba(255, 255, 255, 0.1); 
     }
-    #main-nav li:last-child a { border-bottom: none; } /* Remove borda do último item */
+    #main-nav li:last-child a { border-bottom: none; } 
 
     #main-nav a:hover, #main-nav a:focus {
-        background-color: var(--secondary-color); /* Cor de destaque ao interagir */
-        color: var(--primary-color); /* Texto escuro sobre fundo de destaque */
-        padding-left: 35px; /* Leve indentação no hover/focus */
+        background-color: var(--secondary-color); 
+        color: var(--primary-color); 
+        padding-left: 35px; 
     }
     #main-nav a::after { display: none; }
 
@@ -130,7 +124,7 @@
         display: block; 
         position: absolute;
         top: 15px; 
-        right: 15px;
+        right: 15px; /* Continua no canto direito do painel do menu */
         color: var(--text-color-light); 
         font-size: 1.8rem;
         opacity: 0.8;
@@ -138,7 +132,6 @@
     .mobile-menu-close:hover {
         opacity: 1;
     }
-
 
     body.mobile-menu-open .header-icons {
         opacity: 0;
@@ -160,7 +153,6 @@
     .section-title { font-size: 32px; }
     .collections-container { gap: 20px; }
     .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
-    /* header h1.site-title já deve ser tratado por .logo ou outro estilo global se existir */
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
     .popup-box { flex-direction: column; width: 95%; max-width: 400px; margin: 20px auto; border-radius: 3px; }
