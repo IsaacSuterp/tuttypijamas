@@ -1,7 +1,6 @@
 /* === ARQUIVO: responsive.css === */
 
 @media (min-width: 769px) { /* Desktop e telas maiores */
-    /* Nenhuma alteração nesta seção em relação à versão anterior que removeu o menu mobile */
     .popup-content {
         width: 60%; padding: 40px; text-align: center;
         display: flex; flex-direction: column; justify-content: center;
@@ -38,7 +37,6 @@
 }
 
 @media (max-width: 992px) { /* Tablet e abaixo */
-    /* Nenhuma alteração nesta seção em relação à versão anterior que removeu o menu mobile */
     .auth-image-side { display: none; }
     .auth-form-side { width: 100%; }
     .checkout-container { flex-direction: column-reverse; } 
@@ -50,18 +48,20 @@
     .product-info h1.product-page-title { font-size: 2rem; }
 }
 
-@media (max-width: 768px) { /* Mobile e abaixo - NAV SIMPLIFICADA */
+@media (max-width: 768px) { /* Mobile e abaixo - CORREÇÃO DO ÍCONE DO CARRINHO */
     
     .mobile-menu-toggle {
-        display: none !important; /* Mantém o botão hambúrguer oculto */
+        display: none !important; 
     }
     
     #main-nav {
-        display: flex; /* Faz a navegação aparecer */
-        justify-content: center; /* Centraliza a lista de links (ul) dentro do nav */
-        position: static; /* Garante que não seja fixed ou absolute como antes */
+        display: flex;          
+        justify-content: center;
+        align-items: center;    
+        flex-grow: 1;           
+        position: static;
         transform: none;
-        width: auto; /* Adapta-se ao conteúdo ou pode ser ajustado */
+        width: auto; 
         height: auto;
         background-color: transparent;
         color: var(--text-color);
@@ -69,37 +69,33 @@
         overflow-y: visible;
         padding: 0;
         box-shadow: none;
-        /* Se #main-nav era flex-grow:1 no desktop, pode precisar ajustar o layout aqui */
-        /* Por exemplo, para que não ocupe todo o espaço e empurre os ícones */
-        flex-grow: 0; /* Para que não cresça excessivamente e atrapalhe os ícones */
-        margin: 0 10px; /* Adiciona um pouco de espaço entre os ícones e o logo, se necessário */
+        margin: 0; 
     }
 
     #main-nav ul {
-        flex-direction: row; /* Links lado a lado */
-        gap: 10px; /* Espaçamento entre "Home" e "Nossas Peças" */
-        /* Os estilos de layout.css para ul (list-style, margin, padding, align-items) devem funcionar bem */
+        gap: 10px; 
+        padding: 0; 
+        flex-direction: row; 
     }
 
     #main-nav a {
-        font-size: 0.85rem; /* Tamanho de fonte um pouco menor para mobile */
-        padding: 8px 5px; /* Padding menor para os links */
-        color: var(--text-color); /* Garante a cor padrão do texto */
-        /* Remove estilos específicos do menu mobile anterior se houver (ex: bordas) */
+        font-size: 0.85rem; 
+        padding: 8px 5px; 
+        color: var(--text-color);
         border-bottom: none; 
-        text-transform: none; /* Opcional: remover uppercase se preferir no mobile */
+        text-transform: none; 
     }
     
-    /* O efeito ::after de sublinhado no hover/tap pode ser mantido ou removido para mobile */
-    /* Exemplo: para remover o efeito no mobile: */
-    /*
-    #main-nav a::after {
-        display: none;
+    .header-icons {
+        gap: 10px; /* Reduz o espaço entre os ícones (era 20px no desktop) */
     }
-    */
 
-    /* Estilos de body.mobile-menu-open e .mobile-menu-close já foram removidos/comentados na etapa anterior */
-
+    #cart-icon {
+        display: inline-flex !important; /* Garante que seja exibido como um item flexível em linha */
+        align-items: center;     /* Alinha o emoji e o contador (se houver) verticalmente */
+        visibility: visible !important; /* Força a visibilidade */
+        opacity: 1 !important;         /* Garante opacidade total */
+    }
 
     /* Outros estilos mobile (não relacionados ao menu) permanecem */
     .products-page-layout { flex-direction: column; }
@@ -150,11 +146,11 @@
 
 @media (max-width: 480px) { 
     #main-nav a {
-        font-size: 0.75rem; /* Ainda menor para telas muito pequenas */
+        font-size: 0.75rem; 
         padding: 8px 3px;
     }
     #main-nav ul {
-        gap: 5px; /* Espaçamento ainda menor */
+        gap: 5px; 
     }
     .collection-subnav a { flex-basis: 100%; text-align: center; }
     .tab-link { flex-basis: 100%; }
