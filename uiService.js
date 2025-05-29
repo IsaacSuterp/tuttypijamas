@@ -1,4 +1,4 @@
-// js/uiService.js (agora na raiz: uiService.js)
+// uiService.js
 const uiService = {
     renderProductCard: function(product) {
         const priceFormatted = `R$ ${product.price.toFixed(2).replace('.', ',')}`;
@@ -47,7 +47,7 @@ const uiService = {
 
         if (cart.length === 0) {
             container.innerHTML = "<div style='text-align:center; width:100%;'><h1 class='section-title'>Seu carrinho está vazio.</h1><a href='produtos.html' class='btn'>Ver produtos</a></div>";
-            summaryContainer.innerHTML = '';
+            summaryContainer.innerHTML = ''; // Limpa o resumo também
             return;
         }
         let subtotal = 0;
@@ -78,16 +78,82 @@ const uiService = {
         if (popup) popup.classList.remove('active');
     },
     showNotification: function(message, type = 'success') {
-        const notification = document.getElementById('notification');
-        if (!notification && (document.body.id === 'login-page' || document.body.id === 'checkout-page')) { 
-            console.warn("Elemento de notificação não encontrado na página.");
-            alert(message); return; 
+        const notificationElementId = 'notification'; // ID padrão
+        let notification = document.getElementById(notificationElementId);
+
+        // Tentativa de encontrar notificação específica da página de login se a padrão não existir e estivermos na login-page
+        if (!notification && document.body.id === 'login-page') {
+            notification = document.getElementById('notification'); // Já era 'notification', mas confirmando.
         }
+         // Para checkout, se houver um elemento de notificação específico, use-o.
+        if (!notification && document.body.id === 'checkout-page') {
+            // Se você tiver um elemento com ID diferente no checkout, coloque aqui.
+            // Por enquanto, vamos assumir que pode usar um 'notification' global ou alert.
+        }
+
+
         if (notification) {
-            notification.textContent = message; notification.className = `notification ${type} show`;
-            setTimeout(() => { notification.classList.remove('show'); }, 4000);
+            notification.textContent = message;
+            notification.className = `notification ${type} show`; // Assegura que a classe base 'notification' está lá
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
         } else {
+             // Fallback se nenhum elemento de notificação for encontrado
+            console.warn("Elemento de notificação não encontrado. Usando alert(). Página: " + document.body.id);
             alert(message);
         }
+    },
+    // NOVA FUNÇÃO ADICIONADA
+    renderCustomerReviews: function(reviewsArray) {
+        const reviewsListContainer = document.getElementById('customer-reviews-list');
+        const noReviewsMsgEl = document.getElementById('no-reviews-message');
+
+        if (!reviewsListContainer || !noReviewsMsgEl) {
+            console.error("Elementos para renderizar avaliações não encontrados.");
+            return;
+        }
+
+        reviewsListContainer.innerHTML = ''; // Limpa avaliações antigas
+
+        if (!reviewsArray || reviewsArray.length === 0) {
+            noReviewsMsgEl.style.display = 'block';
+            reviewsListContainer.style.display = 'none'; // Esconde a lista se não há reviews
+            return;
+        }
+        
+        noReviewsMsgEl.style.display = 'none';
+        reviewsListContainer.style.display = 'block'; // Mostra a lista
+
+        reviewsArray.forEach(review => {
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review-item');
+
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHTML += `<span class="star ${i <= review.stars ? 'filled' : 'empty'}">${i <= review.stars ? '&#9733;' : '&#9734;'}</span>`;
+            }
+
+            let formattedDate = review.date;
+            try {
+                // Adiciona T00:00:00 para consistência de parsing entre navegadores, especialmente se a data for apenas YYYY-MM-DD
+                const dateObj = new Date(review.date.includes('T') ? review.date : review.date + "T00:00:00");
+                if (!isNaN(dateObj)) {
+                     formattedDate = dateObj.toLocaleDateString('pt-BR');
+                }
+            } catch(e) { 
+                console.warn("Data da avaliação em formato inválido:", review.date);
+            }
+
+            reviewElement.innerHTML = `
+                <div class="review-header">
+                    <span class="reviewer-name">${review.user || 'Anônimo'}</span>
+                    <div class="review-stars">${starsHTML}</div>
+                </div>
+                <p class="review-date">${formattedDate}</p>
+                <p class="review-comment">${review.comment}</p>
+            `;
+            reviewsListContainer.appendChild(reviewElement);
+        });
     }
 };
