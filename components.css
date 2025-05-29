@@ -200,75 +200,148 @@
 
 
 /* --- MODAL (GUIA DE TAMANHOS) --- */
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; padding: 20px; box-sizing: border-box; }
-.modal-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
-.modal-box { /* Estilo geral para caixas de popup/modal, pode ser sobrescrito */
-    display: flex;
+.modal-overlay { /* Estilo genérico para overlays de modal/popup */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(44, 44, 44, 0.75); 
+    z-index: 2900; /* Base z-index para overlays */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s ease, visibility 0s 0.4s; 
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+.modal-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+    transition: opacity 0.4s ease; 
+}
+.modal-box { /* Estilo geral para caixas de popup/modal */
+    display: flex; /* Alterado para flex para controle interno */
+    flex-direction: column; /* Padrão para modal genérico */
     width: 100%;
     background-color: var(--white);
     position: relative;
-    transform: scale(0.95);
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    margin: 0 auto;
     border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     align-items: stretch; /* Padrão */
-    flex-direction: column; /* Padrão para modal genérico */
+    
+    /* Efeitos de entrada/saída */
+    transform: scale(0.9) translateY(15px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-out;
+    transition-delay: 0.05s; /* Pequeno delay para a caixa aparecer depois do overlay */
+
+    max-height: calc(100vh - 40px); /* Altura máxima considerando o padding do overlay */
+    overflow-y: auto; /* Rolagem interna se o conteúdo for maior */
     padding: 30px; /* Padding padrão para modal-box */
     max-width: 600px; /* Largura padrão para modal-box */
-    max-height: 90vh; /* Altura máxima padrão */
-    overflow-y: auto; /* Rolagem padrão */
 }
-.modal-overlay.active .modal-box { transform: scale(1); }
-.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; }
+.modal-overlay.active .modal-box { 
+    transform: scale(1) translateY(0); 
+    opacity: 1;
+}
+.modal-close { /* Estilo genérico para botões de fechar */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 5px;
+    z-index: 10; /* Acima do conteúdo do modal/popup */
+}
+.modal-close:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
+}
 .modal-title { font-family: var(--font-primary); font-size: 1.8rem; margin-bottom: 15px; }
 .size-table { width: 100%; margin-top: 20px; border-collapse: collapse; text-align: center; }
 .size-table th, .size-table td { padding: 10px; border: 1px solid var(--border-color); font-size: 0.9rem;}
 .size-table thead { background-color: #f5f5f5; }
 
 /* --- POPUP DE NEWSLETTER --- */
-.popup-overlay#newsletter-popup { /* Torna o seletor mais específico para o popup de newsletter */
-    z-index: 2000; /* Z-index específico para newsletter */
+.popup-overlay#newsletter-popup { /* Especificidade para o overlay da newsletter */
+    z-index: 2000; /* z-index específico, pode ser maior que modal se precisar sobrepor */
 }
-/* Estilos específicos para o popup-box da newsletter, sobrescrevendo ou adicionando ao .modal-box genérico */
+/* Estilos específicos para o popup-box da newsletter */
 .popup-overlay#newsletter-popup .popup-box {
-    max-width: 768px;
     flex-direction: row; /* Layout horizontal para newsletter */
-    padding: 0; /* Remove o padding geral para controlar internamente */
+    max-width: 750px; /* Largura específica */
+    padding: 0; /* Remove padding geral para controlar internamente com .popup-image e .popup-content */
     overflow: hidden; /* Garante que a imagem não estoure o border-radius */
 }
 .popup-image {
     width: 40%;
-    /* Caminho da imagem: Assumindo que a pasta 'css' e 'images' estão no mesmo nível da raiz do projeto */
-    /* Se components.css está em 'css/', então '../images/' acessa a pasta 'images' na raiz. */
+    /* Caminho da imagem: Assumindo que components.css está em 'css/' e images em 'images/' na raiz */
     background-image: url('../images/tutty-pijamas-logo.jpg');
-    background-size: cover; /* Para preencher melhor o espaço, 'contain' pode deixar espaços vazios */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 300px; /* Uma altura mínima para garantir que a imagem apareça */
-    border-top-left-radius: 5px; /* Mantém o arredondamento do popup-box */
-    border-bottom-left-radius: 5px;
-    /* background-color: var(--white); /* Não é necessário se a imagem cobrir tudo */
+    min-height: 350px; /* Garante que a imagem tenha uma altura mínima razoável */
 }
-#popup-form-content, #popup-success-content {
+#popup-form-content,
+#popup-success-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; /* Para ocupar o espaço restante ao lado da imagem */
-    padding: 30px 40px; /* Espaçamento interno para o conteúdo */
+    flex-grow: 1;
+    padding: 30px 40px;
     box-sizing: border-box;
-    text-align: center; /* Centraliza o texto dentro */
+    text-align: center;
+    overflow-y: auto; 
+    max-height: inherit; /* Herda de .popup-box para cálculo de rolagem */
 }
 #popup-success-content {
     display: none;
-    animation: fadeIn 0.8s ease;
 }
-.popup-close { /* Já estilizado, mas garantindo que está visível sobre o conteúdo da newsletter */
-    z-index: 10;
+.popup-overlay#newsletter-popup.active #popup-success-content.show-success {
+    display: flex;
+    animation: fadeIn 0.5s ease forwards;
+}
+.popup-title { /* Título dentro do popup de newsletter ou modal */
+    font-family: var(--font-primary);
+    font-size: 1.8rem; /* Pode ser maior para popup: 2rem; */
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+.popup-body { /* Texto do corpo do popup */
+    font-size: 1rem; /* Era 16px */
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+.consent-text { /* Texto de consentimento no popup */
+    font-size: 0.75rem; /* Era 11px */
+    color: #999;
+    margin-top: 10px;
 }
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Animação fadeIn (já pode estar no global.css ou aqui) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* --- NOTIFICAÇÕES (LOGIN/CHECKOUT/ETC) --- */
 .notification {
