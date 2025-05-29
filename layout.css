@@ -21,15 +21,15 @@ main {
 /* Cabeçalho */
 header {
     background-color: var(--white);
-    padding: 25px 0;
+    padding: 25px 0; /* Padding vertical do header */
     position: sticky;
     top: 0;
-    z-index: 1000; /* Abaixo do menu mobile e backdrop */
+    z-index: 1000; 
     border-bottom: 1px solid var(--border-color);
 }
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo | Nav | Header-Right-Items */
     align-items: center;
 }
 .logo {
@@ -39,39 +39,14 @@ header {
     letter-spacing: 1px;
     color: var(--primary-color);
     z-index: 1101; 
-}
-
-/* Botão do Menu Hambúrguer e Botão de Fechar o Menu Mobile */
-.mobile-menu-toggle,
-.mobile-menu-close {
-    display: none; 
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.5rem; 
-    cursor: pointer;
-    padding: 8px;
-    line-height: 1;
-    z-index: 1100; 
-}
-.mobile-menu-toggle .icon-close,
-.mobile-menu-toggle.active .icon-open {
-    display: none;
-}
-.mobile-menu-toggle.active .icon-close {
-    display: inline;
-}
-.mobile-menu-close { 
-    position: absolute;
-    top: 15px; /* Ajustado para melhor posicionamento no menu lateral */
-    right: 15px;
-    color: var(--text-color-light); 
-    font-size: 1.8rem;
+    flex-shrink: 0; /* Não encolher o logo */
 }
 
 /* Navegação Principal (Desktop) */
-#main-nav {
-    display: flex; 
+#main-nav { /* O contêiner <nav> */
+    flex-grow: 1; /* Tenta ocupar o espaço central */
+    display: flex;
+    justify-content: center; /* Centraliza o <ul> dentro do <nav> */
 }
 #main-nav ul { 
     list-style: none;
@@ -80,7 +55,6 @@ header {
     margin: 0;
     padding: 0;
     align-items: center;
-    justify-content: center;
 }
 nav a { 
     font-size: 15px;
@@ -107,13 +81,20 @@ nav a:hover {
 nav a:hover::after {
     width: 100%;
 }
-.header-icons {
+
+/* NOVO: Container para agrupar ícones e botão hambúrguer à direita */
+.header-right-items {
     display: flex;
     align-items: center;
-    gap: 25px;
-    z-index: 1001; /* Acima do header normal, mas abaixo do menu e backdrop */
-    margin-left: 20px;
-    flex-shrink: 0;
+    gap: 15px; /* Espaço entre o grupo de ícones e o botão hambúrguer */
+    flex-shrink: 0; /* Não encolher este grupo */
+}
+
+.header-icons { /* Grupo dos ícones de usuário e carrinho */
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre usuário e carrinho */
+    z-index: 1001; /* Acima do conteúdo normal, mas abaixo do menu overlay */
 }
 .header-icons .icon {
     font-size: 20px;
@@ -133,6 +114,39 @@ nav a:hover::after {
     display: none;
 }
 
+/* Botão do Menu Hambúrguer e Botão de Fechar o Menu Mobile */
+.mobile-menu-toggle,
+.mobile-menu-close {
+    display: none; 
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem; 
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    z-index: 1100; /* Mais alto para garantir que seja clicável */
+}
+.mobile-menu-toggle .icon-open {
+    display: inline; /* Ícone de abrir visível por padrão */
+}
+.mobile-menu-toggle .icon-close {
+    display: none; /* Ícone de fechar escondido por padrão */
+}
+.mobile-menu-toggle.active .icon-open { /* Quando o menu está ativo, esconde o ícone de abrir */
+    display: none;
+}
+.mobile-menu-toggle.active .icon-close { /* Quando o menu está ativo, mostra o ícone de fechar */
+    display: inline;
+}
+.mobile-menu-close { /* Botão de fechar DENTRO do menu mobile */
+    position: absolute;
+    top: 15px; 
+    right: 15px;
+    color: var(--text-color-light); 
+    font-size: 1.8rem;
+}
+
 /* Estilo para o Backdrop do Menu Mobile */
 .menu-backdrop {
     display: none; 
@@ -142,7 +156,7 @@ nav a:hover::after {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 1040; /* Abaixo do menu (#main-nav), acima do conteúdo da página */
+    z-index: 1040; 
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -150,7 +164,6 @@ nav a:hover::after {
     display: block;
     opacity: 1;
 }
-
 
 /* Rodapé */
 footer {
