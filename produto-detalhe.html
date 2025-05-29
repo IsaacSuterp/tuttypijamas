@@ -117,10 +117,40 @@
             </div>
             <div id="tab-reviews" class="tab-content">
                 <h3>Avaliações de Clientes</h3>
-                <div id="customer-reviews-container">
-                    <p>Seja o primeiro a avaliar este produto!</p>
+
+                <div class="new-review-form">
+                    <h4>Deixe sua avaliação sobre este produto</h4>
+                    <form id="new-review-form-actual">
+                        <div class="form-group star-rating-input">
+                            <label>Sua nota (clique nas estrelas):</label>
+                            <div class="stars" aria-label="Avaliação por estrelas">
+                                <span class="star" data-value="1" role="button" tabindex="0" aria-label="1 estrela">&#9734;</span>
+                                <span class="star" data-value="2" role="button" tabindex="0" aria-label="2 estrelas">&#9734;</span>
+                                <span class="star" data-value="3" role="button" tabindex="0" aria-label="3 estrelas">&#9734;</span>
+                                <span class="star" data-value="4" role="button" tabindex="0" aria-label="4 estrelas">&#9734;</span>
+                                <span class="star" data-value="5" role="button" tabindex="0" aria-label="5 estrelas">&#9734;</span>
+                            </div>
+                            <input type="hidden" name="rating_value" id="rating-value" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewer-name">Seu nome (como será exibido):</label>
+                            <input type="text" id="reviewer-name" name="reviewer_name" placeholder="Ex: João S." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-comment">Seu comentário:</label>
+                            <textarea id="review-comment" name="comment" rows="4" placeholder="Conte o que você achou do produto..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Avaliação</button>
+                    </form>
                 </div>
-            </div>
+
+                <h4 style="margin-top: 40px; margin-bottom: 20px; font-family: var(--font-primary); font-size:1.3rem;">Comentários Existentes:</h4>
+                <div id="customer-reviews-list" class="customer-reviews-list">
+                    </div>
+                <div id="no-reviews-message" style="display: none; text-align:center; margin-top: 20px;">
+                    <p>Ainda não há avaliações para este produto. Seja o primeiro a avaliar!</p>
+                </div>
+                </div>
         </section>
 
         <section class="related-products-section">
