@@ -48,8 +48,14 @@
     .product-info h1.product-page-title { font-size: 2rem; }
 }
 
-@media (max-width: 768px) { /* Mobile e abaixo - CORREÇÃO DO ÍCONE DO CARRINHO */
+@media (max-width: 768px) { /* Mobile e abaixo - AJUSTES DE ESPAÇAMENTO NO HEADER */
     
+    /* Garante que o container do header tenha menos padding lateral no mobile */
+    header .container.header-content { /* Ou apenas 'header .container' se .header-content não for o container */
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     .mobile-menu-toggle {
         display: none !important; 
     }
@@ -58,7 +64,9 @@
         display: flex;          
         justify-content: center;
         align-items: center;    
-        flex-grow: 1;           
+        flex-grow: 1; /* Essencial para ocupar o espaço central */
+        margin: 0 8px; /* Adiciona margem nas laterais do bloco de navegação para separá-lo do logo e dos ícones */
+        
         position: static;
         transform: none;
         width: auto; 
@@ -67,37 +75,40 @@
         color: var(--text-color);
         z-index: auto;
         overflow-y: visible;
-        padding: 0;
+        padding: 0; /* Sem padding no próprio bloco #main-nav */
         box-shadow: none;
-        margin: 0; 
     }
 
     #main-nav ul {
-        gap: 10px; 
-        padding: 0; 
+        display: flex; /* Necessário para o gap funcionar corretamente */
         flex-direction: row; 
+        gap: 10px; /* Espaçamento entre "Home" e "Nossas Peças" */
+        padding: 0; 
+        align-items: center;
     }
 
     #main-nav a {
         font-size: 0.85rem; 
-        padding: 8px 5px; 
+        padding: 8px 2px; /* Padding vertical para altura do clique, horizontal mínimo (gap do ul controla) */
         color: var(--text-color);
         border-bottom: none; 
         text-transform: none; 
+        white-space: nowrap; /* Evita que "Nossas Peças" quebre em duas linhas */
     }
     
     .header-icons {
-        gap: 10px; /* Reduz o espaço entre os ícones (era 20px no desktop) */
+        gap: 8px; /* Espaço reduzido entre o ícone de usuário e o ícone de carrinho */
+        flex-shrink: 0; /* Evita que os ícones sejam esmagados se o espaço for muito pouco */
     }
 
     #cart-icon {
-        display: inline-flex !important; /* Garante que seja exibido como um item flexível em linha */
-        align-items: center;     /* Alinha o emoji e o contador (se houver) verticalmente */
-        visibility: visible !important; /* Força a visibilidade */
-        opacity: 1 !important;         /* Garante opacidade total */
+        display: inline-flex !important; 
+        align-items: center;     
+        visibility: visible !important; 
+        opacity: 1 !important;         
     }
 
-    /* Outros estilos mobile (não relacionados ao menu) permanecem */
+    /* Outros estilos mobile permanecem */
     .products-page-layout { flex-direction: column; }
     #filters { width: 100%; margin-bottom: 40px; }
     .section { padding: 60px 20px; }
@@ -147,10 +158,13 @@
 @media (max-width: 480px) { 
     #main-nav a {
         font-size: 0.75rem; 
-        padding: 8px 3px;
+        padding: 8px 1px; /* Padding horizontal ainda menor se necessário */
     }
     #main-nav ul {
         gap: 5px; 
+    }
+    .header-icons {
+        gap: 5px; /* Espaço ainda menor entre ícones para telas muito pequenas */
     }
     .collection-subnav a { flex-basis: 100%; text-align: center; }
     .tab-link { flex-basis: 100%; }
