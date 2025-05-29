@@ -9,51 +9,14 @@ const App = {
         }
         this.handlePageSpecifics();
         this.bindEvents();
-        this.initMobileMenu();
+        // this.initMobileMenu(); // REMOVIDO: Chamada para inicializar o menu mobile
     },
 
-    initMobileMenu() {
-        console.log("DEBUG: App.initMobileMenu() chamado");
-        const menuToggle = document.getElementById('mobile-menu-toggle');
-        const menuClose = document.getElementById('mobile-menu-close');
-        const mainNav = document.getElementById('main-nav');
-        const backdrop = document.getElementById('menu-backdrop');
+    // REMOVIDA: Toda a função initMobileMenu() foi removida.
+    // Se você precisar do código original da função initMobileMenu() para referência,
+    // ele estava na versão anterior que você me enviou.
 
-        if (!menuToggle || !mainNav || !menuClose || !backdrop) {
-            console.error("DEBUG: Um ou mais elementos do menu mobile não foram encontrados:", {menuToggle, mainNav, menuClose, backdrop});
-            return;
-        }
-        const openMenu = () => {
-            console.log("DEBUG: openMenu() chamado");
-            mainNav.classList.add('active'); menuToggle.classList.add('active');
-            backdrop.classList.add('active'); document.body.classList.add('mobile-menu-open');
-        };
-        const closeMenu = () => {
-            console.log("DEBUG: closeMenu() chamado");
-            mainNav.classList.remove('active'); menuToggle.classList.remove('active');
-            backdrop.classList.remove('active'); document.body.classList.remove('mobile-menu-open');
-        };
-        menuToggle.addEventListener('click', () => {
-            console.log("DEBUG: Botão mobile-menu-toggle clicado");
-            if (mainNav.classList.contains('active')) { closeMenu(); } else { openMenu(); }
-        });
-        menuClose.addEventListener('click', () => { console.log("DEBUG: Botão mobile-menu-close clicado"); closeMenu(); });
-        backdrop.addEventListener('click', () => { console.log("DEBUG: Backdrop clicado"); closeMenu(); });
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(event) {
-                console.log(`DEBUG: Link do menu mobile clicado: ${this.href}`);
-                // event.stopPropagation(); // <<<< LINHA CORRIGIDA: Comentada para permitir navegação
-                if (mainNav.classList.contains('active')) {
-                    console.log("DEBUG: Menu ativo. Chamando closeMenu().");
-                    closeMenu();
-                } else {
-                    console.log("DEBUG: Menu não estava ativo, navegação direta.");
-                }
-            });
-        });
-    },
-
-    updatePriceRangeDisplay() { // FUNÇÃO ATUALIZADA
+    updatePriceRangeDisplay() {
         const priceRangeSlider = document.getElementById('filter-price');
         const priceRangeValueSpan = document.getElementById('price-range-value');
 
@@ -121,7 +84,7 @@ const App = {
         
         const priceRangeSlider = document.getElementById('filter-price');
         if (priceRangeSlider) {
-            priceRangeSlider.addEventListener('input', () => { // Evento 'input' para atualização em tempo real
+            priceRangeSlider.addEventListener('input', () => { 
                 this.updatePriceRangeDisplay();
             });
         }
@@ -137,7 +100,7 @@ const App = {
             case 'home-page': PageInitializers.initHomePage(); break;
             case 'products-page': 
                 PageInitializers.initProductListPage(); 
-                this.updatePriceRangeDisplay(); // Garante valor inicial correto
+                this.updatePriceRangeDisplay(); 
                 break;
             case 'cart-page': PageInitializers.initCartPage(); break;
             case 'product-detail-page': PageInitializers.initProductDetailPage(); break;
