@@ -1,23 +1,172 @@
 /* === ARQUIVO: layout.css === */
-.container { width: 100%; max-width: 1320px; margin-left: auto; margin-right: auto; padding: 0 30px; }
-main { padding-top: 40px; padding-bottom: 40px; }
-.section { padding: 60px 0; }
-header { background-color: var(--white); padding: 25px 0; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
-.header-content { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: var(--font-primary); font-size: 28px; font-weight: 500; letter-spacing: 1px; color: var(--primary-color); }
-nav ul { list-style: none; display: flex; gap: 40px; }
-nav a { font-size: 16px; font-weight: 400; letter-spacing: 0.5px; padding-bottom: 8px; position: relative; color: var(--text-color); }
-nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: var(--secondary-color); transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-nav a:hover { color: var(--primary-color); }
-nav a:hover::after { width: 100%; }
-.header-icons { display: flex; align-items: center; gap: 25px; }
-.header-icons .icon { font-size: 20px; color: var(--text-color); position: relative; }
-#cart-count { position: absolute; top: -8px; right: -12px; background-color: var(--secondary-color); color: var(--white); border-radius: 50%; padding: 1px 6px; font-size: 11px; font-weight: bold; display: none; }
-footer { background-color: #252525; color: #a0a0a0; padding: 80px 0 30px 0; margin-top: 100px; }
-.footer-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 50px; margin-bottom: 60px; }
-.footer-column h4 { font-family: var(--font-sans); color: var(--white); font-size: 16px; font-weight: 700; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
-.footer-column ul { list-style: none; padding: 0; }
-.footer-column li { margin-bottom: 12px; }
-.footer-column a { color: #a0a0a0; }
-.footer-column a:hover { color: var(--secondary-color); }
-.footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #3a3a3a; font-size: 14px; }
+
+/* Contêiner Principal */
+.container {
+    width: 100%;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px;
+}
+
+/* Seções Principais */
+main {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.section {
+    padding: 60px 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: var(--white);
+    padding: 25px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-family: var(--font-primary);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    z-index: 1101; /* Para ficar acima do menu mobile se necessário */
+}
+
+/* Botão do Menu Hambúrguer e Botão de Fechar o Menu Mobile */
+.mobile-menu-toggle,
+.mobile-menu-close {
+    display: none; 
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem; 
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    z-index: 1100; 
+}
+.mobile-menu-toggle .icon-close,
+.mobile-menu-toggle.active .icon-open {
+    display: none;
+}
+.mobile-menu-toggle.active .icon-close {
+    display: inline;
+}
+.mobile-menu-close { /* Visível dentro do menu mobile */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--text-color-light); 
+    font-size: 1.8rem;
+}
+
+
+/* Navegação Principal (Desktop) */
+#main-nav {
+    display: flex; /* Comportamento padrão para desktop */
+}
+#main-nav ul { 
+    list-style: none;
+    display: flex;
+    gap: 30px; 
+    margin: 0;
+    padding: 0;
+}
+nav a { /* Estilo dos links de navegação no desktop */
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    padding-bottom: 8px;
+    position: relative;
+    color: var(--text-color);
+}
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--secondary-color);
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+nav a:hover {
+    color: var(--primary-color);
+}
+nav a:hover::after {
+    width: 100%;
+}
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    z-index: 1101; /* Para ficar acima do menu mobile se necessário */
+}
+.header-icons .icon {
+    font-size: 20px;
+    color: var(--text-color);
+    position: relative;
+}
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 50%;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    display: none;
+}
+
+/* Rodapé */
+footer {
+    background-color: #252525;
+    color: #a0a0a0;
+    padding: 80px 0 30px 0;
+    margin-top: 100px;
+}
+.footer-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 50px;
+    margin-bottom: 60px;
+}
+.footer-column h4 {
+    font-family: var(--font-sans);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-column li {
+    margin-bottom: 12px;
+}
+.footer-column a {
+    color: #a0a0a0;
+}
+.footer-column a:hover {
+    color: var(--secondary-color);
+}
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #3a3a3a;
+    font-size: 14px;
+}
