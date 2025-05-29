@@ -1,5 +1,4 @@
-// js/app.js (agora na raiz: app.js)
-
+// app.js
 const App = {
     init() {
         console.log("DEBUG: App.init() chamado");
@@ -62,29 +61,26 @@ const App = {
 
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function(event) {
-                // 'this' aqui é o elemento <a> clicado
                 console.log(`DEBUG: Link do menu mobile clicado: ${this.href}`);
-                console.log(`DEBUG: Menu está ativo? ${mainNav.classList.contains('active')}`);
-
-                // Tentativa de impedir que o clique no link também feche o menu via backdrop,
-                // caso o link esteja "sobre" o backdrop durante a animação.
-                event.stopPropagation(); 
-
+                event.stopPropagation();
                 if (mainNav.classList.contains('active')) {
-                    console.log("DEBUG: Menu ativo. Chamando closeMenu().");
+                    console.log("DEBUG: Menu ativo. Chamando closeMenu(). Navegação deve ocorrer após.");
                     closeMenu();
-                    // A navegação padrão (href) deve ocorrer após closeMenu().
-                    // Se ainda não funcionar, a próxima etapa seria forçar a navegação
-                    // com um pequeno timeout após chamar closeMenu(), mas vamos evitar por enquanto.
-                    // Ex:
-                    // event.preventDefault(); // Precisaria disso para navegação manual
-                    // setTimeout(() => { window.location.href = this.href; }, 100); // Atraso pequeno
                 } else {
-                    console.log("DEBUG: Menu não estava ativo. Navegação deve ocorrer normalmente.");
+                    console.log("DEBUG: Menu não estava ativo, navegação direta.");
                 }
-                // Não estamos usando event.preventDefault(), então o link DEVE navegar.
             });
         });
+    },
+
+    // NOVA FUNÇÃO PARA ATUALIZAR O DISPLAY DO PREÇO
+    updatePriceRangeDisplay() {
+        const priceRangeSlider = document.getElementById('filter-price');
+        const priceRangeValueSpan = document.getElementById('price-range-value');
+
+        if (priceRangeSlider && priceRangeValueSpan) {
+            priceRangeValueSpan.textContent = `R$ ${priceRangeSlider.value}`;
+        }
     },
 
     bindEvents() {
@@ -113,6 +109,7 @@ const App = {
             }
 
             if (document.body.id === 'product-detail-page') {
+                // ... (lógica de eventos da página de detalhes do produto)
                 if (event.target.matches('#size-guide-link')) {
                     event.preventDefault();
                     const modal = document.getElementById('size-guide-modal');
@@ -161,8 +158,22 @@ const App = {
                 if (document.body.id === 'cart-page' && typeof uiService !== 'undefined') uiService.renderCartPage();
             }
         });
+        
         const filters = document.getElementById("filters");
-        if (filters) { filters.addEventListener("change", () => this.applyFilters()); }
+        if (filters) { 
+            // O filtro principal ainda acontece no 'change' para não sobrecarregar
+            filters.addEventListener("change", () => this.applyFilters()); 
+        }
+        
+        // ADICIONADO: Event listener para o 'input' do range de preço
+        const priceRangeSlider = document.getElementById('filter-price');
+        if (priceRangeSlider) {
+            priceRangeSlider.addEventListener('input', () => {
+                this.updatePriceRangeDisplay();
+                // Se quiser filtro em tempo real ao arrastar a barra, descomente a linha abaixo:
+                // this.applyFilters(); 
+            });
+        }
         
         const newsletterForm = document.getElementById('newsletter-form');
         if (newsletterForm) {
@@ -186,7 +197,10 @@ const App = {
         }
         switch (pageId) {
             case 'home-page': PageInitializers.initHomePage(); break;
-            case 'products-page': PageInitializers.initProductListPage(); break;
+            case 'products-page': 
+                PageInitializers.initProductListPage(); 
+                this.updatePriceRangeDisplay(); // ADICIONADO: Mostra valor inicial do range
+                break;
             case 'cart-page': PageInitializers.initCartPage(); break;
             case 'product-detail-page': PageInitializers.initProductDetailPage(); break;
             case 'checkout-page': PageInitializers.initCheckoutPage(); break;
@@ -199,10 +213,7 @@ const App = {
     updateInstallmentOptions: function(totalValue) { /* ...código mantido da versão anterior... */ }
 };
 
-// Para manter a brevidade, as funções applyFilters, renderCheckoutSummary, e updateInstallmentOptions
-// foram omitidas aqui, mas elas DEVEM estar presentes no seu objeto App como na última versão completa.
-// Vou reinseri-las aqui para garantir que você tenha o código completo.
-
+// Colando as definições de App.applyFilters, App.renderCheckoutSummary, App.updateInstallmentOptions
 App.applyFilters = function() {
     if (typeof products === 'undefined' || typeof uiService === 'undefined') {
         console.error("DEBUG: Dependências faltando para applyFilters (products ou uiService)");
@@ -275,7 +286,6 @@ App.updateInstallmentOptions = function(totalValue) {
         } else { cardInstallmentsSelect.innerHTML = '<option value="1">1x de R$ 0,00</option>';}
     }
 };
-
 
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof App !== 'undefined' && App.init) {
