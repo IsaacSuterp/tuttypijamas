@@ -11,13 +11,13 @@
     --text-color-light: #f8f8f8;
     --background-color: #faf8f5;
     --white: #ffffff;
-    --border-color: #e5e5e5;
+    --border-color: #e5e5e5; /* Cor da trilha não preenchida do range slider */
     --border-color-light: rgba(255, 255, 255, 0.7);
     --font-primary: 'Playfair Display', serif;
     --font-secondary: 'Lato', sans-serif;
     --shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.05);
     --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
-    --range-track-color: #ddd; /* Cor da trilha de fundo do range slider */
+    /* --range-track-color: #ddd; Antiga cor da trilha, agora usando --border-color */
 }
 
 /* Reset Básico e Estilos Globais */
@@ -137,9 +137,9 @@ a {
     transition: border-color 0.3s ease;
     background-color: #fdfdfd;
 }
-/* Remove padding de ícone para inputs que não o usam dentro de .input-group */
-.input-group input:not([type="email"]):not([type="password"]):not([type="text"]) { /* Exemplo, ajuste se necessário */
-    padding-left: 14px;
+.input-group input:not([type="email"]):not([type="password"]):not([type="text"]) {
+    /* Seletor mais genérico para inputs sem ícone, se necessário */
+    /* Ex: .input-group input.no-icon { padding-left: 14px; } */
 }
 .input-group input:focus {
     outline: none;
@@ -156,97 +156,95 @@ a {
     margin-top: 5px;
 }
 
-/* === ESTILOS PARA INPUT TYPE="RANGE" (FILTRO DE PREÇO) === */
+/* === ESTILOS REFINADOS PARA INPUT TYPE="RANGE" (FILTRO DE PREÇO) === */
 input[type="range"] {
-    -webkit-appearance: none; /* Remove a aparência padrão do WebKit */
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
-    width: 100%; /* Largura total */
-    height: 8px; /* Altura da trilha */
-    background: var(--range-track-color); /* Cor de fundo da trilha */
-    border-radius: 4px;
-    outline: none; /* Remove o outline padrão no foco */
-    padding: 0; /* Remove padding interno se houver */
-    margin: 10px 0; /* Margem para espaçamento vertical */
+    width: 100%;
+    height: 18px; /* Altura para acomodar o thumb e facilitar clique */
+    background: transparent; /* O input em si será transparente */
+    cursor: pointer;
+    outline: none;
+    margin: 10px 0;
+    padding: 0;
 }
 
-/* Thumb (controle deslizante) para WebKit (Chrome, Safari, Edge) */
+/* --- WebKit (Chrome, Safari, Edge Chromium) --- */
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px; /* Trilha fina */
+    background: var(--border-color); /* Cor da trilha base (parte não preenchida se JS falhar) */
+    border-radius: 2px;
+    border: none;
+}
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px; /* Largura do thumb */
-    height: 20px; /* Altura do thumb */
-    background: var(--secondary-color); /* Cor do thumb */
-    cursor: pointer;
+    border: none;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
-    border: none;
-    margin-top: -6px; /* Centraliza o thumb na trilha (metade da altura do thumb - metade da altura da trilha) */
+    background: var(--primary-color); /* Thumb escuro */
+    margin-top: -6px; /* (4px_track_height - 16px_thumb_height) / 2 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.15s ease-out;
+}
+input[type="range"]:focus::-webkit-slider-thumb,
+input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.15);
 }
 
-/* Track (trilha) para WebKit - a cor de fundo já está no input[type="range"] base */
-input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: transparent; /* A cor da trilha é gerenciada pelo background do input principal */
-    border-radius: 4px;
-    border: none;
-}
-
-/* Thumb para Mozilla Firefox */
-input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--secondary-color);
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-}
-
-/* Track para Mozilla Firefox */
+/* --- Mozilla Firefox --- */
 input[type="range"]::-moz-range-track {
     width: 100%;
-    height: 8px;
-    cursor: pointer;
-    background: var(--range-track-color);
-    border-radius: 4px;
+    height: 4px;
+    background: var(--border-color); /* Cor da trilha não preenchida */
+    border-radius: 2px;
     border: none;
 }
-/* Preenchimento para Firefox (precisa ser feito com JS também para ser dinâmico) */
-input[type="range"]::-moz-range-progress {
-    background-color: var(--secondary-color);
-    height: 8px;
-    border-radius: 4px;
+input[type="range"]::-moz-range-progress { /* Parte preenchida da trilha no Firefox */
+    background-color: var(--secondary-color); /* Cor de destaque (ouro) */
+    height: 4px;
+    border-radius: 2px;
 }
-
-
-/* Thumb para MS Edge (versões mais antigas) e IE */
-input[type="range"]::-ms-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--secondary-color);
-    cursor: pointer;
+input[type="range"]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
     border-radius: 50%;
-    border: 0;
+    background: var(--primary-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.15s ease-out;
+}
+input[type="range"]:focus::-moz-range-thumb,
+input[type="range"]:hover::-moz-range-thumb {
+    transform: scale(1.15);
 }
 
-/* Track para MS Edge (versões mais antigas) e IE */
+/* --- MS Edge (versões mais antigas) & IE --- */
 input[type="range"]::-ms-track {
     width: 100%;
-    height: 8px;
+    height: 4px;
     cursor: pointer;
-    background: transparent; /* Necessário para que as cores de preenchimento abaixo funcionem */
+    background: transparent;
     border-color: transparent;
     color: transparent;
 }
-
-/* Preenchimento inferior para MS Edge e IE */
-input[type="range"]::-ms-fill-lower {
+input[type="range"]::-ms-fill-lower { /* Parte preenchida */
     background: var(--secondary-color);
-    border-radius: 4px;
+    border-radius: 2px;
 }
-
-/* Preenchimento superior (parte não preenchida) para MS Edge e IE */
-input[type="range"]::-ms-fill-upper {
-    background: var(--range-track-color);
-    border-radius: 4px;
+input[type="range"]::-ms-fill-upper { /* Parte não preenchida */
+    background: var(--border-color);
+    border-radius: 2px;
+}
+input[type="range"]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    margin-top: 0px; /* Ajuste para MS */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
