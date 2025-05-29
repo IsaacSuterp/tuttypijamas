@@ -24,13 +24,13 @@ header {
     padding: 25px 0;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1000; /* Abaixo do menu mobile e backdrop */
     border-bottom: 1px solid var(--border-color);
 }
 .header-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-between; /* Mantém a distribuição geral */
 }
 .logo {
     font-family: var(--font-primary);
@@ -38,31 +38,58 @@ header {
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--primary-color);
-    flex-shrink: 0; /* Impede que o logo encolha */
+    z-index: 1101; 
+}
+
+/* Botão do Menu Hambúrguer e Botão de Fechar o Menu Mobile */
+.mobile-menu-toggle,
+.mobile-menu-close {
+    display: none; 
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem; 
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    z-index: 1100; 
+}
+.mobile-menu-toggle .icon-close,
+.mobile-menu-toggle.active .icon-open {
+    display: none;
+}
+.mobile-menu-toggle.active .icon-close {
+    display: inline;
+}
+.mobile-menu-close { 
+    position: absolute;
+    top: 15px; /* Ajustado para melhor posicionamento no menu lateral */
+    right: 15px;
+    color: var(--text-color-light); 
+    font-size: 1.8rem;
 }
 
 /* Navegação Principal (Desktop) */
 #main-nav {
-    flex-grow: 1; /* Permite que a navegação ocupe o espaço central disponível */
-    display: flex;
-    justify-content: center; /* Centraliza o <ul> dentro do <nav> */
+    display: flex; 
 }
-#main-nav ul {
+#main-nav ul { 
     list-style: none;
     display: flex;
-    align-items: center; /* Alinha os itens verticalmente no centro */
-    gap: 25px; /* ESPAÇAMENTO AJUSTADO entre os links */
+    gap: 25px; 
     margin: 0;
     padding: 0;
+    align-items: center;
+    justify-content: center;
 }
-nav a { /* Estilo dos links de navegação no desktop */
-    font-size: 15px; /* TAMANHO DA FONTE AJUSTADO */
+nav a { 
+    font-size: 15px;
     font-weight: 400;
     letter-spacing: 0.5px;
     padding-bottom: 8px;
     position: relative;
     color: var(--text-color);
-    white-space: nowrap; /* Impede quebra de linha nos links */
+    white-space: nowrap;
 }
 nav a::after {
     content: '';
@@ -84,9 +111,9 @@ nav a:hover::after {
     display: flex;
     align-items: center;
     gap: 25px;
-    z-index: 1101;
-    flex-shrink: 0; /* Impede que os ícones encolham */
-    margin-left: 20px; /* Adiciona um espaço mínimo entre nav e ícones */
+    z-index: 1001; /* Acima do header normal, mas abaixo do menu e backdrop */
+    margin-left: 20px;
+    flex-shrink: 0;
 }
 .header-icons .icon {
     font-size: 20px;
@@ -106,33 +133,22 @@ nav a:hover::after {
     display: none;
 }
 
-
-/* Botão do Menu Hambúrguer e Botão de Fechar o Menu Mobile */
-.mobile-menu-toggle,
-.mobile-menu-close {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 8px;
-    line-height: 1;
-    z-index: 1100;
+/* Estilo para o Backdrop do Menu Mobile */
+.menu-backdrop {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1040; /* Abaixo do menu (#main-nav), acima do conteúdo da página */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
-.mobile-menu-toggle .icon-close,
-.mobile-menu-toggle.active .icon-open {
-    display: none;
-}
-.mobile-menu-toggle.active .icon-close {
-    display: inline;
-}
-.mobile-menu-close { /* Visível dentro do menu mobile */
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: var(--text-color-light);
-    font-size: 1.8rem;
+.menu-backdrop.active {
+    display: block;
+    opacity: 1;
 }
 
 
