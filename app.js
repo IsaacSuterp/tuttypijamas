@@ -2,11 +2,11 @@
 
 const App = {
     init() {
-        console.log("App.init() chamado");
+        console.log("DEBUG: App.init() chamado");
         if (typeof uiService !== 'undefined' && uiService.updateCartCount) {
             uiService.updateCartCount();
         } else {
-            console.error("app.js: uiService ou uiService.updateCartCount não está definido ao iniciar App.");
+            console.error("DEBUG: app.js: uiService ou uiService.updateCartCount não está definido ao iniciar App.");
         }
         this.handlePageSpecifics();
         this.bindEvents();
@@ -14,19 +14,19 @@ const App = {
     },
 
     initMobileMenu() {
-        console.log("App.initMobileMenu() chamado");
+        console.log("DEBUG: App.initMobileMenu() chamado");
         const menuToggle = document.getElementById('mobile-menu-toggle');
         const menuClose = document.getElementById('mobile-menu-close');
         const mainNav = document.getElementById('main-nav');
         const backdrop = document.getElementById('menu-backdrop');
 
         if (!menuToggle || !mainNav || !menuClose || !backdrop) {
-            console.error("Um ou mais elementos do menu mobile não foram encontrados:", {menuToggle, mainNav, menuClose, backdrop});
+            console.error("DEBUG: Um ou mais elementos do menu mobile não foram encontrados:", {menuToggle, mainNav, menuClose, backdrop});
             return;
         }
 
         const openMenu = () => {
-            console.log("openMenu() chamado");
+            console.log("DEBUG: openMenu() chamado");
             mainNav.classList.add('active');
             menuToggle.classList.add('active');
             backdrop.classList.add('active');
@@ -34,7 +34,7 @@ const App = {
         };
 
         const closeMenu = () => {
-            console.log("closeMenu() chamado");
+            console.log("DEBUG: closeMenu() chamado");
             mainNav.classList.remove('active');
             menuToggle.classList.remove('active');
             backdrop.classList.remove('active');
@@ -42,7 +42,7 @@ const App = {
         };
 
         menuToggle.addEventListener('click', () => {
-            console.log("Botão mobile-menu-toggle clicado");
+            console.log("DEBUG: Botão mobile-menu-toggle clicado");
             if (mainNav.classList.contains('active')) {
                 closeMenu();
             } else {
@@ -51,36 +51,45 @@ const App = {
         });
 
         menuClose.addEventListener('click', () => {
-            console.log("Botão mobile-menu-close clicado");
+            console.log("DEBUG: Botão mobile-menu-close clicado");
             closeMenu();
         });
 
         backdrop.addEventListener('click', () => {
-            console.log("Backdrop clicado");
+            console.log("DEBUG: Backdrop clicado");
             closeMenu();
         });
 
         mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function(event) { // Usando function para preservar 'this' se necessário, embora não usado aqui
-                console.log(`Link do menu mobile clicado: ${this.href}`);
+            link.addEventListener('click', function(event) {
+                // 'this' aqui é o elemento <a> clicado
+                console.log(`DEBUG: Link do menu mobile clicado: ${this.href}`);
+                console.log(`DEBUG: Menu está ativo? ${mainNav.classList.contains('active')}`);
+
+                // Tentativa de impedir que o clique no link também feche o menu via backdrop,
+                // caso o link esteja "sobre" o backdrop durante a animação.
+                event.stopPropagation(); 
+
                 if (mainNav.classList.contains('active')) {
-                    console.log("Menu está ativo, chamando closeMenu(). Navegação deve ocorrer após.");
+                    console.log("DEBUG: Menu ativo. Chamando closeMenu().");
                     closeMenu();
-                    // A navegação padrão do link (href) deve ocorrer automaticamente aqui
-                    // A menos que um event.preventDefault() seja chamado, o que não é o caso.
+                    // A navegação padrão (href) deve ocorrer após closeMenu().
+                    // Se ainda não funcionar, a próxima etapa seria forçar a navegação
+                    // com um pequeno timeout após chamar closeMenu(), mas vamos evitar por enquanto.
+                    // Ex:
+                    // event.preventDefault(); // Precisaria disso para navegação manual
+                    // setTimeout(() => { window.location.href = this.href; }, 100); // Atraso pequeno
                 } else {
-                    console.log("Menu não estava ativo, navegação direta.");
+                    console.log("DEBUG: Menu não estava ativo. Navegação deve ocorrer normalmente.");
                 }
+                // Não estamos usando event.preventDefault(), então o link DEVE navegar.
             });
         });
     },
 
     bindEvents() {
-        console.log("App.bindEvents() chamado");
+        console.log("DEBUG: App.bindEvents() chamado");
         document.body.addEventListener('click', event => {
-            // Log para qualquer clique no body, útil para ver se outros listeners interferem
-            // console.log("Clique no body detectado, target:", event.target);
-
             if (event.target.matches('.view-product-btn')) {
                 const productId = event.target.dataset.productId;
                 if (productId) window.location.href = `produto-detalhe.html?id=${productId}`;
@@ -90,9 +99,7 @@ const App = {
                 if (typeof cartService !== 'undefined') cartService.remove(cartItemId);
                 if (document.body.id === 'cart-page' && typeof uiService !== 'undefined') uiService.renderCartPage();
             }
-            // O evento de clique no .popup-close e .popup-overlay é tratado em initPopup no uiService
-            // se o popup de newsletter ainda usar essa abordagem, ou deve ser adicionado aqui se for global.
-            // Para o popup de newsletter, os listeners de fechar estão no App.bindEvents agora:
+            
             const newsletterPopup = document.getElementById('newsletter-popup');
             if (newsletterPopup && newsletterPopup.classList.contains('active')) {
                 if (event.target.matches('#newsletter-popup .popup-close') || event.target === newsletterPopup) {
@@ -172,9 +179,9 @@ const App = {
 
     handlePageSpecifics() {
         const pageId = document.body.id;
-        console.log("App.handlePageSpecifics() chamado para a página:", pageId);
+        console.log("DEBUG: App.handlePageSpecifics() chamado para a página:", pageId);
         if (typeof PageInitializers === 'undefined') {
-            console.error("PageInitializers não está definido.");
+            console.error("DEBUG: PageInitializers não está definido.");
             return;
         }
         switch (pageId) {
@@ -183,26 +190,22 @@ const App = {
             case 'cart-page': PageInitializers.initCartPage(); break;
             case 'product-detail-page': PageInitializers.initProductDetailPage(); break;
             case 'checkout-page': PageInitializers.initCheckoutPage(); break;
-            default: console.warn("Nenhum handler específico para a página com ID:", pageId);
+            default: console.warn("DEBUG: Nenhum handler específico para a página com ID:", pageId);
         }
     },
 
-    applyFilters() { /* ...código mantido... */ },
-    renderCheckoutSummary() { /* ...código mantido... */ },
-    updateInstallmentOptions(totalValue) { /* ...código mantido... */ }
+    applyFilters: function() { /* ...código mantido da versão anterior... */ },
+    renderCheckoutSummary: function() { /* ...código mantido da versão anterior... */ },
+    updateInstallmentOptions: function(totalValue) { /* ...código mantido da versão anterior... */ }
 };
 
-// As funções applyFilters, renderCheckoutSummary, e updateInstallmentOptions
-// devem ser parte do objeto App para serem chamadas com this.
-// Certifique-se de que elas foram definidas como App.applyFilters = function() { ... } etc.
-// Ou, se foram definidas dentro do PageInitializers, a chamada em handlePageSpecifics para elas deve ser ajustada.
-// Pela estrutura anterior, applyFilters é um método de App. renderCheckoutSummary e updateInstallmentOptions
-// foram definidas como métodos de App e chamadas por PageInitializers.initCheckoutPage usando App.renderCheckoutSummary etc.
-// Reintegrando elas no App para clareza:
+// Para manter a brevidade, as funções applyFilters, renderCheckoutSummary, e updateInstallmentOptions
+// foram omitidas aqui, mas elas DEVEM estar presentes no seu objeto App como na última versão completa.
+// Vou reinseri-las aqui para garantir que você tenha o código completo.
 
 App.applyFilters = function() {
     if (typeof products === 'undefined' || typeof uiService === 'undefined') {
-        console.error("Dependências faltando para applyFilters (products ou uiService)");
+        console.error("DEBUG: Dependências faltando para applyFilters (products ou uiService)");
         return;
     }
     let filteredProducts = [...products];
@@ -230,7 +233,7 @@ App.applyFilters = function() {
 
 App.renderCheckoutSummary = function() {
     if (typeof cartService === 'undefined' || typeof uiService === 'undefined') {
-        console.error("Dependências faltando para renderCheckoutSummary (cartService ou uiService)");
+        console.error("DEBUG: Dependências faltando para renderCheckoutSummary (cartService ou uiService)");
         return;
     }
     const cart = cartService.get();
@@ -240,7 +243,7 @@ App.renderCheckoutSummary = function() {
     const totalEl = document.getElementById('summary-total');
 
     if (!itemsContainer || !subtotalEl || !shippingEl || !totalEl) {
-        console.error("Elementos do DOM para o resumo do checkout não encontrados.");
+        console.error("DEBUG: Elementos do DOM para o resumo do checkout não encontrados.");
         return;
     }
     itemsContainer.innerHTML = ''; let currentSubtotal = 0;
@@ -255,7 +258,7 @@ App.renderCheckoutSummary = function() {
     subtotalEl.textContent = `R$ ${currentSubtotal.toFixed(2).replace('.', ',')}`;
     shippingEl.textContent = `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
     totalEl.textContent = `R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
-    this.updateInstallmentOptions(currentTotal); // Chama App.updateInstallmentOptions
+    this.updateInstallmentOptions(currentTotal);
 };
 
 App.updateInstallmentOptions = function(totalValue) {
@@ -278,6 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof App !== 'undefined' && App.init) {
         App.init();
     } else {
-        console.error("Objeto App ou App.init não está definido.");
+        console.error("DEBUG: Objeto App ou App.init não está definido no DOMContentLoaded.");
     }
 });
