@@ -198,53 +198,51 @@
     margin-bottom: 0.5em;
 }
 
-
 /* --- MODAL (GUIA DE TAMANHOS) --- */
 .modal-overlay { /* Estilo genérico para overlays de modal/popup */
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(44, 44, 44, 0.75); 
-    z-index: 2900; /* Base z-index para overlays */
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    opacity: 0; 
-    visibility: hidden; 
-    transition: opacity 0.4s ease, visibility 0s 0.4s; 
-    padding: 20px; 
-    box-sizing: border-box; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;        /* Garante largura total da viewport */
+    height: 100vh;       /* Garante altura total da viewport */
+    background-color: rgba(44, 44, 44, 0.75);
+    z-index: 2900; /* Base z-index para overlays, popup de newsletter pode ser maior */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s;
+    padding: 20px;
+    box-sizing: border-box;
 }
-.modal-overlay.active { 
-    opacity: 1; 
-    visibility: visible; 
-    transition: opacity 0.4s ease; 
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
 }
 .modal-box { /* Estilo geral para caixas de popup/modal */
-    display: flex; /* Alterado para flex para controle interno */
-    flex-direction: column; /* Padrão para modal genérico */
+    display: flex;
+    flex-direction: column;
     width: 100%;
     background-color: var(--white);
     position: relative;
-    border-radius: 5px;
+    border-radius: 6px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    align-items: stretch; /* Padrão */
-    
-    /* Efeitos de entrada/saída */
+    align-items: stretch;
+
     transform: scale(0.9) translateY(15px);
     opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease-out;
-    transition-delay: 0.05s; /* Pequeno delay para a caixa aparecer depois do overlay */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease-out;
+    transition-delay: 0.05s;
 
-    max-height: calc(100vh - 40px); /* Altura máxima considerando o padding do overlay */
-    overflow-y: auto; /* Rolagem interna se o conteúdo for maior */
-    padding: 30px; /* Padding padrão para modal-box */
-    max-width: 600px; /* Largura padrão para modal-box */
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    padding: 30px;
+    max-width: 600px;
 }
-.modal-overlay.active .modal-box { 
-    transform: scale(1) translateY(0); 
+.modal-overlay.active .modal-box {
+    transform: scale(1) translateY(0);
     opacity: 1;
 }
 .modal-close { /* Estilo genérico para botões de fechar */
@@ -259,7 +257,7 @@
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease;
     padding: 5px;
-    z-index: 10; /* Acima do conteúdo do modal/popup */
+    z-index: 10;
 }
 .modal-close:hover {
     color: var(--primary-color);
@@ -271,25 +269,68 @@
 .size-table thead { background-color: #f5f5f5; }
 
 /* --- POPUP DE NEWSLETTER --- */
-.popup-overlay#newsletter-popup { /* Especificidade para o overlay da newsletter */
-    z-index: 2000; /* z-index específico, pode ser maior que modal se precisar sobrepor */
+.popup-overlay#newsletter-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30, 30, 30, 0.8);
+    z-index: 3000; /* Z-index mais alto para o popup de newsletter */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
+    padding: 20px;
+    box-sizing: border-box;
 }
-/* Estilos específicos para o popup-box da newsletter */
+
+.popup-overlay#newsletter-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease-in-out;
+}
+
 .popup-overlay#newsletter-popup .popup-box {
-    flex-direction: row; /* Layout horizontal para newsletter */
-    max-width: 750px; /* Largura específica */
-    padding: 0; /* Remove padding geral para controlar internamente com .popup-image e .popup-content */
-    overflow: hidden; /* Garante que a imagem não estoure o border-radius */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 720px;
+    background-color: var(--white);
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    align-items: stretch;
+    overflow: hidden;
+
+    transform: scale(0.9) translateY(15px);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+    transition-delay: 0.05s;
+    
+    max-height: calc(100vh - 40px);
 }
+
+.popup-overlay#newsletter-popup.active .popup-box {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
 .popup-image {
     width: 40%;
-    /* Caminho da imagem: Assumindo que components.css está em 'css/' e images em 'images/' na raiz */
-    background-image: url('../images/tutty-pijamas-logo.jpg');
+    /* Ajuste o caminho da imagem: se components.css está em 'css/' e 'images' na raiz: */
+    background-image: url('../images/tutty-pijamas-logo.jpg'); 
+    /* background-image: url('https://images.unsplash.com/photo-1576053105020-091968c66960?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70'); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 350px; /* Garante que a imagem tenha uma altura mínima razoável */
+    min-height: 300px; 
 }
+
 #popup-form-content,
 #popup-success-content {
     display: flex;
@@ -297,12 +338,13 @@
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    padding: 30px 40px;
+    padding: 30px 35px;
     box-sizing: border-box;
     text-align: center;
     overflow-y: auto; 
-    max-height: inherit; /* Herda de .popup-box para cálculo de rolagem */
+    max-height: inherit; 
 }
+
 #popup-success-content {
     display: none;
 }
@@ -310,26 +352,66 @@
     display: flex;
     animation: fadeIn 0.5s ease forwards;
 }
-.popup-title { /* Título dentro do popup de newsletter ou modal */
+
+.popup-title { /* Título dentro do popup de newsletter ou modal genérico */
     font-family: var(--font-primary);
-    font-size: 1.8rem; /* Pode ser maior para popup: 2rem; */
+    font-size: 2rem; /* Um pouco maior para o popup de newsletter */
     font-weight: 500;
     line-height: 1.3;
     color: var(--primary-color);
     margin-bottom: 15px;
 }
 .popup-body { /* Texto do corpo do popup */
-    font-size: 1rem; /* Era 16px */
+    font-size: 1rem;
     color: #555;
     margin-bottom: 25px;
     line-height: 1.6;
 }
 .consent-text { /* Texto de consentimento no popup */
-    font-size: 0.75rem; /* Era 11px */
+    font-size: 0.75rem;
     color: #999;
     margin-top: 10px;
 }
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
+
+/* Adaptação para telas menores (Mobile) para POPUP DE NEWSLETTER */
+@media (max-width: 768px) {
+    .popup-overlay#newsletter-popup .popup-box {
+        flex-direction: column;
+        max-width: 90%;
+        max-height: calc(100vh - 60px);
+    }
+
+    .popup-overlay#newsletter-popup .popup-image { /* Específico para newsletter */
+        width: 100%;
+        height: 180px;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .popup-overlay#newsletter-popup #popup-form-content,
+    .popup-overlay#newsletter-popup #popup-success-content {
+        padding: 20px 25px;
+    }
+    
+    .popup-overlay#newsletter-popup .popup-title {
+        font-size: 1.6rem;
+    }
+    .popup-overlay#newsletter-popup .popup-body {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    .popup-overlay#newsletter-popup .popup-close {
+        color: #333; 
+        background-color: rgba(255,255,255,0.7); 
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 
 /* Animação fadeIn (já pode estar no global.css ou aqui) */
 @keyframes fadeIn {
