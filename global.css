@@ -1,0 +1,28 @@
+/* === ARQUIVO: global.css === */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap');
+:root {
+    --primary-color: #2c2c2c; --secondary-color: #c0b283; --text-color: #333333;
+    --text-color-light: #f8f8f8; --background-color: #faf8f5; --white: #ffffff;
+    --border-color: #e5e5e5; --border-color-light: rgba(255, 255, 255, 0.7);
+    --font-primary: 'Playfair Display', serif; --font-secondary: 'Lato', sans-serif;
+    --shadow-subtle: 0 5px 15px rgba(0, 0, 0, 0.05); --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+html, body { width: 100%; overflow-x: hidden; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-secondary); color: var(--text-color); background-color: var(--background-color); line-height: 1.7; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+a { text-decoration: none; color: var(--primary-color); transition: color 0.4s ease; }
+.btn { background-color: var(--primary-color); color: var(--white); padding: 14px 35px; border-radius: 2px; font-weight: 400; font-family: var(--font-secondary); letter-spacing: 1px; text-transform: uppercase; font-size: 13px; display: inline-block; border: 1px solid var(--primary-color); cursor: pointer; transition: all 0.4s ease; }
+.btn:hover { background-color: var(--white); color: var(--primary-color); border-color: var(--primary-color); }
+.btn-large { padding: 15px; font-size: 1rem; }
+.btn-secondary { background-color: #555; color: white; border: 1px solid #555; padding: 12px 20px; height: 46px; border-radius: 0 2px 2px 0; cursor: pointer; white-space: nowrap; }
+.btn-secondary:hover { background-color: #444; border-color: #444; }
+.btn-secondary-outline { background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); padding: 0 20px; height: 46px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+.btn-secondary-outline:hover { background-color: var(--primary-color); color: var(--white); }
+.section-title { font-family: var(--font-primary); text-align: center; font-size: 38px; font-weight: 500; margin-bottom: 20px; color: var(--primary-color); }
+.section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 50px auto; font-size: 16px; font-weight: 300; color: #555; }
+.input-group { position: relative; margin-bottom: 20px; }
+.input-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; }
+.input-group input { width: 100%; padding: 14px 14px 14px 45px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 15px; transition: border-color 0.3s ease; background-color: #fdfdfd; }
+.input-group input:focus { outline: none; border-color: var(--secondary-color); box-shadow: 0 0 0 2px rgba(192, 178, 131, 0.3); }
+.input-group input::placeholder { color: #aaa; }
+.error-message { display: block; color: #e74c3c; font-size: 0.8rem; margin-top: 5px; }
