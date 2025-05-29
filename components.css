@@ -1,33 +1,179 @@
 /* === ARQUIVO: components.css === */
-.collection-subnav { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 10px; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
-.collection-subnav a { font-family: var(--font-secondary); font-size: 0.9rem; color: var(--text-color); padding: 8px 20px; border: 1px solid var(--border-color); border-radius: 20px; text-decoration: none; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px; }
-.collection-subnav a:hover { background-color: var(--primary-color); color: var(--white); border-color: var(--primary-color); }
-.collection-subnav a.active-collection-link { background-color: var(--primary-color); color: var(--white); border-color: var(--primary-color); font-weight: bold; }
-.collections-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 60px; padding: 20px 0; }
-.collection-card { width: 360px; height: 500px; position: relative; overflow: hidden; border-radius: 4px; box-shadow: var(--shadow-subtle); transition: transform 0.4s ease, box-shadow 0.4s ease; background-size: cover; background-position: center; display: flex; }
-.collection-card:hover { transform: scale(1.03); box-shadow: var(--shadow-hover); }
+
+/* --- SUBNAVEGAÇÃO DAS PÁGINAS DE COLEÇÃO --- */
+.collection-subnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+.collection-subnav a {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    padding: 8px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.collection-subnav a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+.collection-subnav a.active-collection-link {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* --- SEÇÃO DE COLEÇÕES (HOMEPAGE) --- */
+.collections-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 60px;
+    padding: 20px 0;
+}
+.collection-card { /* Card de coleção individual */
+    width: 360px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: var(--shadow-subtle);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background-size: cover;
+    background-position: center;
+    display: flex; /* Para centralizar o card-content */
+}
+.collection-card:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-hover);
+}
+/* Imagens de fundo para os cards de coleção */
 #estilo-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507680464027-827663820934?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
 #feminino { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1530903334433-a3c31a78e036?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
 #inverno { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1605152276395-52033c4129a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
 #infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548123378-8de3e846a10d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
-.collection-card .card-content { position: relative; z-index: 2; color: var(--text-color-light); text-align: center; padding: 20px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.collection-card h2 { font-family: var(--font-primary); font-size: 2.2rem; margin-bottom: 25px; font-weight: 500; line-height: 1.2; }
-.collection-button { border: 2px solid var(--border-color-light); background-color: transparent; color: var(--text-color-light); border-radius: 50px; }
-.collection-button:hover { background-color: var(--white); color: var(--primary-color); border-color: var(--white); }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; }
-.product-card { background-color: var(--white); text-align: center; padding: 20px; position: relative; overflow: hidden; transition: box-shadow 0.4s ease; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border-color); border-radius: 4px; }
+
+.collection-card .card-content { /* Conteúdo textual dentro do card de coleção */
+    position: relative; 
+    z-index: 2; 
+    color: var(--text-color-light); 
+    text-align: center;
+    padding: 20px; 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+.collection-card h2 { /* Título dentro do card de coleção */
+    font-family: var(--font-primary); 
+    font-size: 2.2rem; 
+    margin-bottom: 25px;
+    font-weight: 500; 
+    line-height: 1.2;
+}
+/* Estilo específico para o botão da coleção (herda de .btn em global.css) */
+.collection-button {
+    font-family: var(--font-secondary); /* Garante herança se não usar classe .btn junto */
+    border: 2px solid var(--border-color-light);
+    background-color: transparent;
+    color: var(--text-color-light);
+    border-radius: 50px;
+    /* AJUSTES DE TAMANHO PARA DESKTOP */
+    padding: 12px 35px;
+    font-size: 1rem; 
+    font-weight: bold;
+    /* Herda outras propriedades de .btn se usado como <button class="btn collection-button"> */
+    /* Se usado sozinho <button class="collection-button">, precisa de todas as props de .btn aqui: */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: inline-block;
+}
+.collection-button:hover {
+    background-color: var(--white); 
+    color: var(--primary-color);
+    border-color: var(--white);
+}
+
+/* --- GRID DE PRODUTOS E CARDS DE PRODUTO --- */
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 40px; 
+}
+.product-card { /* Card de produto individual */
+    background-color: var(--white); 
+    text-align: center; 
+    padding: 20px;
+    position: relative; 
+    overflow: hidden; 
+    transition: box-shadow 0.4s ease;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+    border: 1px solid var(--border-color); 
+    border-radius: 4px;
+}
 .product-card:hover { box-shadow: var(--shadow-hover); }
-.product-card img { max-width: 100%; height: 300px; object-fit: cover; margin-bottom: 20px; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+.product-card img { 
+    max-width: 100%; 
+    height: 300px; /* Altura fixa para as imagens dos produtos */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    margin-bottom: 20px; 
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+}
 .product-card:hover img { transform: scale(1.05); }
 .product-card h3 { font-family: var(--font-primary); font-size: 1.25rem; font-weight: 500; margin-bottom: 10px; color: var(--primary-color); }
 .product-card .price { font-size: 1.1rem; font-weight: 400; color: var(--text-color); margin-bottom: 15px; }
-.product-card p { font-size: 0.8rem; color: #777; margin-bottom: 15px; flex-grow: 1; }
-.product-card .btn { width: 80%; margin: 15px auto 0 auto; }
-#filters { width: 300px; flex-shrink: 0; }
-#filters h3 { font-family: var(--font-primary); font-size: 1.5rem; font-weight: 500; padding-bottom: 15px; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); }
+.product-card p { /* Usado para descrição/parcelas */
+    font-size: 0.8rem; 
+    color: #777; 
+    margin-bottom: 15px; 
+    flex-grow: 1; /* Permite que este parágrafo cresça e empurre o botão para baixo */
+}
+.product-card .btn { /* Botão "Ver Mais" no card de produto */
+    width: 80%; 
+    margin: 15px auto 0 auto; /* Centraliza o botão e dá margem superior */
+}
+
+/* --- FILTROS (PÁGINA DE PRODUTOS) --- */
+#filters { 
+    width: 300px; 
+    flex-shrink: 0; 
+    /* Estilos de borda/padding podem ser adicionados aqui se #filters for um "bloco" visual */
+}
+#filters h3 { 
+    font-family: var(--font-primary); 
+    font-size: 1.5rem; 
+    font-weight: 500; 
+    padding-bottom: 15px; 
+    margin-bottom: 25px; 
+    border-bottom: 1px solid var(--border-color); 
+}
 .filter-group { margin-bottom: 30px; }
 .filter-group label { display: block; margin-bottom: 12px; font-weight: 400; font-size: 1rem; }
-.filter-group select, .filter-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 2px; background-color: var(--white); font-family: var(--font-sans); }
+.filter-group select, .filter-group input[type="range"], .filter-group input[type="text"] { 
+    width: 100%; padding: 12px; border: 1px solid var(--border-color); 
+    border-radius: 2px; background-color: var(--white); font-family: var(--font-sans); 
+}
+
+/* --- ABAS (PÁGINA DE DETALHES DO PRODUTO) --- */
 .tabs-nav { display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 30px; flex-wrap: wrap; }
 .tab-link { padding: 15px 20px; font-size: 0.9rem; border: none; background: none; cursor: pointer; color: #555; position: relative; transition: color 0.3s ease; white-space: nowrap; flex-shrink: 0; flex-grow: 1; text-align: center; }
 .tab-link::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background-color: var(--secondary-color); transform: scaleX(0); transition: transform 0.3s ease; }
@@ -36,7 +182,9 @@
 .tab-content { display: none; line-height: 1.8; padding-top: 20px; }
 .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
 .tab-content h3 { font-family: var(--font-primary); font-size: 1.3rem; margin-bottom: 15px; word-break: break-word; }
-#customer-reviews-container p { word-break: break-word; overflow-wrap: break-word; }
+#customer-reviews-container p { word-break: break-word; overflow-wrap: break-word; } /* Garante que o texto da avaliação quebre */
+
+/* --- MODAL (GUIA DE TAMANHOS) --- */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; padding: 20px; }
 .modal-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
 .modal-box { background-color: var(--white); padding: 30px; border-radius: 5px; width: 100%; max-width: 600px; position: relative; transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); max-height: 90vh; overflow-y: auto; }
@@ -46,6 +194,8 @@
 .size-table { width: 100%; margin-top: 20px; border-collapse: collapse; text-align: center; }
 .size-table th, .size-table td { padding: 10px; border: 1px solid var(--border-color); font-size: 0.9rem;}
 .size-table thead { background-color: #f5f5f5; }
+
+/* --- POPUP DE NEWSLETTER --- */
 .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; padding: 20px; box-sizing: border-box; }
 .popup-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
 .popup-box { display: flex; width: 100%; max-width: 768px; background-color: var(--white); position: relative; transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); margin: 0 auto; border-radius: 5px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); flex-direction: row; align-items: stretch; }
@@ -53,11 +203,13 @@
 .popup-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
 .popup-close:hover { color: var(--primary-color); }
 .popup-image { width: 40%; background-image: url('tutty-pijamas-logo.jpg'); background-size: contain; background-position: center; background-repeat: no-repeat; min-height: 200px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; background-color: var(--white); }
-#popup-form-content, #popup-success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+#popup-form-content, #popup-success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; /* Ocupa toda a largura do .popup-content pai */ }
 #popup-success-content { display: none; text-align: center; animation: fadeIn 0.8s ease; }
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.notification { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 100%; max-width: calc(100% - 40px); padding: 15px; border-radius: 4px; text-align: center; color: var(--white); font-size: 15px; opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 10; }
-.notification.show { opacity: 1; visibility: visible; top: 20px; }
+
+/* --- NOTIFICAÇÕES (LOGIN/CHECKOUT) --- */
+.notification { position: absolute; top: -80px; /* Posição inicial fora da tela */ left: 50%; transform: translateX(-50%); width: 100%; max-width: calc(100% - 40px); /* Evita colar nas bordas */ padding: 15px; border-radius: 4px; text-align: center; color: var(--white); font-size: 15px; opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); z-index: 10; }
+.notification.show { opacity: 1; visibility: visible; top: 20px; /* Posição final visível */ }
 .notification.success { background-color: #2ecc71; }
 .notification.error { background-color: #e74c3c; }
