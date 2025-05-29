@@ -48,105 +48,106 @@
     .product-info h1.product-page-title { font-size: 2rem; }
 }
 
-@media (max-width: 768px) { /* Mobile e abaixo - Layout Geral e Menu Mobile */
-    /* .header-content nav#main-nav > ul {  // Removido para corrigir links no menu mobile } */
+@media (max-width: 768px) { /* Mobile e abaixo - REMOÇÃO DO MENU MOBILE */
     
     .mobile-menu-toggle {
-        display: block;
+        display: none !important; /* MODIFICADO: Garante que o botão hambúrguer não apareça */
     }
     
-    #main-nav { /* ESTILO DO MENU MOBILE LATERAL DESLIZANTE PELA DIREITA */
-        display: flex; 
-        flex-direction: column;
-        align-items: stretch; /* Faz os <a> filhos ocuparem a largura total */
-        justify-content: flex-start; /* Links começam do topo */
-        
-        position: fixed;
-        top: 0;
-        right: 0; /* ALTERADO: Posicionado na borda direita */
-        width: 280px; 
-        height: 100vh; 
-        background-color: var(--primary-color); 
-        color: var(--text-color-light);
-        z-index: 1050; 
-        overflow-y: auto;
-        
-        padding: 20px 0; /* Padding vertical, 0 lateral para links ocuparem tudo */
-        padding-top: 70px; 
-        box-shadow: -3px 0px 15px rgba(0,0,0,0.2); /* ALTERADO: Sombra para a esquerda */
-
-        transform: translateX(100%); /* ALTERADO: Começa totalmente fora da tela à direita */
-        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    #main-nav { /* MODIFICADO: Esconde completamente a navegação principal em telas mobile */
+        display: none !important; 
     }
 
-    #main-nav.active { /* Menu Aberto */
-        transform: translateX(0%); 
-    }
+    /* REMOVIDO/COMENTADO: Todos os estilos abaixo que definiam o comportamento 
+       e aparência do menu mobile deslizante (como #main-nav.active, 
+       estilos de ul, li, a para mobile, .mobile-menu-close, body.mobile-menu-open)
+       não são mais necessários, pois #main-nav agora é display: none nesta resolução.
+       Você pode remover estas seções comentadas se preferir.
+    */
+    /* // #main-nav { 
+    //     display: flex; 
+    //     flex-direction: column;
+    //     align-items: stretch; 
+    //     justify-content: flex-start; 
+    //     position: fixed;
+    //     top: 0;
+    //     right: 0; 
+    //     width: 280px; 
+    //     height: 100vh; 
+    //     background-color: var(--primary-color); 
+    //     color: var(--text-color-light);
+    //     z-index: 1050; 
+    //     overflow-y: auto;
+    //     padding: 20px 0; 
+    //     padding-top: 70px; 
+    //     box-shadow: -3px 0px 15px rgba(0,0,0,0.2); 
+    //     transform: translateX(100%); 
+    //     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    // }
+    // #main-nav.active { 
+    //     transform: translateX(0%); 
+    // }
+    // #main-nav ul { 
+    //     display: flex; 
+    //     flex-direction: column; 
+    //     gap: 0; 
+    //     width: 100%;
+    //     text-align: left; 
+    //     padding: 0; 
+    //     margin: 0; 
+    //     list-style: none; 
+    // }
+    // #main-nav li { 
+    //     width: 100%; 
+    // }
+    // #main-nav a { 
+    //     display: block; 
+    //     padding: 18px 30px; 
+    //     font-size: 1.1rem; 
+    //     font-weight: 400; 
+    //     color: var(--text-color-light);
+    //     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    //     transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
+    //     text-transform: uppercase;
+    //     letter-spacing: 0.5px;
+    //     text-decoration: none; 
+    // }
+    // #main-nav li:first-child a {
+    //     border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    // }
+    // #main-nav li:last-child a { border-bottom: none; } 
+    // #main-nav a:hover, #main-nav a:focus {
+    //     background-color: var(--secondary-color); 
+    //     color: var(--primary-color); 
+    //     padding-left: 35px; 
+    // }
+    // #main-nav a::after { display: none; }
+    // .mobile-menu-close {  // Estilo já está em layout.css como display:none por padrão
+    //     display: block; 
+    //     position: absolute;
+    //     top: 15px; 
+    //     right: 15px; 
+    //     color: var(--text-color-light); 
+    //     font-size: 1.8rem;
+    //     opacity: 0.8;
+    // }
+    // .mobile-menu-close:hover {
+    //     opacity: 1;
+    // }
+    // body.mobile-menu-open .header-icons { // Não mais aplicável
+    //     opacity: 0;
+    //     visibility: hidden;
+    //     transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+    // }
+    // .header-icons { // Pode haver estilos de .header-icons aqui que são independentes do menu
+    //     opacity: 1;
+    //     visibility: visible;
+    //     transition: opacity 0.2s ease 0.2s, visibility 0s linear;
+    // }
+    // body.mobile-menu-open { overflow: hidden; } // Não mais aplicável
+    */
 
-    #main-nav ul { 
-        display: flex; 
-        flex-direction: column; 
-        gap: 0; 
-        width: 100%;
-        text-align: left; 
-        padding: 0; /* Garante que não haja padding no UL */
-        margin: 0; /* Garante que não haja margin no UL */
-        list-style: none; /* Remove bullets da lista */
-    }
-    #main-nav li { 
-        width: 100%; 
-    }
-    #main-nav a { 
-        display: block; 
-        padding: 18px 30px; 
-        font-size: 1.1rem; 
-        font-weight: 400; 
-        color: var(--text-color-light);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: background-color 0.3s ease, color 0.3s ease, padding-left 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        text-decoration: none; /* Garante que não haja sublinhado */
-    }
-    #main-nav li:first-child a {
-        border-top: 1px solid rgba(255, 255, 255, 0.1); 
-    }
-    #main-nav li:last-child a { border-bottom: none; } 
-
-    #main-nav a:hover, #main-nav a:focus {
-        background-color: var(--secondary-color); 
-        color: var(--primary-color); 
-        padding-left: 35px; 
-    }
-    #main-nav a::after { display: none; }
-
-    .mobile-menu-close { 
-        display: block; 
-        position: absolute;
-        top: 15px; 
-        right: 15px; /* Continua no canto direito do painel do menu */
-        color: var(--text-color-light); 
-        font-size: 1.8rem;
-        opacity: 0.8;
-    }
-    .mobile-menu-close:hover {
-        opacity: 1;
-    }
-
-    body.mobile-menu-open .header-icons {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease, visibility 0s linear 0.2s;
-    }
-    .header-icons {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.2s ease 0.2s, visibility 0s linear;
-    }
-
-    body.mobile-menu-open { overflow: hidden; }
-
-    /* Outros estilos mobile */
+    /* Outros estilos mobile (não relacionados ao menu) permanecem */
     .products-page-layout { flex-direction: column; }
     #filters { width: 100%; margin-bottom: 40px; }
     .section { padding: 60px 20px; }
