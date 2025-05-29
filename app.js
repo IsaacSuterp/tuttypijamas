@@ -1,5 +1,4 @@
-// js/app.js (agora na raiz: app.js)
-
+// app.js
 const App = {
     init() {
         console.log("DEBUG: App.init() chamado");
@@ -49,7 +48,7 @@ const App = {
         });
     },
 
-    updatePriceRangeDisplay() {
+    updatePriceRangeDisplay() { // FUNÇÃO ATUALIZADA
         const priceRangeSlider = document.getElementById('filter-price');
         const priceRangeValueSpan = document.getElementById('price-range-value');
 
@@ -57,10 +56,20 @@ const App = {
             const value = parseInt(priceRangeSlider.value);
             const min = parseInt(priceRangeSlider.min || 0);
             const max = parseInt(priceRangeSlider.max || 100);
-            const percentage = (min === max) ? 100 : ((value - min) / (max - min)) * 100;
+            
+            const percentage = (min === max) ? (value >= max ? 100 : 0) : ((value - min) / (max - min)) * 100;
 
             priceRangeValueSpan.textContent = `R$ ${value}`;
-            priceRangeSlider.style.background = `linear-gradient(to right, var(--secondary-color) 0%, var(--secondary-color) ${percentage}%, var(--range-track-color) ${percentage}%, var(--range-track-color) 100%)`;
+
+            // Atualiza o background para navegadores WebKit (Chrome, Safari, Edge)
+            // e para Firefox se o ::-moz-range-progress não for suficiente ou para um visual mais controlado
+            // O CSS base já define a cor da trilha não preenchida (var(--border-color))
+            priceRangeSlider.style.background = `linear-gradient(to right, 
+                var(--secondary-color) 0%, 
+                var(--secondary-color) ${percentage}%, 
+                var(--border-color) ${percentage}%, 
+                var(--border-color) 100%
+            )`;
         }
     },
 
@@ -102,10 +111,20 @@ const App = {
                 if (document.body.id === 'cart-page' && typeof uiService !== 'undefined') uiService.renderCartPage();
             }
         });
+        
         const filters = document.getElementById("filters");
-        if (filters) { filters.addEventListener("change", () => this.applyFilters()); }
+        if (filters) { 
+            filters.addEventListener("change", () => this.applyFilters()); 
+        }
+        
         const priceRangeSlider = document.getElementById('filter-price');
-        if (priceRangeSlider) { priceRangeSlider.addEventListener('input', () => { this.updatePriceRangeDisplay(); /* this.applyFilters(); */ }); }
+        if (priceRangeSlider) {
+            priceRangeSlider.addEventListener('input', () => { // Evento 'input' para atualização em tempo real
+                this.updatePriceRangeDisplay();
+                // Opcional: this.applyFilters(); // Se quiser filtrar dinamicamente ao arrastar
+            });
+        }
+        
         const newsletterForm = document.getElementById('newsletter-form');
         if (newsletterForm) { newsletterForm.addEventListener('submit', event => { event.preventDefault(); const formContent = document.getElementById('popup-form-content'); const successContent = document.getElementById('popup-success-content'); if(formContent) formContent.style.display = 'none'; if(successContent) successContent.style.display = 'block'; if (typeof uiService !== 'undefined') setTimeout(() => uiService.closePopup(), 4000); }); }
     },
@@ -115,7 +134,10 @@ const App = {
         if (typeof PageInitializers === 'undefined') { console.error("DEBUG: PageInitializers não está definido."); return; }
         switch (pageId) {
             case 'home-page': PageInitializers.initHomePage(); break;
-            case 'products-page': PageInitializers.initProductListPage(); this.updatePriceRangeDisplay(); break;
+            case 'products-page': 
+                PageInitializers.initProductListPage(); 
+                this.updatePriceRangeDisplay(); // Garante valor inicial correto
+                break;
             case 'cart-page': PageInitializers.initCartPage(); break;
             case 'product-detail-page': PageInitializers.initProductDetailPage(); break;
             case 'checkout-page': PageInitializers.initCheckoutPage(); break;
