@@ -1,6 +1,11 @@
-/* === ARQUIVO: css/responsive.css === */
-@media (min-width: 769px) { /* Desktop e telas maiores - Pop-up */
-    .popup-content { width: 60%; padding: 40px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; box-sizing: border-box; }
+/* === ARQUIVO: responsive.css === */
+
+@media (min-width: 769px) { /* Desktop e telas maiores - Pop-up e Página de Produto */
+    .popup-content {
+        width: 60%; padding: 40px; text-align: center;
+        display: flex; flex-direction: column; justify-content: center;
+        align-items: center; box-sizing: border-box;
+    }
     .popup-content > * { max-width: 100%; }
     .popup-content :is(h2, p, form) { margin-left: 0; margin-right: 0; width: 100%; }
     .popup-title { font-family: var(--font-primary); font-size: 28px; font-weight: 500; line-height: 1.3; color: var(--primary-color); margin-bottom: 15px; text-align: center; }
@@ -10,12 +15,27 @@
     #newsletter-form .input-group input { padding: 14px 14px 14px 45px; }
     #newsletter-form .btn { padding: 14px; border-radius: 4px; font-size: 16px; width: 100%; max-width: 350px; }
     .consent-text { font-size: 11px; color: #999; margin-top: 10px; text-align: center; }
-    .product-page-layout { grid-template-columns: repeat(2, 1fr); }
-    .product-info { padding-top: 0; }
-    .product-actions { flex-direction: row; align-items: center; }
-    .quantity-selector { max-width: 150px; margin-bottom: 0; }
-    .btn-large { width: auto; flex-grow: 1; }
+
+    .product-page-layout {
+        grid-template-columns: repeat(2, 1fr); /* Duas colunas no desktop */
+    }
+    .product-info {
+        padding-top: 0;
+    }
+    .product-actions {
+        flex-direction: row; /* Botões lado a lado */
+        align-items: center;
+    }
+    .quantity-selector {
+        max-width: 150px;
+        margin-bottom: 0;
+    }
+    .btn-large { /* Botão Adicionar ao Carrinho na PDP */
+        width: auto; 
+        flex-grow: 1; 
+    }
 }
+
 @media (max-width: 992px) { /* Tablet e abaixo - Layout Geral e Checkout */
     .auth-image-side { display: none; }
     .auth-form-side { width: 100%; }
@@ -26,17 +46,98 @@
     .cart-summary { max-width: 100%; }
     .product-page-layout { grid-template-columns: 1fr; }
     .product-info h1.product-page-title { font-size: 2rem; }
+
+    /* Ajustes no header para tablet - pode esconder nav e mostrar toggle um pouco antes */
+    /* Dependendo do número de links, a navegação principal pode precisar virar hambúrguer já em 992px */
+    /* Exemplo:
+    .header-content nav { display: none; }
+    .mobile-menu-toggle { display: block; order: 3;}
+    */
 }
-@media (max-width: 768px) { /* Mobile e abaixo - Layout Geral */
-    .header-content { flex-direction: column; gap: 20px; }
-    nav ul { justify-content: center; flex-wrap: wrap; gap: 15px 25px; }
+
+@media (max-width: 768px) { /* Mobile e abaixo - Layout Geral e Menu Mobile */
+    .header-content {
+        /* O logo e os ícones já estão em space-between, o toggle se encaixa */
+    }
+    nav ul { /* Esconde a navegação desktop original no mobile */
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block; /* Mostra o botão hambúrguer */
+         /* order: 1; Se quiser o hambúrguer à esquerda */
+    }
+    
+    #main-nav { /* Estilos do Menu Mobile Overlay */
+        display: none; /* Escondido por padrão */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; 
+        background-color: var(--primary-color); 
+        color: var(--text-color-light);
+        z-index: 1050; 
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 80px; /* Espaço para o botão de fechar se ele estiver no topo */
+    }
+
+    #main-nav.active { /* Quando o menu está aberto */
+        display: flex;
+        transform: translateX(0%);
+    }
+
+    #main-nav ul { /* Lista de links dentro do menu mobile */
+        display: flex; /* Para que o flex-direction funcione */
+        flex-direction: column;
+        gap: 0; 
+        width: 100%;
+        text-align: center;
+    }
+
+    #main-nav li {
+        width: 100%;
+    }
+
+    #main-nav a { /* Links dentro do menu mobile */
+        display: block; 
+        padding: 20px;
+        font-size: 1.3rem; 
+        color: var(--text-color-light);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s ease;
+    }
+    #main-nav li:last-child a {
+        border-bottom: none;
+    }
+    #main-nav a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--secondary-color); /* Destaque ao passar o mouse */
+    }
+     #main-nav a::after { /* Remove o sublinhado do desktop no menu mobile */
+        display: none;
+    }
+
+    .mobile-menu-close { /* Mostra o botão de fechar dentro do menu mobile */
+        display: block; /* Já definido em layout.css, mas reforça aqui */
+    }
+
+    body.mobile-menu-open {
+        overflow: hidden; /* Previne scroll da página atrás do menu */
+    }
+
+    /* Outros estilos mobile */
     .products-page-layout { flex-direction: column; }
     #filters { width: 100%; margin-bottom: 40px; }
     .section { padding: 60px 20px; }
     .section-title { font-size: 32px; }
     .collections-container { gap: 20px; }
     .collection-card { width: 100%; max-width: 400px; height: 400px; margin-bottom: 0; }
-    header h1.site-title { font-size: 2rem; }
     .collection-card h2 { font-size: 1.8rem; }
     .collection-button { padding: 10px 25px; font-size: 0.9rem; }
     .popup-box { flex-direction: column; width: 95%; max-width: 400px; margin: 20px auto; border-radius: 3px; }
@@ -48,6 +149,7 @@
     #newsletter-form .input-group { max-width: none; }
     .consent-text { font-size: 10px; text-align: center; }
     .popup-close { color: #333; text-shadow: none; }
+
     .cart-table { border: 0; }
     .cart-table thead { border: none; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
     .cart-table tr { display: block; border: 1px solid var(--border-color); margin-bottom: 20px; border-radius: 4px; padding: 15px; }
@@ -61,18 +163,22 @@
     .cart-product-info { flex-direction: row; align-items: center; text-align: left; width: 100%; }
     .cart-product-info img { margin-bottom: 0; margin-right:10px; width: 60px; }
     .cart-quantity-input { width: 60px; padding: 5px; text-align: center; }
+
     .collection-subnav { gap: 10px; }
     .collection-subnav a { padding: 6px 15px; font-size: 0.8rem; }
+
     .form-row { flex-direction: column; gap: 0; }
     .payment-options { flex-direction: column; align-items: stretch; }
     .payment-option label { width: 100%; justify-content: center; }
+    
     .tabs-nav { justify-content: center; }
     .tab-link { padding: 12px 15px; font-size: 0.9rem; flex-grow: 1; text-align: center; }
     .product-detailed-info .tab-content h3 { font-size: 1.3rem; word-break: break-word; }
     .product-actions { flex-direction: column; align-items: stretch; }
     .quantity-selector { justify-content: space-between; max-width: none; margin-bottom: 15px; }
 }
-@media (max-width: 480px) {
+
+@media (max-width: 480px) { 
     .collection-subnav a { flex-basis: 100%; text-align: center; }
     .tab-link { flex-basis: 100%; }
 }
