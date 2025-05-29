@@ -68,33 +68,33 @@
 #infantil-colecao { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1548123378-8de3e846a10d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80'); }
 
 .collection-card .card-content { /* Conteúdo textual dentro do card de coleção */
-    position: relative; 
-    z-index: 2; 
-    color: var(--text-color-light); 
+    position: relative;
+    z-index: 2;
+    color: var(--text-color-light);
     text-align: center;
-    padding: 20px; 
-    width: 100%; 
-    display: flex; 
+    padding: 20px;
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     background-color: rgba(0,0,0,0.1); /* Leve overlay para melhor contraste se a imagem for muito clara */
 }
 .collection-card h2 { /* Título dentro do card de coleção */
-    font-family: var(--font-primary); 
-    font-size: 2.2rem; 
+    font-family: var(--font-primary);
+    font-size: 2.2rem;
     margin-bottom: 25px;
-    font-weight: 500; 
+    font-weight: 500;
     line-height: 1.2;
 }
 .collection-button {
-    font-family: var(--font-secondary); 
+    font-family: var(--font-secondary);
     border: 2px solid var(--border-color-light);
     background-color: transparent;
     color: var(--text-color-light);
     border-radius: 50px;
     padding: 12px 35px;
-    font-size: 1rem; 
+    font-size: 1rem;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -103,75 +103,75 @@
     display: inline-block;
 }
 .collection-button:hover {
-    background-color: var(--white); 
+    background-color: var(--white);
     color: var(--primary-color);
     border-color: var(--white);
 }
 
 /* --- GRID DE PRODUTOS E CARDS DE PRODUTO --- */
-.product-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 40px; 
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
 }
-.product-card { 
-    background-color: var(--white); 
-    text-align: center; 
+.product-card {
+    background-color: var(--white);
+    text-align: center;
     padding: 20px;
-    position: relative; 
-    overflow: hidden; 
+    position: relative;
+    overflow: hidden;
     transition: box-shadow 0.4s ease;
-    display: flex; 
-    flex-direction: column; 
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    border: 1px solid var(--border-color); 
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 .product-card:hover { box-shadow: var(--shadow-hover); }
-.product-card img { 
-    max-width: 100%; 
-    height: 300px; 
-    object-fit: cover; 
-    margin-bottom: 20px; 
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+.product-card img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     border-radius: 3px; /* Pequeno arredondamento para a imagem */
 }
 .product-card:hover img { transform: scale(1.05); }
 .product-card h3 { font-family: var(--font-primary); font-size: 1.25rem; font-weight: 500; margin-bottom: 10px; color: var(--primary-color); }
 .product-card .price { font-size: 1.1rem; font-weight: 400; color: var(--text-color); margin-bottom: 15px; }
-.product-card p { 
-    font-size: 0.8rem; 
-    color: #777; 
-    margin-bottom: 15px; 
-    flex-grow: 1; 
+.product-card p {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 15px;
+    flex-grow: 1;
 }
-.product-card .btn { 
-    width: 80%; 
-    margin: 15px auto 0 auto; 
+.product-card .btn {
+    width: 80%;
+    margin: 15px auto 0 auto;
 }
 
 /* --- FILTROS (PÁGINA DE PRODUTOS) --- */
-#filters { 
-    width: 300px; 
-    flex-shrink: 0; 
+#filters {
+    width: 300px;
+    flex-shrink: 0;
     background-color: var(--white); /* Adiciona um fundo */
     padding: 25px; /* Adiciona padding interno */
     border-radius: 4px; /* Arredonda as bordas */
     border: 1px solid var(--border-color);
 }
-#filters h3 { 
-    font-family: var(--font-primary); 
-    font-size: 1.5rem; 
-    font-weight: 500; 
-    padding-bottom: 15px; 
-    margin-bottom: 25px; 
-    border-bottom: 1px solid var(--border-color); 
+#filters h3 {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
 }
 .filter-group { margin-bottom: 30px; }
 .filter-group label { display: block; margin-bottom: 12px; font-weight: 400; font-size: 1rem; }
-.filter-group select, .filter-group input[type="range"], .filter-group input[type="text"] { 
-    width: 100%; padding: 12px; border: 1px solid var(--border-color); 
-    border-radius: 2px; background-color: var(--white); font-family: var(--font-sans); 
+.filter-group select, .filter-group input[type="range"], .filter-group input[type="text"] {
+    width: 100%; padding: 12px; border: 1px solid var(--border-color);
+    border-radius: 2px; background-color: var(--white); font-family: var(--font-sans);
 }
 
 /* --- ABAS (PÁGINA DE DETALHES DO PRODUTO) --- */
@@ -183,14 +183,15 @@
 .tab-content { display: none; line-height: 1.8; padding-top: 20px; }
 .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
 .tab-content h3 { font-family: var(--font-primary); font-size: 1.3rem; margin-bottom: 15px; word-break: break-word; }
-#customer-reviews-container p, /* Mantido para compatibilidade se ainda existir */
-.tab-content p { /* Estilo genérico para parágrafos dentro do conteúdo da aba */
-    word-break: break-word; 
-    overflow-wrap: break-word; 
-    margin-bottom: 1em; /* Adiciona margem inferior aos parágrafos */
+
+/* Estilos para parágrafos e listas dentro do conteúdo da aba (incluindo avaliações) */
+.tab-content p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-bottom: 1em;
 }
 .tab-content ul, .tab-content ol {
-    margin-left: 20px; /* Adiciona indentação para listas */
+    margin-left: 20px;
     margin-bottom: 1em;
 }
 .tab-content ul li, .tab-content ol li {
@@ -201,7 +202,23 @@
 /* --- MODAL (GUIA DE TAMANHOS) --- */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(44, 44, 44, 0.7); z-index: 3000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0s 0.5s; padding: 20px; box-sizing: border-box; }
 .modal-overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease; }
-.modal-box { background-color: var(--white); padding: 30px; border-radius: 5px; width: 100%; max-width: 600px; position: relative; transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); max-height: 90vh; overflow-y: auto; }
+.modal-box { /* Estilo geral para caixas de popup/modal, pode ser sobrescrito */
+    display: flex;
+    width: 100%;
+    background-color: var(--white);
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    align-items: stretch; /* Padrão */
+    flex-direction: column; /* Padrão para modal genérico */
+    padding: 30px; /* Padding padrão para modal-box */
+    max-width: 600px; /* Largura padrão para modal-box */
+    max-height: 90vh; /* Altura máxima padrão */
+    overflow-y: auto; /* Rolagem padrão */
+}
 .modal-overlay.active .modal-box { transform: scale(1); }
 .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; }
 .modal-title { font-family: var(--font-primary); font-size: 1.8rem; margin-bottom: 15px; }
@@ -213,67 +230,81 @@
 .popup-overlay#newsletter-popup { /* Torna o seletor mais específico para o popup de newsletter */
     z-index: 2000; /* Z-index específico para newsletter */
 }
-.popup-box { /* Estilo geral para caixas de popup/modal, pode ser sobrescrito */
-    display: flex; 
-    width: 100%; 
-    background-color: var(--white); 
-    position: relative; 
-    transform: scale(0.95); 
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
-    margin: 0 auto; 
-    border-radius: 5px; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
-    align-items: stretch;
-    flex-direction: column; /* Padrão para modal genérico */
-}
-.popup-overlay#newsletter-popup .popup-box { /* Estilos específicos para o popup-box da newsletter */
+/* Estilos específicos para o popup-box da newsletter, sobrescrevendo ou adicionando ao .modal-box genérico */
+.popup-overlay#newsletter-popup .popup-box {
     max-width: 768px;
     flex-direction: row; /* Layout horizontal para newsletter */
+    padding: 0; /* Remove o padding geral para controlar internamente */
+    overflow: hidden; /* Garante que a imagem não estoure o border-radius */
 }
-.popup-overlay.active .popup-box { transform: scale(1); }
-.popup-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; line-height: 1; color: #aaa; cursor: pointer; transition: color 0.3s ease; z-index: 10; }
-.popup-close:hover { color: var(--primary-color); }
-.popup-image { width: 40%; background-image: url('../images/tutty-pijamas-logo.jpg'); /* ASSUMINDO QUE O CSS ESTÁ EM 'css/' E IMAGENS EM 'images/' */ background-size: contain; background-position: center; background-repeat: no-repeat; min-height: 200px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; background-color: var(--white); }
-#popup-form-content, #popup-success-content { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; padding: 20px; box-sizing: border-box; /* Adicionado para o padding não estourar */ }
-#popup-success-content { display: none; text-align: center; animation: fadeIn 0.8s ease; }
+.popup-image {
+    width: 40%;
+    /* Caminho da imagem: Assumindo que a pasta 'css' e 'images' estão no mesmo nível da raiz do projeto */
+    /* Se components.css está em 'css/', então '../images/' acessa a pasta 'images' na raiz. */
+    background-image: url('../images/tutty-pijamas-logo.jpg');
+    background-size: cover; /* Para preencher melhor o espaço, 'contain' pode deixar espaços vazios */
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 300px; /* Uma altura mínima para garantir que a imagem apareça */
+    border-top-left-radius: 5px; /* Mantém o arredondamento do popup-box */
+    border-bottom-left-radius: 5px;
+    /* background-color: var(--white); /* Não é necessário se a imagem cobrir tudo */
+}
+#popup-form-content, #popup-success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Para ocupar o espaço restante ao lado da imagem */
+    padding: 30px 40px; /* Espaçamento interno para o conteúdo */
+    box-sizing: border-box;
+    text-align: center; /* Centraliza o texto dentro */
+}
+#popup-success-content {
+    display: none;
+    animation: fadeIn 0.8s ease;
+}
+.popup-close { /* Já estilizado, mas garantindo que está visível sobre o conteúdo da newsletter */
+    z-index: 10;
+}
 .success-icon { font-size: 50px; color: #2ecc71; margin-bottom: 20px; margin-top: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- NOTIFICAÇÕES (LOGIN/CHECKOUT/ETC) --- */
-.notification { 
-    position: fixed; /* MUDADO PARA FIXED para ficar sempre visível na tela */
-    top: -100px; /* Posição inicial fora da tela, mais para cima */
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: auto; /* Largura automática baseada no conteúdo */
-    min-width: 280px; /* Largura mínima */
-    max-width: 90%; /* Evita ocupar toda a largura em telas pequenas */
-    padding: 15px 25px; 
-    border-radius: 4px; 
-    text-align: center; 
-    color: var(--white); 
-    font-size: 15px; 
-    opacity: 0; 
-    visibility: hidden; 
-    transition: opacity 0.4s ease, top 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Transição mais suave */
-    z-index: 9999; /* Z-index bem alto para notificações */
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 280px;
+    max-width: 90%;
+    padding: 15px 25px;
+    border-radius: 4px;
+    text-align: center;
+    color: var(--white);
+    font-size: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, top 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 9999;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
-.notification.show { 
-    opacity: 1; 
-    visibility: visible; 
-    top: 20px; 
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+    top: 20px;
 }
 .notification.success { background-color: #2ecc71; }
 .notification.error { background-color: #e74c3c; }
 
 
-/* === NOVOS ESTILOS PARA A SEÇÃO DE AVALIAÇÕES === */
+/* === ESTILOS PARA A SEÇÃO DE AVALIAÇÕES === */
 .new-review-form {
     background-color: #fdfaf6;
     padding: 25px;
     border-radius: 5px;
-    margin-top: 20px; /* Adicionado para separar do título "Avaliações de Clientes" */
+    margin-top: 20px;
     margin-bottom: 40px;
     border: 1px solid var(--border-color);
 }
@@ -308,8 +339,8 @@
     color: #ccc; /* Cor padrão das estrelas vazias */
     cursor: pointer;
     transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    padding: 0 2px; /* Para facilitar o clique/toque */
-    user-select: none; /* Evitar seleção de texto da estrela */
+    padding: 0 2px;
+    user-select: none;
 }
 
 .star-rating-input .stars .star:hover,
@@ -323,7 +354,7 @@
 }
 
 .new-review-form textarea,
-.new-review-form input[type="text"]#reviewer-name { /* Aplicando a input específico */
+.new-review-form input[type="text"]#reviewer-name {
     width: 100%;
     padding: 12px;
     border: 1px solid var(--border-color);
@@ -390,14 +421,12 @@
     font-size: 16px;
 }
 
-.review-stars .star.filled {
+.review-stars .star.filled { /* O JS adiciona o caractere &#9733; */
     color: var(--secondary-color);
-    /* content: '&#9733;'; /* O JS já está colocando o caractere */
 }
 
-.review-stars .star.empty {
+.review-stars .star.empty { /* O JS adiciona o caractere &#9734; */
     color: #e0e0e0;
-    /* content: '&#9734;'; /* O JS já está colocando o caractere */
 }
 
 .review-date {
@@ -417,12 +446,12 @@
     font-style: italic;
     color: #777;
     padding: 20px 0;
-    text-align: center; /* Garante centralização */
+    text-align: center;
 }
 
 /* Estrelas no resumo do produto (topo da página de detalhes) */
 .product-reviews-summary .star {
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
     margin-right: 1px;
 }
 .product-reviews-summary .star.filled {
