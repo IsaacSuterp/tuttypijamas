@@ -1,69 +1,86 @@
-// js/app.js
+// js/app.js (agora na raiz: app.js)
+
 const App = {
     init() {
-        if (typeof uiService !== 'undefined') {
+        console.log("App.init() chamado");
+        if (typeof uiService !== 'undefined' && uiService.updateCartCount) {
             uiService.updateCartCount();
         } else {
-            console.error("app.js: uiService não está definido ao iniciar App.");
+            console.error("app.js: uiService ou uiService.updateCartCount não está definido ao iniciar App.");
         }
         this.handlePageSpecifics();
         this.bindEvents();
-        this.initMobileMenu(); // Chamada da função do menu mobile
+        this.initMobileMenu();
     },
 
     initMobileMenu() {
+        console.log("App.initMobileMenu() chamado");
         const menuToggle = document.getElementById('mobile-menu-toggle');
         const menuClose = document.getElementById('mobile-menu-close');
         const mainNav = document.getElementById('main-nav');
         const backdrop = document.getElementById('menu-backdrop');
 
+        if (!menuToggle || !mainNav || !menuClose || !backdrop) {
+            console.error("Um ou mais elementos do menu mobile não foram encontrados:", {menuToggle, mainNav, menuClose, backdrop});
+            return;
+        }
+
         const openMenu = () => {
-            if (mainNav) mainNav.classList.add('active');
-            if (menuToggle) menuToggle.classList.add('active');
-            if (backdrop) backdrop.classList.add('active');
+            console.log("openMenu() chamado");
+            mainNav.classList.add('active');
+            menuToggle.classList.add('active');
+            backdrop.classList.add('active');
             document.body.classList.add('mobile-menu-open');
         };
 
         const closeMenu = () => {
-            if (mainNav) mainNav.classList.remove('active');
-            if (menuToggle) menuToggle.classList.remove('active');
-            if (backdrop) backdrop.classList.remove('active');
+            console.log("closeMenu() chamado");
+            mainNav.classList.remove('active');
+            menuToggle.classList.remove('active');
+            backdrop.classList.remove('active');
             document.body.classList.remove('mobile-menu-open');
         };
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => {
-                // Verifica se o menu está ativo para decidir se abre ou fecha
-                if (mainNav && mainNav.classList.contains('active')) {
+        menuToggle.addEventListener('click', () => {
+            console.log("Botão mobile-menu-toggle clicado");
+            if (mainNav.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        menuClose.addEventListener('click', () => {
+            console.log("Botão mobile-menu-close clicado");
+            closeMenu();
+        });
+
+        backdrop.addEventListener('click', () => {
+            console.log("Backdrop clicado");
+            closeMenu();
+        });
+
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(event) { // Usando function para preservar 'this' se necessário, embora não usado aqui
+                console.log(`Link do menu mobile clicado: ${this.href}`);
+                if (mainNav.classList.contains('active')) {
+                    console.log("Menu está ativo, chamando closeMenu(). Navegação deve ocorrer após.");
                     closeMenu();
+                    // A navegação padrão do link (href) deve ocorrer automaticamente aqui
+                    // A menos que um event.preventDefault() seja chamado, o que não é o caso.
                 } else {
-                    openMenu();
+                    console.log("Menu não estava ativo, navegação direta.");
                 }
             });
-        }
-
-        if (menuClose) {
-            menuClose.addEventListener('click', closeMenu);
-        }
-
-        if (backdrop) { 
-            backdrop.addEventListener('click', closeMenu);
-        }
-
-        if (mainNav) { 
-            mainNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mainNav.classList.contains('active')) {
-                        closeMenu();
-                    }
-                    // A navegação para o href do link ocorrerá normalmente
-                });
-            });
-        }
+        });
     },
 
     bindEvents() {
+        console.log("App.bindEvents() chamado");
         document.body.addEventListener('click', event => {
+            // Log para qualquer clique no body, útil para ver se outros listeners interferem
+            // console.log("Clique no body detectado, target:", event.target);
+
             if (event.target.matches('.view-product-btn')) {
                 const productId = event.target.dataset.productId;
                 if (productId) window.location.href = `produto-detalhe.html?id=${productId}`;
@@ -73,15 +90,21 @@ const App = {
                 if (typeof cartService !== 'undefined') cartService.remove(cartItemId);
                 if (document.body.id === 'cart-page' && typeof uiService !== 'undefined') uiService.renderCartPage();
             }
-            // Removido: .popup-close e .popup-overlay agora são tratados no initPopup se necessário ou já cobertos.
-            // Se o popup de newsletter ainda precisar de um evento de fechamento global, ele pode ser adicionado aqui.
-            // Por ora, o evento do backdrop do menu mobile já cobre o clique fora da área do menu.
-            // O .popup-close do newsletter é tratado no uiService.initPopup's event listener.
-            
+            // O evento de clique no .popup-close e .popup-overlay é tratado em initPopup no uiService
+            // se o popup de newsletter ainda usar essa abordagem, ou deve ser adicionado aqui se for global.
+            // Para o popup de newsletter, os listeners de fechar estão no App.bindEvents agora:
+            const newsletterPopup = document.getElementById('newsletter-popup');
+            if (newsletterPopup && newsletterPopup.classList.contains('active')) {
+                if (event.target.matches('#newsletter-popup .popup-close') || event.target === newsletterPopup) {
+                    if (typeof uiService !== 'undefined') uiService.closePopup();
+                }
+            }
+
             if (event.target.matches('.collection-button')) {
                 const targetPage = event.target.dataset.target;
                 if (targetPage) window.location.href = targetPage;
             }
+
             if (document.body.id === 'product-detail-page') {
                 if (event.target.matches('#size-guide-link')) {
                     event.preventDefault();
@@ -145,26 +168,11 @@ const App = {
                 if (typeof uiService !== 'undefined') setTimeout(() => uiService.closePopup(), 4000);
             });
         }
-         // Listener para fechar o popup de newsletter que estava faltando no bindEvents global
-        const closePopupButtonNews = document.querySelector('#newsletter-popup .popup-close');
-        const newsletterPopupOverlay = document.getElementById('newsletter-popup');
-
-        if(closePopupButtonNews) {
-            closePopupButtonNews.addEventListener('click', () => {
-                if (typeof uiService !== 'undefined') uiService.closePopup();
-            });
-        }
-        if(newsletterPopupOverlay){
-            newsletterPopupOverlay.addEventListener('click', (e) => {
-                if (e.target === newsletterPopupOverlay) { // Se o clique foi no overlay e não na caixa
-                    if (typeof uiService !== 'undefined') uiService.closePopup();
-                }
-            });
-        }
     },
 
     handlePageSpecifics() {
         const pageId = document.body.id;
+        console.log("App.handlePageSpecifics() chamado para a página:", pageId);
         if (typeof PageInitializers === 'undefined') {
             console.error("PageInitializers não está definido.");
             return;
@@ -175,6 +183,7 @@ const App = {
             case 'cart-page': PageInitializers.initCartPage(); break;
             case 'product-detail-page': PageInitializers.initProductDetailPage(); break;
             case 'checkout-page': PageInitializers.initCheckoutPage(); break;
+            default: console.warn("Nenhum handler específico para a página com ID:", pageId);
         }
     },
 
@@ -183,6 +192,92 @@ const App = {
     updateInstallmentOptions(totalValue) { /* ...código mantido... */ }
 };
 
+// As funções applyFilters, renderCheckoutSummary, e updateInstallmentOptions
+// devem ser parte do objeto App para serem chamadas com this.
+// Certifique-se de que elas foram definidas como App.applyFilters = function() { ... } etc.
+// Ou, se foram definidas dentro do PageInitializers, a chamada em handlePageSpecifics para elas deve ser ajustada.
+// Pela estrutura anterior, applyFilters é um método de App. renderCheckoutSummary e updateInstallmentOptions
+// foram definidas como métodos de App e chamadas por PageInitializers.initCheckoutPage usando App.renderCheckoutSummary etc.
+// Reintegrando elas no App para clareza:
+
+App.applyFilters = function() {
+    if (typeof products === 'undefined' || typeof uiService === 'undefined') {
+        console.error("Dependências faltando para applyFilters (products ou uiService)");
+        return;
+    }
+    let filteredProducts = [...products];
+    const categoryElement = document.getElementById("filter-category");
+    const colorElement = document.getElementById("filter-color");
+    const priceElement = document.getElementById("filter-price");
+    const sortElement = document.getElementById("sort-order");
+
+    const category = categoryElement ? categoryElement.value : "";
+    const color = colorElement ? colorElement.value : "";
+    const maxPrice = priceElement ? parseFloat(priceElement.value) : Infinity;
+    const sortOrder = sortElement ? sortElement.value : "relevance";
+
+    if (category) filteredProducts = filteredProducts.filter(p => p.category === category);
+    if (color) filteredProducts = filteredProducts.filter(p => p.color === color);
+    if (priceElement && !isNaN(maxPrice) && maxPrice !== Infinity) {
+         filteredProducts = filteredProducts.filter(p => p.price <= maxPrice);
+    }
+    switch (sortOrder) {
+        case "price-asc": filteredProducts.sort((a, b) => a.price - b.price); break;
+        case "price-desc": filteredProducts.sort((a, b) => b.price - a.price); break;
+    }
+    uiService.renderProductGrid(filteredProducts);
+};
+
+App.renderCheckoutSummary = function() {
+    if (typeof cartService === 'undefined' || typeof uiService === 'undefined') {
+        console.error("Dependências faltando para renderCheckoutSummary (cartService ou uiService)");
+        return;
+    }
+    const cart = cartService.get();
+    const itemsContainer = document.getElementById('checkout-order-items');
+    const subtotalEl = document.getElementById('summary-subtotal');
+    const shippingEl = document.getElementById('summary-shipping');
+    const totalEl = document.getElementById('summary-total');
+
+    if (!itemsContainer || !subtotalEl || !shippingEl || !totalEl) {
+        console.error("Elementos do DOM para o resumo do checkout não encontrados.");
+        return;
+    }
+    itemsContainer.innerHTML = ''; let currentSubtotal = 0;
+    if (cart.length === 0) { itemsContainer.innerHTML = '<p>Seu carrinho está vazio.</p>'; }
+    else {
+        cart.forEach(item => {
+            const itemSubtotal = item.price * item.quantity; currentSubtotal += itemSubtotal;
+            itemsContainer.innerHTML += `<div class="order-item"><img src="${item.images[0]}" alt="${item.name}"><div class="item-details"><p class="item-name">${item.name} ${item.selectedSize ? `(Tam: ${item.selectedSize})` : ''}</p><p class="item-qty-price">Qtd: ${item.quantity} | R$ ${item.price.toFixed(2).replace('.', ',')}</p></div><p class="item-total">R$ ${itemSubtotal.toFixed(2).replace('.', ',')}</p></div>`;
+        });
+    }
+    const shippingCost = 15.00; const currentTotal = currentSubtotal + shippingCost;
+    subtotalEl.textContent = `R$ ${currentSubtotal.toFixed(2).replace('.', ',')}`;
+    shippingEl.textContent = `R$ ${shippingCost.toFixed(2).replace('.', ',')}`;
+    totalEl.textContent = `R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+    this.updateInstallmentOptions(currentTotal); // Chama App.updateInstallmentOptions
+};
+
+App.updateInstallmentOptions = function(totalValue) {
+    const cardInstallmentsSelect = document.getElementById('card-installments');
+    if (cardInstallmentsSelect) {
+        cardInstallmentsSelect.innerHTML = '';
+        if (totalValue > 0) {
+            for (let i = 1; i <= 10; i++) {
+                const installmentValue = (totalValue / i).toFixed(2).replace('.', ',');
+                const option = document.createElement('option'); option.value = i;
+                option.textContent = `${i}x de R$ ${installmentValue} ${i === 1 ? '' : (i <= 3 ? 'sem juros' : 'com juros')}`;
+                cardInstallmentsSelect.appendChild(option);
+            }
+        } else { cardInstallmentsSelect.innerHTML = '<option value="1">1x de R$ 0,00</option>';}
+    }
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    App.init();
+    if (typeof App !== 'undefined' && App.init) {
+        App.init();
+    } else {
+        console.error("Objeto App ou App.init não está definido.");
+    }
 });
